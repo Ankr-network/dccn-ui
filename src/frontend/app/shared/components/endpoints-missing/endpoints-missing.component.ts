@@ -19,6 +19,8 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
     action: 'Got it'
   };
 
+  jobs = ['K-means', 'Cross-Validation', 'Website', 'Test'];
+
   noneRegisteredText = {
     firstLine: 'There are no registered endpoints',
     toolbarLink: {
