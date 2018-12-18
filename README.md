@@ -15,15 +15,19 @@
 
 To build and start Ankr-UI on your local machine, follow these steps from the root directory:
 
-1. `docker build -f deploy/Dockerfile.all-in-one . -t stratos .`
+1. `docker build -f deploy/Dockerfile.all-in-one . -t stratos`
 
-2. `cd deploy/uaa
-./prepare.sh
-sudo docker build -f Dockerfile.dev -t uaa .`
+2. `cd deploy/uaa`
 
-3. `docker network create --driver=bridge dev-bridge
-docker run -p 4443:443 --net=dev-bridge stratos
-docker run --net=dev-bridge --name=uaa uaa`
+`./prepare.sh`
+
+`sudo docker build -f Dockerfile.dev -t uaa .`
+
+3. `docker network create --driver=bridge dev-bridge`
+
+`docker run -p 4443:443 --net=dev-bridge stratos`
+
+`docker run --net=dev-bridge --name=uaa uaa`
 
 4. Access the Console at http://localhost:4443/ and provide the following information: UAA Endpoint API URL: `http://uaa:8080` Client ID: `console` Client Secret: Leave this blank Admin Account: `admin` Password: `hscadmin`
 
