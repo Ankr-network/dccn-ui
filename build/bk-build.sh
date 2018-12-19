@@ -6,7 +6,7 @@
 
 DEV=${STRATOS_BACKEND_DEV:-false}
 ACTION=${1:-build}
-NO_DEP=${STRATOS_USE_VENDOR_AS_IS:-false}
+NO_DEP=${STRATOS_USE_VENDOR_AS_IS:-true}
 VERSION=${stratos_version:-dev}
 
 set -euo pipefail
@@ -24,9 +24,9 @@ mkdir -p ${STRATOS_GOBASE}/src
 rm -rf "${STRATOS_GOBASE}/src/jetstream"
 
 # Copy vendor folder if needed
-if [ ! -d "${STRATOS_GOBASE}/vendor" ] && [ -d "${STRATOS}/vendor" ]; then
-  cp -R "${STRATOS}/vendor" ${STRATOS_GOBASE}
-fi
+#if [ ! -d "${STRATOS_GOBASE}/vendor" ] && [ -d "${STRATOS}/vendor" ]; then
+#  cp -R "${STRATOS}/vendor" ${STRATOS_GOBASE}
+#fi
 
 # Set go path
 export GOPATH="${STRATOS}/tmp/go"
@@ -38,6 +38,7 @@ popd > /dev/null
 
 # Copy dep files
 cp Gopkg.* ${STRATOS_GOBASE}
+cp -R vendor ${STRATOS_GOBASE}
 
 # Check the dependencies - update if needed
 if [ "$NO_DEP" == "false" ]; then
