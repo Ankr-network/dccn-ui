@@ -3,6 +3,8 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material';
 import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { delay, map, startWith, tap } from 'rxjs/operators';
 
+import { HttpClient } from '@angular/common/http';
+
 import { UserService } from '../../../core/user.service';
 import { EndpointsService } from '../../../core/endpoints.service';
 
@@ -40,7 +42,7 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
 
   private _snackBar: MatSnackBarRef<SimpleSnackBar>;
 
-  constructor(private snackBar: MatSnackBar, public endpointsService: EndpointsService) { }
+  constructor(private snackBar: MatSnackBar, public endpointsService: EndpointsService, private httpClient: HttpClient) { }
 
   ngAfterViewInit() {
     this.noContent$ = observableCombineLatest(
@@ -58,6 +60,8 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
         return null;
       })
     ).pipe(startWith(null));
+    this.httpClient.get('/pp/v1/jobs')
+      .subscribe(data => console.log(data));
   }
 
   ngOnDestroy() {

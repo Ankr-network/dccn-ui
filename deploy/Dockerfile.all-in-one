@@ -13,9 +13,6 @@ COPY --chown=stratos:users deploy/all-in-one/config.all-in-one.properties config
 
 RUN npm install
 RUN npm run build
-
-
-
 RUN npm run build-backend
 RUN cp src/jetstream/jetstream .
 RUN mv dist ui

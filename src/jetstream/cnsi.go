@@ -18,6 +18,13 @@ import (
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/cnsis"
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/interfaces"
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/tokens"
+
+	"context"
+
+	pb "github.com/Ankr-network/dccn-rpc/protocol"
+	"google.golang.org/grpc"
+
+	"time"
 )
 
 const dbReferenceError = "Unable to establish a database reference: '%v'"
@@ -194,6 +201,56 @@ func (p *portalProxy) listCNSIs(c echo.Context) error {
 	c.Response().Write(jsonString)
 	return nil
 }
+
+
+func (p *portalProxy) buildJobs(c echo.Context) ([]*pb.TaskInfo) {
+	url := "hub.ankr.network"
+	port := "50051"
+	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+
+	defer conn.Close()
+	dc2 := pb.NewDccncliClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	r, err := dc2.TaskList(ctx, &pb.TaskListRequest{Usertoken: "ed1605e17374bde6c68864d072c9f5c9"})
+	if err != nil {
+		log.Fatalf("Client: could not send: %v", err)
+	}
+	Taskinfos := r.Tasksinfo
+	log.Info(Taskinfos)
+	log.Info("Sucessfully obtained list of tasks")
+	return Taskinfos
+}
+
+func (p *portalProxy) getJobs(c echo.Context) error {
+	log.Debug("get Jobs")
+	jobList := p.buildJobs(c)
+	// if err != nil {
+	// 	return interfaces.NewHTTPShadowError(
+	// 		http.StatusBadRequest,
+	// 		"Failed to retrieve list of CNSIs",
+	// 		"Failed to retrieve list of CNSIs: %v", err,
+	// 	)
+	// }
+
+	jsonString, err := json.Marshal(jobList)
+	if err != nil {
+		return err
+	}
+
+	c.Response().Header().Set("Content-Type", "application/json")
+	c.Response().Write(jsonString)
+	return nil
+}
+
+
+
+
+
+
 
 func (p *portalProxy) listRegisteredCNSIs(c echo.Context) error {
 	log.Debug("listRegisteredCNSIs")
