@@ -15,23 +15,29 @@
 
 To build and start Ankr-UI on your local machine, follow these steps from the root directory:
 
-1. `docker build -f deploy/Dockerfile.all-in-one . -t stratos`
+1. First, because we need to use dep in order to get the dependencies for the files, we need to link the root directory to our go source directory. Find the go/src/ directory, and then link the Ankr-UI directory to the go/src/ directory using:
 
-2. `cd deploy/uaa`
+`$ ln -s ${directory of Ankr-UI} ${name of directory in go/src/}`
 
-`./prepare.sh`
+`$ cd ${name of directory in go/src/}`
 
-`sudo docker build -f Dockerfile.dev -t uaa .`
+2. `$ docker build -f deploy/Dockerfile.all-in-one . -t stratos`
 
-3. `docker network create --driver=bridge dev-bridge`
+3. `$ cd deploy/uaa`
 
-`docker run -p 4443:443 --net=dev-bridge stratos`
+`$ ./prepare.sh`
 
-`docker run --net=dev-bridge --name=uaa uaa`
+`$ sudo docker build -f Dockerfile.dev -t uaa .`
 
-4. Access the Console at http://localhost:4443/ and provide the following information: UAA Endpoint API URL: `http://uaa:8080` Client ID: `console` Client Secret: Leave this blank Admin Account: `admin` Password: `hscadmin`
+4. `$ docker network create --driver=bridge dev-bridge`
 
-5. Click `enter` and select the following from the list: `stratos.admin`
+`$ docker run -p 4443:443 --net=dev-bridge stratos`
+
+`$ docker run --net=dev-bridge --name=uaa uaa`
+
+5. Access the Console at http://localhost:4443/ and provide the following information: UAA Endpoint API URL: `http://uaa:8080` Client ID: `console` Client Secret: Leave this blank Admin Account: `admin` Password: `hscadmin`
+
+6. Click `enter` and select the following from the list: `stratos.admin`
 
 The Console is now ready to be used.
 
