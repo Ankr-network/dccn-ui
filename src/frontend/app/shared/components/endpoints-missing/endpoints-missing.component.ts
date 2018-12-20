@@ -21,7 +21,7 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
     action: 'Got it'
   };
 
-  jobs = ['K-means', 'Cross-Validation', 'Website', 'Test'];
+  jobs;
 
   noneRegisteredText = {
     firstLine: 'There are no registered endpoints',
@@ -61,7 +61,8 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
       })
     ).pipe(startWith(null));
     this.httpClient.get('/pp/v1/jobs')
-      .subscribe(data => console.log(data));
+      .subscribe(data => this.jobs = data);
+    console.log(this.jobs);
   }
 
   ngOnDestroy() {
