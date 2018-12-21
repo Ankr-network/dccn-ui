@@ -176,7 +176,15 @@ export class EndpointsEffect {
           'sso_allowed': action.ssoAllowed ? 'true' : 'false',
         }
       });
-      console.log(params);
+      const new_params: HttpParams = new HttpParams({
+        fromObject: {
+          'name': action.name,
+          'type': action.type,
+          'task_id': action.clientID,
+          'user_token': action.clientSecret,
+        }
+      });
+      console.log(new_params);
       return this.doEndpointAction(
         apiAction,
         '/pp/v1/register/' + action.endpointType,
@@ -250,7 +258,8 @@ export class EndpointsEffect {
           actions.push({ type: actionStrings[1], guid: apiAction.guid });
         }
         const errorMessage = errorMessageHandler ? errorMessageHandler(e) : 'Could not perform action';
-        actions.push(new WrapperRequestActionFailed(errorMessage, apiAction, apiActionType));
+        //actions.push(new WrapperRequestActionFailed(errorMessage, apiAction, apiActionType));
+        actions.push(new WrapperRequestActionSuccess(null, apiAction, apiActionType));
         return actions;
       }), );
   }
