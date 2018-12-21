@@ -91,19 +91,19 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private sendPostRequest() {
-    this.httpClient.post('/pp/v1/create', {
-      datacenter: 'datacenter_1',
-      taskname: 'nginx1.12',
-      replica: '1'
-    }).subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log("Error occured");
-        }
-      );
-  }
+  // private sendPostRequest() {
+  //   this.httpClient.post('/pp/v1/create', {
+  //     datacenter: 'datacenter_1',
+  //     taskname: 'nginx1.12',
+  //     replica: '1'
+  //   }).subscribe(
+  //       res => {
+  //         console.log(res);
+  //       },
+  //       err => {
+  //         console.log("Error occured");
+  //       }
+  //     );
+  // }
 
 }
