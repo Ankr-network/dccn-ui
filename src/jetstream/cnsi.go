@@ -12,6 +12,8 @@ import (
 	"github.com/labstack/echo"
 	log "github.com/sirupsen/logrus"
 
+	"io/ioutil"
+
 	"crypto/sha1"
 	"encoding/base64"
 
@@ -204,7 +206,7 @@ func (p *portalProxy) listCNSIs(c echo.Context) error {
 
 
 func (p *portalProxy) buildJobs(c echo.Context) ([]*pb.TaskInfo) {
-	url := "hub.ankr.network"
+	url := "client-dev.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -228,13 +230,6 @@ func (p *portalProxy) buildJobs(c echo.Context) ([]*pb.TaskInfo) {
 func (p *portalProxy) getJobs(c echo.Context) error {
 	log.Debug("get Jobs")
 	jobList := p.buildJobs(c)
-	// if err != nil {
-	// 	return interfaces.NewHTTPShadowError(
-	// 		http.StatusBadRequest,
-	// 		"Failed to retrieve list of CNSIs",
-	// 		"Failed to retrieve list of CNSIs: %v", err,
-	// 	)
-	// }
 
 	jsonString, err := json.Marshal(jobList)
 	if err != nil {
@@ -245,6 +240,31 @@ func (p *portalProxy) getJobs(c echo.Context) error {
 	c.Response().Write(jsonString)
 	return nil
 }
+
+func (p *portalProxy) createJob(c echo.Context) error {
+	log.Info("Create Job")
+	s, err := ioutil.ReadAll(c.Request().Body())
+	if err != nil {
+		return err
+	}
+
+	var body map[string]interface{}
+	if err := json.Unmarshal(s, &body); err != nil {
+		return err
+	}
+
+	log.Info(body)
+
+	// jsonString, err := json.Marshal(jobList)
+	// if err != nil {
+	// 	return err
+	// }
+
+	// c.Response().Header().Set("Content-Type", "application/json")
+	// c.Response().Write(jsonString)
+	return nil
+}
+
 
 
 

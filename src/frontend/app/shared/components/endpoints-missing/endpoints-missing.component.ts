@@ -62,7 +62,20 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
     ).pipe(startWith(null));
     this.httpClient.get('/pp/v1/jobs')
       .subscribe(data => this.jobs = data);
-    console.log(this.jobs);
+    //console.log(this.jobs);
+
+    this.httpClient.post('/pp/v1/create', {
+      title: 'foo',
+      body: 'bar',
+      userId: 1
+    }).subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
   }
 
   ngOnDestroy() {
