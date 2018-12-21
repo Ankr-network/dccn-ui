@@ -179,7 +179,7 @@ export class EndpointsEffect {
       const new_params: HttpParams = new HttpParams({
         fromObject: {
           'name': action.name,
-          'type': action.type,
+          'type': action.endpointType,
           'task_id': action.clientID,
           'user_token': action.clientSecret,
         }
