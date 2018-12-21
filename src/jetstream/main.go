@@ -777,6 +777,8 @@ func (p *portalProxy) registerRoutes(e *echo.Echo, addSetupMiddleware *setupMidd
 
 	sessionGroup.GET("/jobs", p.getJobs)
 
+	sessionGroup.POST("/create", p.createJob)
+
 	// Info
 	sessionGroup.GET("/info", p.info)
 
