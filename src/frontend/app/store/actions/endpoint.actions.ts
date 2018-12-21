@@ -126,6 +126,7 @@ export class RegisterEndpoint extends EndpointAction {
     public clientID = '',
     public clientSecret = '',
     public ssoAllowed: boolean,
+    public replica = '',
   ) {
     super();
   }

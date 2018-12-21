@@ -180,6 +180,7 @@ export class EndpointsEffect {
         fromObject: {
           'name': action.name,
           'type': action.endpointType,
+          'replica': action.endpoint,
           'task_id': action.clientID,
           'user_token': action.clientSecret,
         }
