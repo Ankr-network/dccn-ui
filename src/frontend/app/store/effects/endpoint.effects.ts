@@ -186,6 +186,20 @@ export class EndpointsEffect {
         }
       });
       console.log(new_params);
+      this.http.post('/pp/v1/create', {
+        datacenter: 'datacenter_1',
+        taskname: action.name,
+        type: action.endpointType,
+         replica: '1'
+      }).subscribe(
+         res => {
+           console.log(res);
+         },
+         err => {
+           console.log("Error occured");
+         }
+      );
+
       return this.doEndpointAction(
         apiAction,
         '/pp/v1/register/' + action.endpointType,
