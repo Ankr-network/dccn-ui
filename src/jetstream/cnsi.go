@@ -319,6 +319,9 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 
 	log.Info(body)
 
+
+	url := "client-dev.dccn.ankr.network"
+	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -328,7 +331,10 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	id = strconv.Atoibody(body["id"].(string))
+	id, err:= strconv.Atoi(body["id"].(string))
+	if err != nil {
+		log.Fatalf("ID is not an integer")
+	}
 
 	if ctr, err := dc.CancelTask(ctx, &pb.CancelTaskRequest{Taskid: int64(id), Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
 		return fmt.Errorf("unable to delete task %d: %v", id, err)
@@ -355,6 +361,8 @@ func (p *portalProxy) updateJob(c echo.Context) error {
 
 	log.Info(body)
 
+	url := "client-dev.dccn.ankr.network"
+	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -364,18 +372,23 @@ func (p *portalProxy) updateJob(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
+	id, err:= strconv.Atoi(body["id"].(string))
+	if err != nil {
+		log.Fatalf("ID is not an integer")
+	}
+
 	utrq := &pb.UpdateTaskRequest{
-		Taskid:    int64(strconv.Atoibody(body["id"].(string))),
+		Taskid:    int64(id),
 		Usertoken: "ed1605e17374bde6c68864d072c9f5c9",
 	}
-	if replica != "" {
+	if body["replica"].(string) != "" {
 		replicaCount, err := strconv.Atoi(body["replica"].(string))
 		if err != nil {
 			return fmt.Errorf("replica count %s is not an int", body["replica"].(string))
 		}
 		utrq.Replica = int64(replicaCount)
 	}
-	if name != "" {
+	if body["taskname"].(string) != "" {
 		utrq.Name = body["taskname"].(string)
 	}
 	if utrp, err := dc.UpdateTask(ctx, utrq); err != nil {

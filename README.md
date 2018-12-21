@@ -21,6 +21,10 @@ To build and start Ankr-UI on your local machine, follow these steps from the ro
 
 `$ cd ${name of directory in go/src/}`
 
+`$ dep ensure --vendor-only`
+
+After the dep command is ran, there will be a vendor directory that will be utilized during the build process.
+
 2. `$ docker build -f deploy/Dockerfile.all-in-one . -t stratos`
 
 3. `$ cd deploy/uaa`
