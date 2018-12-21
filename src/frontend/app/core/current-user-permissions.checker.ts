@@ -304,7 +304,7 @@ export class CurrentUserPermissionsChecker {
 
   private getAllEndpointGuids() {
     return this.store.select(endpointsRegisteredEntitiesSelector).pipe(
-      map(endpoints => Object.values(endpoints).filter(e => e.cnsi_type === 'cf').map(endpoint => endpoint.guid))
+      map(endpoints => Object.values(endpoints).filter(e => e.cnsi_type === 'web').map(endpoint => endpoint.guid))
     );
   }
 

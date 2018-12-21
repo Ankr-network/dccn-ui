@@ -38,7 +38,7 @@ export class EndpointCardComponent extends CardCell<EndpointModel> implements On
   }
 
   public getRouterPath(row: EndpointModel) {
-    if (row.cnsi_type === 'cf') {
+    if (row.cnsi_type === 'web') {
       return ['/cloud-foundry', row.guid];
     }
   }

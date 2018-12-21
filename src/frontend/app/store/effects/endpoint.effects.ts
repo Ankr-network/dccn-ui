@@ -176,7 +176,7 @@ export class EndpointsEffect {
           'sso_allowed': action.ssoAllowed ? 'true' : 'false',
         }
       });
-
+      console.log(params);
       return this.doEndpointAction(
         apiAction,
         '/pp/v1/register/' + action.endpointType,
@@ -220,7 +220,7 @@ export class EndpointsEffect {
     params: HttpParams,
     apiActionType: ApiRequestTypes = 'update',
     actionStrings: [string, string] = [null, null],
-    endpointType: EndpointType = 'cf',
+    endpointType: EndpointType = 'web',
     body?: string,
     errorMessageHandler?: Function,
   ) {

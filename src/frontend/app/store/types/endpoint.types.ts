@@ -71,7 +71,7 @@ export interface EndpointState {
 }
 
 // If we support more endpoint types in future, this type should be extended
-export type EndpointType = 'cf' | 'metrics';
+export type EndpointType = 'web' | 'fetch';
 
 export interface StateUpdateAction {
   type: string;

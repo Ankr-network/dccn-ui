@@ -13,7 +13,7 @@ export const endpointEntitiesSelector = selectEntities<EndpointModel>(endpointSt
 export const cfEndpointEntitiesSelector = (endpoints: IRequestEntityTypeState<EndpointModel>): IRequestEntityTypeState<EndpointModel> => {
   const cf = {};
   Object.values(endpoints).map(endpoint => {
-    if (endpoint.cnsi_type === 'cf') {
+    if (endpoint.cnsi_type === 'web') {
       cf[endpoint.guid] = endpoint;
     }
   });

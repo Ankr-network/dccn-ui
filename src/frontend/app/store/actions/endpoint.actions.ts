@@ -38,7 +38,7 @@ export class EndpointActionComplete implements Action {
 
 export class EndpointAction implements Action {
   type: string;
-  endpointType: EndpointType = 'cf';
+  endpointType: EndpointType = 'web';
 }
 
 // Different Auth Type support for connecting to Endpoints

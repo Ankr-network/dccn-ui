@@ -72,13 +72,13 @@ export class CfServicesListConfigService implements IListConfig<APIResource> {
         first(),
         map(endpoints => {
           return Object.values(endpoints)
-            .filter((endpoint: EndpointModel) => endpoint.connectionStatus === 'connected' && endpoint.cnsi_type === 'cf');
+            .filter((endpoint: EndpointModel) => endpoint.connectionStatus === 'connected' && endpoint.cnsi_type === 'web');
         }), ),
       loading$: observableOf(false),
       select: new BehaviorSubject(undefined)
     };
     this.multiFilterConfigs = [
-      createListFilterConfig('cf', 'Cloud Foundry', this.cf),
+      createListFilterConfig('web', 'Cloud Foundry', this.cf),
     ];
   }
 

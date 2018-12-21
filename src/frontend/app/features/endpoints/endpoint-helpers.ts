@@ -17,7 +17,7 @@ export function getEndpointUsername(endpoint: EndpointModel) {
   return endpoint && endpoint.user ? endpoint.user.name : '-';
 }
 
-export const DEFAULT_ENDPOINT_TYPE = 'cf';
+export const DEFAULT_ENDPOINT_TYPE = 'web';
 export interface EndpointTypeConfig {
   value: EndpointType;
   label: string;
@@ -35,15 +35,15 @@ export interface EndpointIcon {
 
 const endpointTypes: EndpointTypeConfig[] = [
   {
-    value: 'cf',
-    label: 'Cloud Foundry',
+    value: 'web',
+    label: 'Web',
     urlValidation: urlValidationExpression,
     icon: 'cloud_foundry',
     iconFont: 'stratos-icons'
   },
   {
-    value: 'metrics',
-    label: 'Metrics',
+    value: 'fetch',
+    label: 'fetch',
     allowTokenSharing: true
   },
 ];
@@ -56,13 +56,13 @@ const endpointAuthTypes = [
       username: ['', Validators.required],
       password: ['', Validators.required],
     },
-    types: new Array<EndpointType>('cf', 'metrics')
+    types: new Array<EndpointType>('web', 'fetch')
   },
   {
     name: 'Single Sign-On (SSO)',
     value: 'sso',
     form: {},
-    types: new Array<EndpointType>('cf')
+    types: new Array<EndpointType>('web')
   },
 ];
 
