@@ -255,10 +255,134 @@ func (p *portalProxy) createJob(c echo.Context) error {
 
 	log.Info(body)
 
+	url := "client-dev.dccn.ankr.network"
+	port := "50051"
+	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+
+	defer conn.Close()
+	dc := pb.NewDccncliClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	tcrq := &pb.AddTaskRequest{
+			Name:       body["taskname"].(string),
+			Type:       "web",
+			Datacenter: body["datacenter"].(string),
+			Usertoken:  "ed1605e17374bde6c68864d072c9f5c9",
+	}
+
+	if body["replica"].(string) != "" {
+		replicaCount, err := strconv.Atoi(body["replica"].(string))
+		if err != nil {
+			return fmt.Errorf("replica count %s is not an int", body["replica"].(string))
+		}
+		tcrq.Replica = int64(replicaCount)
+	}
+
+	tcrp, err := dc.AddTask(ctx, tcrq)
+	if err != nil {
+		return err
+	}
+	if tcrp.Status == "Success" {
+		log.Info("Task id %d created successfully. \n", tcrp.Taskid)
+	} else {
+		log.Info("Fail to create task. \n")
+	}
+
+
+
 	// jsonString, err := json.Marshal(jobList)
 	// if err != nil {
 	// 	return err
 	// }
+
+	// c.Response().Header().Set("Content-Type", "application/json")
+	// c.Response().Write(jsonString)
+	return nil
+}
+
+
+func (p *portalProxy) deleteJob(c echo.Context) error {
+	log.Info("Delete Job")
+	s, err := ioutil.ReadAll(c.Request().Body())
+	if err != nil {
+		return err
+	}
+
+	var body map[string]interface{}
+	if err := json.Unmarshal(s, &body); err != nil {
+		return err
+	}
+
+	log.Info(body)
+
+	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+	dc := pb.NewDccncliClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	id = strconv.Atoibody(body["id"].(string))
+
+	if ctr, err := dc.CancelTask(ctx, &pb.CancelTaskRequest{Taskid: int64(id), Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
+		return fmt.Errorf("unable to delete task %d: %v", id, err)
+	} else {
+		fmt.Printf("Delete task id %d ...%s! \n", id, ctr.Status)
+	}
+
+	// c.Response().Header().Set("Content-Type", "application/json")
+	// c.Response().Write(jsonString)
+	return nil
+}
+
+func (p *portalProxy) updateJob(c echo.Context) error {
+	log.Info("Update Job")
+	s, err := ioutil.ReadAll(c.Request().Body())
+	if err != nil {
+		return err
+	}
+
+	var body map[string]interface{}
+	if err := json.Unmarshal(s, &body); err != nil {
+		return err
+	}
+
+	log.Info(body)
+
+	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+	dc := pb.NewDccncliClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	utrq := &pb.UpdateTaskRequest{
+		Taskid:    int64(strconv.Atoibody(body["id"].(string))),
+		Usertoken: "ed1605e17374bde6c68864d072c9f5c9",
+	}
+	if replica != "" {
+		replicaCount, err := strconv.Atoi(body["replica"].(string))
+		if err != nil {
+			return fmt.Errorf("replica count %s is not an int", body["replica"].(string))
+		}
+		utrq.Replica = int64(replicaCount)
+	}
+	if name != "" {
+		utrq.Name = body["taskname"].(string)
+	}
+	if utrp, err := dc.UpdateTask(ctx, utrq); err != nil {
+		return fmt.Errorf("unable to update task %d: %v", id, err)
+	} else {
+		fmt.Printf("Update task id %d ...%s! \n", id, utrp.Status)
+	}
 
 	// c.Response().Header().Set("Content-Type", "application/json")
 	// c.Response().Write(jsonString)

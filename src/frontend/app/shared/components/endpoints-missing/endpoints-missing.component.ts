@@ -61,21 +61,22 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
       })
     ).pipe(startWith(null));
     this.httpClient.get('/pp/v1/jobs')
+      // .subscribe(data => console.log(data));
       .subscribe(data => this.jobs = data);
     //console.log(this.jobs);
 
-    this.httpClient.post('/pp/v1/create', {
-      title: 'foo',
-      body: 'bar',
-      userId: 1
-    }).subscribe(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log("Error occured");
-        }
-      );
+    // this.httpClient.post('/pp/v1/create', {
+    //   datacenter: 'datacenter_1',
+    //   taskname: 'nginx1.12',
+    //   replica: '1'
+    // }).subscribe(
+    //     res => {
+    //       console.log(res);
+    //     },
+    //     err => {
+    //       console.log("Error occured");
+    //     }
+    //   );
   }
 
   ngOnDestroy() {
@@ -88,6 +89,21 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
     } else if (this._snackBar && !show) {
       this._snackBar.dismiss();
     }
+  }
+
+  private sendPostRequest() {
+    this.httpClient.post('/pp/v1/create', {
+      datacenter: 'datacenter_1',
+      taskname: 'nginx1.12',
+      replica: '1'
+    }).subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
   }
 
 }
