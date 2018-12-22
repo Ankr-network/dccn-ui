@@ -19,11 +19,11 @@ import { DEFAULT_ENDPOINT_TYPE, getEndpointTypes, getFullEndpointApiUrl, Endpoin
 
 /* tslint:disable:no-access-missing-member https://github.com/mgechev/codelyzer/issues/191*/
 @Component({
-  selector: 'app-create-endpoint-cf-step-1',
-  templateUrl: './create-endpoint-cf-step-1.component.html',
-  styleUrls: ['./create-endpoint-cf-step-1.component.scss']
+  selector: 'app-update-endpoint-cf-step-1',
+  templateUrl: './update-endpoint-cf-step-1.component.html',
+  styleUrls: ['./update-endpoint-cf-step-1.component.scss']
 })
-export class CreateEndpointCfStep1Component implements IStepperStep, AfterContentInit {
+export class UpdateEndpointCfStep1Component implements IStepperStep, AfterContentInit {
 
   existingEndpoints: Observable<{
     names: string[],

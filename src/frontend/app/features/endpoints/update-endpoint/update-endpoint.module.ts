@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { CoreModule } from '../../../core/core.module';
 import { SharedModule } from '../../../shared/shared.module';
-import { CreateEndpointComponent } from './create-endpoint.component';
+import { UpdateEndpointComponent } from './update-endpoint.component';
 import { NgModule } from '@angular/core';
-import { CreateEndpointCfStep1Component } from './create-endpoint-cf-step-1/create-endpoint-cf-step-1.component';
+import { UpdateEndpointCfStep1Component } from './update-endpoint-cf-step-1/update-endpoint-cf-step-1.component';
 
 @NgModule({
   imports: [
@@ -12,11 +12,11 @@ import { CreateEndpointCfStep1Component } from './create-endpoint-cf-step-1/crea
     SharedModule
   ],
   declarations: [
-    CreateEndpointComponent,
-    CreateEndpointCfStep1Component,
+    UpdateEndpointComponent,
+    UpdateEndpointCfStep1Component,
   ],
   exports: [
-    CreateEndpointComponent
+    UpdateEndpointComponent
   ]
 })
-export class CreateEndpointModule { }
+export class UpdateEndpointModule { }

@@ -4,20 +4,20 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CoreModule } from '../../../core/core.module';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateEndpointComponent } from './create-endpoint.component';
-import { CreateEndpointCfStep1Component } from './create-endpoint-cf-step-1/create-endpoint-cf-step-1.component';
+import { UpdateEndpointComponent } from './update-endpoint.component';
+import { UpdateEndpointCfStep1Component } from './update-endpoint-cf-step-1/update-endpoint-cf-step-1.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { createBasicStoreModule } from '../../../test-framework/store-test-helper';
 
-describe('UpdateEndpointComponent', () => {
-  let component: CreateEndpointComponent;
-  let fixture: ComponentFixture<CreateEndpointComponent>;
+describe('DeleteEndpointComponent', () => {
+  let component: DeleteEndpointComponent;
+  let fixture: ComponentFixture<DeleteEndpointComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CreateEndpointComponent,
-        CreateEndpointCfStep1Component,
+        UpdateEndpointComponent,
+        UpdateEndpointCfStep1Component,
       ],
       imports: [
         CoreModule,
@@ -32,7 +32,7 @@ describe('UpdateEndpointComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateEndpointComponent);
+    fixture = TestBed.createComponent(UpdateEndpointComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
