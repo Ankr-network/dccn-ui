@@ -126,7 +126,7 @@ export class EndpointsListConfigService implements IListConfig<EndpointModel> {
         true
       );
       this.confirmDialog.open(confirmation, () => {
-        this.store.dispatch(new UnregisterEndpoint(item.guid, item.cnsi_type));
+        this.store.dispatch(new UnregisterEndpoint(item.guid, item.cnsi_type, "", ""));
         this.handleDeleteAction(item, ([oldVal, newVal]) => {
           this.store.dispatch(new ShowSnackBar(`Unregistered ${item.name}`));
         });

@@ -25,6 +25,10 @@ import {
   UNREGISTER_ENDPOINTS_FAILED,
   UNREGISTER_ENDPOINTS_SUCCESS,
   UnregisterEndpoint,
+  UPDATEREGISTER_ENDPOINTS,
+  UPDATEREGISTER_ENDPOINTS_SUCCESS,
+  UPDATEREGISTER_ENDPOINTS_FAILED,
+  UpdateregisterEndpoint,
 } from '../actions/endpoint.actions';
 import { ClearPaginationOfEntity } from '../actions/pagination.actions';
 import { GET_SYSTEM_INFO_SUCCESS, GetSystemInfo, GetSystemSuccess } from '../actions/system.actions';
@@ -148,9 +152,69 @@ export class EndpointsEffect {
       const apiAction = this.getEndpointDeleteAction(action.guid, action.type);
       const params: HttpParams = new HttpParams({
         fromObject: {
-          'cnsi_guid': action.guid
+          //'cnsi_guid': action.guid
         }
       });
+
+      const new_params: HttpParams = new HttpParams({
+        fromObject: {
+          'name': action.name,
+          'taskID': action.taskID,
+        }
+      });
+      console.log(new_params);
+      this.http.post('/pp/v1/delete', {
+        taskname: action.name,
+        taskID: action.taskID,
+      }).subscribe(
+         res => {
+           console.log(res);
+         },
+         err => {
+           console.log("Error occured");
+         }
+      );
+
+      return this.doEndpointAction(
+        apiAction,
+        '/pp/v1/unregister',
+        params,
+        'delete',
+        [UNREGISTER_ENDPOINTS_SUCCESS, UNREGISTER_ENDPOINTS_FAILED],
+        action.endpointType
+      );
+    }));
+
+
+  @Effect() updateregister$ = this.actions$.ofType<UpdateregisterEndpoint>(UPDATEREGISTER_ENDPOINTS).pipe(
+    mergeMap(action => {
+
+      const apiAction = this.getEndpointDeleteAction(action.guid, action.type);
+      const params: HttpParams = new HttpParams({
+        fromObject: {
+          //'cnsi_guid': action.guid
+        }
+      });
+
+      const new_params: HttpParams = new HttpParams({
+        fromObject: {
+        'type': action.endpointType,
+          'name': action.name,
+          'task_id': action.taskID,
+        }
+      });
+      console.log(new_params);
+      this.http.post('/pp/v1/update', {
+        taskname: action.name,
+        taskID: action.taskID,
+      }).subscribe(
+         res => {
+           console.log(res);
+         },
+         err => {
+           console.log("Error occured");
+         }
+      );
 
       return this.doEndpointAction(
         apiAction,

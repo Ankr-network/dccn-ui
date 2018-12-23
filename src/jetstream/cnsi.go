@@ -331,7 +331,8 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	id, err:= strconv.Atoi(body["id"].(string))
+	id, err:= strconv.Atoi(body["taskID"].(string))
+	log.Info(id)
 	if err != nil {
 		log.Fatalf("ID is not an integer")
 	}

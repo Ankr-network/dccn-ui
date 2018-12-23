@@ -7,7 +7,7 @@ import { filter, map, pairwise, withLatestFrom } from 'rxjs/operators';
 
 import { UtilsService } from '../../../../core/utils.service';
 import { IStepperStep, StepOnNextFunction } from '../../../../shared/components/stepper/step/step.component';
-import { GetAllEndpoints, RegisterEndpoint } from '../../../../store/actions/endpoint.actions';
+import { GetAllEndpoints, UnregisterEndpoint } from '../../../../store/actions/endpoint.actions';
 import { AppState } from '../../../../store/app-state';
 import { EndpointsEffect } from '../../../../store/effects/endpoint.effects';
 import { endpointSchemaKey, entityFactory } from '../../../../store/helpers/entity-factory';
@@ -83,14 +83,11 @@ export class DeleteEndpointCfStep1Component implements IStepperStep, AfterConten
 
   onNext: StepOnNextFunction = () => {
 
-    const action = new RegisterEndpoint(
+    const action = new UnregisterEndpoint(
+      this.clientIDField.value,
       this.typeField.value,
       this.nameField.value,
       this.urlField.value,
-      !!this.skipSllField.value,
-      this.clientIDField ? this.clientIDField.value : '',
-      this.clientSecretField ? this.clientSecretField.value : '',
-      this.ssoAllowedField ? !!this.ssoAllowedField.value : false,
     );
 
     this.store.dispatch(action);

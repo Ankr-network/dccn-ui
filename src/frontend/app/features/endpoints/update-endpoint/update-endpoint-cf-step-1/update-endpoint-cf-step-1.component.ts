@@ -7,7 +7,7 @@ import { filter, map, pairwise, withLatestFrom } from 'rxjs/operators';
 
 import { UtilsService } from '../../../../core/utils.service';
 import { IStepperStep, StepOnNextFunction } from '../../../../shared/components/stepper/step/step.component';
-import { GetAllEndpoints, RegisterEndpoint } from '../../../../store/actions/endpoint.actions';
+import { GetAllEndpoints, UpdateregisterEndpoint } from '../../../../store/actions/endpoint.actions';
 import { AppState } from '../../../../store/app-state';
 import { EndpointsEffect } from '../../../../store/effects/endpoint.effects';
 import { endpointSchemaKey, entityFactory } from '../../../../store/helpers/entity-factory';
@@ -83,14 +83,10 @@ export class UpdateEndpointCfStep1Component implements IStepperStep, AfterConten
 
   onNext: StepOnNextFunction = () => {
 
-    const action = new RegisterEndpoint(
+    const action = new UpdateregisterEndpoint(
       this.typeField.value,
       this.nameField.value,
       this.urlField.value,
-      !!this.skipSllField.value,
-      this.clientIDField ? this.clientIDField.value : '',
-      this.clientSecretField ? this.clientSecretField.value : '',
-      this.ssoAllowedField ? !!this.ssoAllowedField.value : false,
     );
 
     this.store.dispatch(action);
@@ -122,7 +118,6 @@ export class UpdateEndpointCfStep1Component implements IStepperStep, AfterConten
       map(() => {
         return this.form.valid;
       }));
-      console.log("asjdfl;asjf;lksajdfljsadf");
   }
   setUrlValidation(endpointValue: string) {
     const endpoint = this.endpointTypes.find(e => e.value === endpointValue);
