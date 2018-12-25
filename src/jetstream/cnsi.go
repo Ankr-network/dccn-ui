@@ -373,31 +373,36 @@ func (p *portalProxy) updateJob(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	id, err:= strconv.Atoi(body["id"].(string))
+	id, err:= strconv.Atoi(body["taskID"].(string))
 	if err != nil {
 		log.Fatalf("ID is not an integer")
 	}
 
+	log.Info(id)
 	utrq := &pb.UpdateTaskRequest{
-		Taskid:    int64(id),
 		Usertoken: "ed1605e17374bde6c68864d072c9f5c9",
+		Taskid: int64(id),
 	}
-	if body["replica"].(string) != "" {
+	log.Info(utrq.Taskid)
+	/*if body["replica"].(string) != "" {
 		replicaCount, err := strconv.Atoi(body["replica"].(string))
 		if err != nil {
 			return fmt.Errorf("replica count %s is not an int", body["replica"].(string))
 		}
 		utrq.Replica = int64(replicaCount)
-	}
+	}*/
+	utrq.Replica = 1
+	log.Info(utrq.Usertoken)
 	if body["taskname"].(string) != "" {
 		utrq.Name = body["taskname"].(string)
 	}
+	log.Info(utrq.Taskid)
+	log.Info(utrq.Name)
 	if utrp, err := dc.UpdateTask(ctx, utrq); err != nil {
 		return fmt.Errorf("unable to update task %d: %v", id, err)
 	} else {
 		fmt.Printf("Update task id %d ...%s! \n", id, utrp.Status)
 	}
-
 	// c.Response().Header().Set("Content-Type", "application/json")
 	// c.Response().Write(jsonString)
 	return nil
