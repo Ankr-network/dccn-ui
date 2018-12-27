@@ -6,6 +6,10 @@ files:
   login-bg.jpg: "assets/login-bg.jpg"
   logo.png: "assets/logo.png"
   eula.html: "assets/eula.html" 
+  logo2.png: "assets/logo2.png"
+  CREATE2.png: "assets/CREATE2.png"
+  DELETE2.png: "assets/DELETE2.png"
+  UPDATE2.png: "assets/UPDATE2.png"
 
 folders:
   - "app/custom"

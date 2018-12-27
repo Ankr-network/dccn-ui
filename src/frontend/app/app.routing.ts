@@ -68,7 +68,7 @@ const appRoutes: Routes = [
           loadChildren: 'app/features/metrics/metrics.module#MetricsModule',
         }]
       },
-      {
+      /*{
         path: 'marketplace', loadChildren: 'app/features/service-catalog/service-catalog.module#ServiceCatalogModule',
         data: {
           stratosNavigation: {
@@ -99,7 +99,7 @@ const appRoutes: Routes = [
             position: 50
           }
         },
-      },
+      },*/
       { path: 'about', loadChildren: 'app/features/about/about.module#AboutModule' },
       { path: 'user-profile', loadChildren: 'app/features/user-profile/user-profile.module#UserProfileModule' },
     ]

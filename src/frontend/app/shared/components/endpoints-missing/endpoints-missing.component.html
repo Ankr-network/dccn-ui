@@ -1,8 +1,47 @@
 <!-- <app-no-content-message *ngIf="noContent$ | async as message" [icon]="'settings_ethernet'" [hidden]="!message" [firstLine]="message.firstLine" [secondLine]="'yo'" [toolbarLink]="message.toolbarLink">
-</app-no-content-message> -->
+</app-no-content-message>
 
-<ul>
+
+ul>
  <li *ngFor="let job of jobs">
    	{{ job.taskname }}
  </li>
 </ul>
+
+ -->
+
+
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Working Task</h2>
+  <p>The .table-striped class adds zebra-stripes to a table:</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>taskname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of jobs">
+          <td>{{job.taskname}}</td>
+          <td><button class="btn btn-danger" ng-click="">edit</button></td>
+          <td><button class="btn btn-danger" ng-click="">clear</button></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
