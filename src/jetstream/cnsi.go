@@ -23,7 +23,7 @@ import (
 
 	"context"
 
-	pb "github.com/Ankr-network/dccn-rpc/protocol"
+	pb "github.com/Ankr-network/dccn-comms/protocol"
 	"google.golang.org/grpc"
 
 	"time"
@@ -305,6 +305,49 @@ func (p *portalProxy) createJob(c echo.Context) error {
 }
 
 
+func (p *portalProxy) cancelJob(c echo.Context) error {
+	log.Info("Cancel Job")
+	s, err := ioutil.ReadAll(c.Request().Body())
+	if err != nil {
+		return err
+	}
+
+	var body map[string]interface{}
+	if err := json.Unmarshal(s, &body); err != nil {
+		return err
+	}
+
+	log.Info(body)
+
+
+	url := "client-dev.dccn.ankr.network"
+	port := "50051"
+	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+	dc := pb.NewDccncliClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	id, err:= strconv.Atoi(body["taskID"].(string))
+	log.Info(id)
+	if err != nil {
+		log.Fatalf("ID is not an integer")
+	}
+
+	if ctr, err := dc.CancelTask(ctx, &pb.CancelTaskRequest{Taskid: int64(id), Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
+		return fmt.Errorf("unable to delete task %d: %v", id, err)
+	} else {
+		fmt.Printf("Delete task id %d ...%s! \n", id, ctr.Status)
+	}
+
+	// c.Response().Header().Set("Content-Type", "application/json")
+	// c.Response().Write(jsonString)
+	return nil
+}
+
 func (p *portalProxy) deleteJob(c echo.Context) error {
 	log.Info("Delete Job")
 	s, err := ioutil.ReadAll(c.Request().Body())
@@ -337,7 +380,7 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 		log.Fatalf("ID is not an integer")
 	}
 
-	if ctr, err := dc.CancelTask(ctx, &pb.CancelTaskRequest{Taskid: int64(id), Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
+	if ctr, err := dc.PurgeTask(ctx, &pb.PurgeTaskRequest{Taskid: int64(id), Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
 		return fmt.Errorf("unable to delete task %d: %v", id, err)
 	} else {
 		fmt.Printf("Delete task id %d ...%s! \n", id, ctr.Status)
