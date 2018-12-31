@@ -48,7 +48,7 @@ The Console is now ready to be used.
 ## How to set up dev environment
 There are totally three components in Stratos' dev environment, which are Augular UI, Jetstream (Golang) and UAA (docker) respectively. All of them need to be set up correctly. The following is one among many ways to make them working together. Please feel free to modify it according to your own needs.
 
-1. Sync up to the latest version
+1. Sync up to the latest code
 
 2. `npm install`
 
