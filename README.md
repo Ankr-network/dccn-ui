@@ -45,6 +45,32 @@ After the dep command is ran, there will be a vendor directory that will be util
 
 The Console is now ready to be used.
 
+## How to set up dev environment
+There are totally three components in Stratos' dev environment, which are Augular UI, Jetstream (Golang) and UAA (docker) respectively. All of them need to be set up correctly. The following is one among many ways to make them working together. Please feel free to modify it according to your own needs.
+
+1. Sync up to the latest version
+
+2. `npm install`
+
+3. `dep ensure -vendor-only`
+
+4. `npm run build-backend` # This step is to build jetstream. You might need to delete 'tmp' directory if there is any conflict.
+
+5. Go to src\jetstream folder and copy default.config.properties to config.properties
+
+6. Comment out the line # UAA_ENDPOINT=http://localhost:8080
+
+7. `npm start` to start augular js 
+
+8. Go to src\jetstream and run `.\jetstream` to start jetstream backend
+
+9. `docker run --name=uaa --rm -p 8080:8080 -P splatform/stratos-uaa` to start UAA
+
+10. Go to `https://localhost:4200` for the initial setup. This step is only required once. Provide the following information: 
+    UAA Endpoint API URL: `http://localhost:8080` Client ID: `console` Client Secret: *Leave this blank* Admin Account: `admin` Password: `hscadmin`
+    Click `enter` and select the following from the list: `stratos.admin`
+
+11. Enjoy! The Augular js code should be reflected right away. And Go code still need to be built every time there are code changes but in much faster way!
 
 ## Deploying Stratos
 
