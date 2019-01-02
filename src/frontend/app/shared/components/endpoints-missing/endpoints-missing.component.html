@@ -1,6 +1,10 @@
 <!-- <app-no-content-message *ngIf="noContent$ | async as message" [icon]="'settings_ethernet'" [hidden]="!message" [firstLine]="message.firstLine" [secondLine]="'yo'" [toolbarLink]="message.toolbarLink">
 </app-no-content-message>
-
+<app-steppers cancel="/endpoints">
+  <app-step [title]="'Task Details'" [valid]="step1.validate | async" [onNext]="step1.onNext">
+    <app-delete-endpoint-cf-step-1 #step1></app-delete-endpoint-cf-step-1>
+  </app-step>
+</app-steppers>
 
 ul>
  <li *ngFor="let job of jobs">
@@ -39,8 +43,9 @@ ul>
           <td>{{job.taskname}}</td>
           <td>{{job.status}}</td>
           <td><button class="btn btn-danger" [routerLink]="'/endpoints/update/'">edit</button></td>
-          <td><button class="btn btn-danger" [routerLink]="'/endpoints/delete/'">clear</button></td>
+          <td><button class="btn btn-danger" ngClick="endpoints-missing.showSnackBar">clear</button></td>
         </tr>
+      
     </tbody>
   </table>
 </div>

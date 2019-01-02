@@ -269,7 +269,7 @@ func (p *portalProxy) createJob(c echo.Context) error {
 	tcrq := &pb.AddTaskRequest{
 		Name:       body["taskname"].(string),
 		Type:       "web",
-		Datacenterid: body["datacenter"].(int64),
+		Datacenter: body["datacenter"].(string),
 		Usertoken:  "ed1605e17374bde6c68864d072c9f5c9",
 	}
 

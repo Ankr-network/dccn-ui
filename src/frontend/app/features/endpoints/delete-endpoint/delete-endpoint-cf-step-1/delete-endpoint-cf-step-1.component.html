@@ -28,14 +28,14 @@
     <mat-form-field>
       <input matInput id="usertoken" name="usertoken" ngModel #clientSecretField="ngModel" placeholder="usertoken">
     </mat-form-field>
-  </div>
-  <div *ngIf="endpointTypeSupportsSSO" class="create-endpoint__sso">
+  <!--</div>
+ <div *ngIf="endpointTypeSupportsSSO" class="create-endpoint__sso">
     <mat-checkbox matInput name="ssoAllowed" #ssoAllowedField="ngModel" ngModel>Allow SSO login to this endpoint</mat-checkbox>
     <div *ngIf="!!ssoAllowedField.value">
       <p>
         Please ensure that you have added the Stratos SSO Callback URL shown below to the client's 'redirect_uri'.
       </p>
       <pre>{{clientRedirectURI}}</pre>
-    </div>
+    </div>-->
   </div>
 </form>
