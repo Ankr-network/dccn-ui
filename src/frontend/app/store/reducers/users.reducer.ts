@@ -53,7 +53,7 @@ export function userReducer(state: IRequestEntityTypeState<APIResource<CfUser>>,
 }
 
 export function endpointDisconnectUserReducer(state: IRequestEntityTypeState<APIResource<CfUser>>, action: DisconnectEndpoint) {
-  if (action.endpointType === 'cf') {
+  if (action.endpointType === 'web') {
     switch (action.type) {
       case DISCONNECT_ENDPOINTS_SUCCESS:
         const cfGuid = action.guid;

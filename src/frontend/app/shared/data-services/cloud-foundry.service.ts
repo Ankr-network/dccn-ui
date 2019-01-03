@@ -28,7 +28,7 @@ export class CloudFoundryService {
     this.cfEndpointsMonitor = new PaginationMonitor(store, CloudFoundryService.EndpointList, entityFactory(endpointSchemaKey));
 
     this.cFEndpoints$ = this.cfEndpointsMonitor.currentPage$.pipe(
-      map(endpoints => endpoints.filter(e => e.cnsi_type === 'cf'))
+      map(endpoints => endpoints.filter(e => e.cnsi_type === 'web'))
     );
 
     this.connectedCFEndpoints$ = this.cFEndpoints$.pipe(

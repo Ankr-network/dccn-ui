@@ -1,2 +1,54 @@
-<app-no-content-message *ngIf="noContent$ | async as message" [icon]="'settings_ethernet'" [hidden]="!message" [firstLine]="message.firstLine" [secondLine]="message.secondLine" [toolbarLink]="message.toolbarLink">
+<!-- <app-no-content-message *ngIf="noContent$ | async as message" [icon]="'settings_ethernet'" [hidden]="!message" [firstLine]="message.firstLine" [secondLine]="'yo'" [toolbarLink]="message.toolbarLink">
 </app-no-content-message>
+<app-steppers cancel="/endpoints">
+  <app-step [title]="'Task Details'" [valid]="step1.validate | async" [onNext]="step1.onNext">
+    <app-delete-endpoint-cf-step-1 #step1></app-delete-endpoint-cf-step-1>
+  </app-step>
+</app-steppers>
+
+ul>
+ <li *ngFor="let job of jobs">
+   	{{ job.taskname }}
+ </li>
+</ul>
+<title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ -->
+
+
+<html lang="en">
+<head>
+  
+</head>
+<body>
+
+<div class="container">
+  <h2>Working Task</h2>
+  <p>Task which is working now in the Ankr_hub</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>taskname</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of jobs">
+          <td>{{job.taskname}}</td>
+          <td>{{job.status}}</td>
+          <td><button class="btn btn-danger" [routerLink]="'/endpoints/update/'">edit</button></td>
+          <td><button class="btn btn-danger" ngClick="endpoints-missing.showSnackBar">clear</button></td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -37,6 +37,11 @@ import (
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/crypto"
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/interfaces"
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/tokens"
+
+	// "context"
+
+	// pb "github.com/Ankr-network/dccn-rpc/protocol"
+	// "google.golang.org/grpc"
 )
 
 // TimeoutBoundary represents the amount of time we'll wait for the database
@@ -131,6 +136,37 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+
+
+
+
+
+	//obtain task list
+	// url := "hub.ankr.network"
+	// port := "50051"
+	// conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+	// if err != nil {
+	// 	log.Fatalf("did not connect: %v", err)
+	// }
+
+	// defer conn.Close()
+	// dc2 := pb.NewDccncliClient(conn)
+	// ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	// defer cancel()
+	// r, err := dc2.TaskList(ctx, &pb.TaskListRequest{Usertoken: "ed1605e17374bde6c68864d072c9f5c9"})
+	// if err != nil {
+	// 	log.Fatalf("Client: could not send: %v", err)
+	// }
+	// Taskinfos := r.Tasksinfo
+	// log.Info(Taskinfos)
+	// log.Info("Sucessfully obtained list of tasks")
+	//end of obtaining task list
+
+
+
+
+
 
 	// Store database provider name for diagnostics
 	portalConfig.DatabaseProviderName = dc.DatabaseProvider
@@ -739,6 +775,14 @@ func (p *portalProxy) registerRoutes(e *echo.Echo, addSetupMiddleware *setupMidd
 	sessionGroup.GET("/cnsis", p.listCNSIs)
 	sessionGroup.GET("/cnsis/registered", p.listRegisteredCNSIs)
 
+	sessionGroup.GET("/jobs", p.getJobs)
+
+	sessionGroup.POST("/create", p.createJob)
+
+	sessionGroup.POST("/delete", p.deleteJob)
+
+	sessionGroup.POST("/update", p.updateJob)
+
 	// Info
 	sessionGroup.GET("/info", p.info)
 
@@ -825,6 +869,28 @@ func getStaticFiles() (string, error) {
 	}
 	return "", errors.New("UI folder not found")
 }
+
+// func getJobs() (pb.TaskInfo) {
+// 	url := "hub.ankr.network"
+// 	port := "50051"
+// 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+// 	if err != nil {
+// 		log.Fatalf("did not connect: %v", err)
+// 	}
+
+// 	defer conn.Close()
+// 	dc2 := pb.NewDccncliClient(conn)
+// 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+// 	defer cancel()
+// 	r, err := dc2.TaskList(ctx, &pb.TaskListRequest{Usertoken: "ed1605e17374bde6c68864d072c9f5c9"})
+// 	if err != nil {
+// 		log.Fatalf("Client: could not send: %v", err)
+// 	}
+// 	Taskinfos := r.Tasksinfo
+// 	log.Info(Taskinfos)
+// 	log.Info("Sucessfully obtained list of tasks")
+// 	return Taskinfos
+// }
 
 func isConsoleUpgrading() bool {
 

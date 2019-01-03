@@ -140,7 +140,7 @@ export class CfOrgSpaceDataService implements OnDestroy {
         // Ensure we have endpoints
         filter(endpoints => endpoints && !!Object.keys(endpoints).length),
         // Filter out non-cf endpoints
-        map(endpoints => Object.values(endpoints).filter(e => e.cnsi_type === 'cf')),
+        map(endpoints => Object.values(endpoints).filter(e => e.cnsi_type === 'web')),
         // Ensure we have at least one connected cf
         filter(cfs => {
           for (let i = 0; i < cfs.length; i++) {

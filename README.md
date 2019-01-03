@@ -1,4 +1,4 @@
-# Stratos
+# Ankr-UI
 
 <a href="https://travis-ci.org/cloudfoundry-incubator/stratos/branches"><img src="https://travis-ci.org/cloudfoundry-incubator/stratos.svg?branch=v2-master"></a>&nbsp;<a style="padding-left: 4px" href="https://codeclimate.com/github/cloudfoundry-incubator/stratos/maintainability"><img src="https://api.codeclimate.com/v1/badges/61af8b605f385e894632/maintainability" /></a>
 <a href="https://goreportcard.com/github.com/cloudfoundry-incubator/stratos"><img src="https://goreportcard.com/badge/github.com/cloudfoundry-incubator/stratos"/></a>
@@ -9,22 +9,42 @@
 [![slack.cloudfoundry.org](https://slack.cloudfoundry.org/badge.svg)](https://cloudfoundry.slack.com/messages/C80EP4Y57/)
 
 
-Stratos is an Open Source Web-based UI (Console) for managing Cloud Foundry. It allows users and administrators to both manage applications running in the Cloud Foundry cluster and perform cluster management tasks.
-
-If you are looking for the V1 version of Stratos, you can find it in the [master](https://github.com/cloudfoundry-incubator/stratos/tree/master) branch.
-
 ![Stratos Application view](docs/images/screenshots/app-summary.png)
 
 ## Quick Start
 
-To get started quickly, we recommend following the steps to deploy the Stratos Console as a Cloud Foundry Application - see [here](deploy/cloud-foundry).
+To build and start Ankr-UI on your local machine, follow these steps from the root directory:
 
-If you have [docker](https://www.docker.com/community-edition) installed, you can quickly deploy Stratos using the all-in-one container:
-```
-$ docker run -p 4443:443 splatform/stratos:latest 
-```
+1. First, because we need to use dep in order to get the dependencies for the files, we need to link the root directory to our go source directory. Find the go/src/ directory, and then link the Ankr-UI directory to the go/src/ directory using:
 
-Once that has finished, you can then access Stratos by visiting https://localhost:4443.
+`$ ln -s ${directory of Ankr-UI} ${name of directory in go/src/}`
+
+`$ cd ${name of directory in go/src/}`
+
+`$ dep ensure --vendor-only`
+
+After the dep command is ran, there will be a vendor directory that will be utilized during the build process.
+
+2. `$ docker build -f deploy/Dockerfile.all-in-one . -t stratos`
+
+3. `$ cd deploy/uaa`
+
+`$ ./prepare.sh`
+
+`$ sudo docker build -f Dockerfile.dev -t uaa .`
+
+4. `$ docker network create --driver=bridge dev-bridge`
+
+`$ docker run -p 4443:443 --net=dev-bridge stratos`
+
+`$ docker run --net=dev-bridge --name=uaa uaa`
+
+5. Access the Console at http://localhost:4443/ and provide the following information: UAA Endpoint API URL: `http://uaa:8080` Client ID: `console` Client Secret: Leave this blank Admin Account: `admin` Password: `hscadmin`
+
+6. Click `enter` and select the following from the list: `stratos.admin`
+
+The Console is now ready to be used.
+
 
 ## Deploying Stratos
 

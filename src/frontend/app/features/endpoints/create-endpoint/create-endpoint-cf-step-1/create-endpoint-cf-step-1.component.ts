@@ -82,6 +82,7 @@ export class CreateEndpointCfStep1Component implements IStepperStep, AfterConten
   }
 
   onNext: StepOnNextFunction = () => {
+
     const action = new RegisterEndpoint(
       this.typeField.value,
       this.nameField.value,
@@ -121,8 +122,8 @@ export class CreateEndpointCfStep1Component implements IStepperStep, AfterConten
       map(() => {
         return this.form.valid;
       }));
+      console.log("asjdfl;asjf;lksajdfljsadf");
   }
-
   setUrlValidation(endpointValue: string) {
     const endpoint = this.endpointTypes.find(e => e.value === endpointValue);
     this.urlValidation = endpoint ? endpoint.urlValidation : '';
@@ -131,9 +132,12 @@ export class CreateEndpointCfStep1Component implements IStepperStep, AfterConten
 
   // Only show the Client ID and Client Secret fields if the endpoint type is Cloud Foundry
   setAdvancedFields(endpoint: EndpointTypeConfig) {
-    this.showAdvancedFields = endpoint.value === 'cf';
+    this.showAdvancedFields = endpoint.value === 'web';
 
     // Only allow SSL if the endpoint type isCloud Foundry
-    this.endpointTypeSupportsSSO = endpoint.value === 'cf';
+    this.endpointTypeSupportsSSO = endpoint.value === 'web';
+  }
+  setlogfile(endpoint: EndpointTypeConfig) {
+    console.log(endpoint.value);
   }
 }

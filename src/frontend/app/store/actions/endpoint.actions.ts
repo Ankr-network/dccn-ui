@@ -27,6 +27,10 @@ export const UNREGISTER_ENDPOINTS = '[Endpoints] Unregister';
 export const UNREGISTER_ENDPOINTS_SUCCESS = '[Endpoints] Unregister succeed';
 export const UNREGISTER_ENDPOINTS_FAILED = '[Endpoints] Unregister failed';
 
+export const UPDATEREGISTER_ENDPOINTS = '[Endpoints] Update';
+export const UPDATEREGISTER_ENDPOINTS_SUCCESS = '[Endpoints] Update succeed';
+export const UPDATEREGISTER_ENDPOINTS_FAILED = '[Endpoints] Update failed';
+
 export class EndpointActionComplete implements Action {
   constructor(
     public type: string,
@@ -38,7 +42,7 @@ export class EndpointActionComplete implements Action {
 
 export class EndpointAction implements Action {
   type: string;
-  endpointType: EndpointType = 'cf';
+  endpointType: EndpointType = 'web';
 }
 
 // Different Auth Type support for connecting to Endpoints
@@ -109,12 +113,18 @@ export class DisconnectEndpoint extends EndpointAction {
 
 export class UnregisterEndpoint extends EndpointAction {
   constructor(
-    public guid: string,
+    public guid1: string,
     public endpointType: EndpointType,
+    public name: string,
+    public taskID: string,
   ) {
     super();
   }
   type = UNREGISTER_ENDPOINTS;
+
+  public guid(): string {
+    return '<New Endpoint>' + this.name;
+  }
 }
 
 export class RegisterEndpoint extends EndpointAction {
@@ -126,10 +136,28 @@ export class RegisterEndpoint extends EndpointAction {
     public clientID = '',
     public clientSecret = '',
     public ssoAllowed: boolean,
+    public replica = '',
   ) {
     super();
   }
   type = REGISTER_ENDPOINTS;
+
+  public guid(): string {
+    return '<New Endpoint>' + this.name;
+  }
+}
+
+
+export class UpdateregisterEndpoint extends EndpointAction {
+  constructor(
+    public endpointType: EndpointType,
+    public name: string,
+    public taskID: string,
+    public replica = '',
+  ) {
+    super();
+  }
+  type = UPDATEREGISTER_ENDPOINTS;
 
   public guid(): string {
     return '<New Endpoint>' + this.name;

@@ -7,7 +7,7 @@ export function removeEndpointRoles(state: ICurrentUserRolesState, action: Endpo
   const cfState = {
     ...state.cf
   };
-  if (action.endpointType !== 'cf' || !cfState[action.guid]) {
+  if (action.endpointType !== 'web' || !cfState[action.guid]) {
     return state;
   }
   delete cfState[action.guid];
@@ -20,7 +20,7 @@ export function removeEndpointRoles(state: ICurrentUserRolesState, action: Endpo
 export function addEndpoint(state: ICurrentUserRolesState, action: EndpointActionComplete) {
   const endpoint = action.endpoint as EndpointModel;
   const guid = endpoint.guid;
-  if (action.endpointType !== 'cf' || state[guid]) {
+  if (action.endpointType !== 'web' || state[guid]) {
     return state;
   }
   const cfState = {

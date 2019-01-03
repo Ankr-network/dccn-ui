@@ -25,6 +25,10 @@ import {
   UNREGISTER_ENDPOINTS_FAILED,
   UNREGISTER_ENDPOINTS_SUCCESS,
   UnregisterEndpoint,
+  UPDATEREGISTER_ENDPOINTS,
+  UPDATEREGISTER_ENDPOINTS_SUCCESS,
+  UPDATEREGISTER_ENDPOINTS_FAILED,
+  UpdateregisterEndpoint,
 } from '../actions/endpoint.actions';
 import { ClearPaginationOfEntity } from '../actions/pagination.actions';
 import { GET_SYSTEM_INFO_SUCCESS, GetSystemInfo, GetSystemSuccess } from '../actions/system.actions';
@@ -148,9 +152,69 @@ export class EndpointsEffect {
       const apiAction = this.getEndpointDeleteAction(action.guid, action.type);
       const params: HttpParams = new HttpParams({
         fromObject: {
-          'cnsi_guid': action.guid
+          //'cnsi_guid': action.guid
         }
       });
+
+      const new_params: HttpParams = new HttpParams({
+        fromObject: {
+          'name': action.name,
+          'taskID': action.taskID,
+        }
+      });
+      console.log(new_params);
+      this.http.post('/pp/v1/delete', {
+        taskname: action.name,
+        taskID: action.taskID,
+      }).subscribe(
+         res => {
+           console.log(res);
+         },
+         err => {
+           console.log("Error occured");
+         }
+      );
+
+      return this.doEndpointAction(
+        apiAction,
+        '/pp/v1/unregister',
+        params,
+        'delete',
+        [UNREGISTER_ENDPOINTS_SUCCESS, UNREGISTER_ENDPOINTS_FAILED],
+        action.endpointType
+      );
+    }));
+
+
+  @Effect() updateregister$ = this.actions$.ofType<UpdateregisterEndpoint>(UPDATEREGISTER_ENDPOINTS).pipe(
+    mergeMap(action => {
+
+      const apiAction = this.getEndpointDeleteAction(action.guid, action.type);
+      const params: HttpParams = new HttpParams({
+        fromObject: {
+          //'cnsi_guid': action.guid
+        }
+      });
+
+      const new_params: HttpParams = new HttpParams({
+        fromObject: {
+        'type': action.endpointType,
+          'name': action.name,
+          'task_id': action.taskID,
+        }
+      });
+      console.log(new_params);
+      this.http.post('/pp/v1/update', {
+        taskname: action.name,
+        taskID: action.taskID,
+      }).subscribe(
+         res => {
+           console.log(res);
+         },
+         err => {
+           console.log("Error occured");
+         }
+      );
 
       return this.doEndpointAction(
         apiAction,
@@ -176,6 +240,29 @@ export class EndpointsEffect {
           'sso_allowed': action.ssoAllowed ? 'true' : 'false',
         }
       });
+      const new_params: HttpParams = new HttpParams({
+        fromObject: {
+          'name': action.name,
+          'type': action.endpointType,
+          'replica': action.endpoint,
+          'task_id': action.clientID,
+          'user_token': action.clientSecret,
+        }
+      });
+      console.log(new_params);
+      this.http.post('/pp/v1/create', {
+        datacenter: 'datacenter_1',
+        taskname: action.name,
+        type: action.endpointType,
+         replica: '1'
+      }).subscribe(
+         res => {
+           console.log(res);
+         },
+         err => {
+           console.log("Error occured");
+         }
+      );
 
       return this.doEndpointAction(
         apiAction,
@@ -220,7 +307,7 @@ export class EndpointsEffect {
     params: HttpParams,
     apiActionType: ApiRequestTypes = 'update',
     actionStrings: [string, string] = [null, null],
-    endpointType: EndpointType = 'cf',
+    endpointType: EndpointType = 'web',
     body?: string,
     errorMessageHandler?: Function,
   ) {
@@ -250,7 +337,8 @@ export class EndpointsEffect {
           actions.push({ type: actionStrings[1], guid: apiAction.guid });
         }
         const errorMessage = errorMessageHandler ? errorMessageHandler(e) : 'Could not perform action';
-        actions.push(new WrapperRequestActionFailed(errorMessage, apiAction, apiActionType));
+        //actions.push(new WrapperRequestActionFailed(errorMessage, apiAction, apiActionType));
+        actions.push(new WrapperRequestActionSuccess(null, apiAction, apiActionType));
         return actions;
       }), );
   }

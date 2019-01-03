@@ -3,6 +3,8 @@ import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material';
 import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { delay, map, startWith, tap } from 'rxjs/operators';
 
+import { HttpClient } from '@angular/common/http';
+
 import { UserService } from '../../../core/user.service';
 import { EndpointsService } from '../../../core/endpoints.service';
 
@@ -18,6 +20,8 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
     message: `There are no connected endpoints, connect with your personal credentials to get started.`,
     action: 'Got it'
   };
+
+  jobs;
 
   noneRegisteredText = {
     firstLine: 'There are no registered endpoints',
@@ -38,7 +42,7 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
 
   private _snackBar: MatSnackBarRef<SimpleSnackBar>;
 
-  constructor(private snackBar: MatSnackBar, public endpointsService: EndpointsService) { }
+  constructor(private snackBar: MatSnackBar, public endpointsService: EndpointsService, private httpClient: HttpClient) { }
 
   ngAfterViewInit() {
     this.noContent$ = observableCombineLatest(
@@ -56,6 +60,23 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
         return null;
       })
     ).pipe(startWith(null));
+    this.httpClient.get('/pp/v1/jobs')
+      // .subscribe(data => console.log(data));
+      .subscribe(data => this.jobs = data);
+    //console.log(this.jobs);
+
+    // this.httpClient.post('/pp/v1/create', {
+    //   datacenter: 'datacenter_1',
+    //   taskname: 'nginx1.12',
+    //   replica: '1'
+    // }).subscribe(
+    //     res => {
+    //       console.log(res);
+    //     },
+    //     err => {
+    //       console.log("Error occured");
+    //     }
+    //   );
   }
 
   ngOnDestroy() {
@@ -69,5 +90,20 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
       this._snackBar.dismiss();
     }
   }
+
+  // private sendPostRequest() {
+  //   this.httpClient.post('/pp/v1/create', {
+  //     datacenter: 'datacenter_1',
+  //     taskname: 'nginx1.12',
+  //     replica: '1'
+  //   }).subscribe(
+  //       res => {
+  //         console.log(res);
+  //       },
+  //       err => {
+  //         console.log("Error occured");
+  //       }
+  //     );
+  // }
 
 }
