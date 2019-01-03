@@ -29,7 +29,7 @@ export function updateNewlyConnectedEndpoint(
   state: ICurrentUserRolesState,
   action: EndpointActionComplete
 ): ICurrentUserRolesState {
-  if (action.endpointType !== 'cf') {
+  if (action.endpointType !== 'web') {
     return state;
   }
   const endpoint = action.endpoint as INewlyConnectedEndpointInfo;

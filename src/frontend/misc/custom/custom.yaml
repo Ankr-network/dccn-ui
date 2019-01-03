@@ -5,7 +5,11 @@ files:
   favicon.ico: "favicon.ico"
   login-bg.jpg: "assets/login-bg.jpg"
   logo.png: "assets/logo.png"
-  eula.html: "assets/eula.html" 
+  eula.html: "assets/eula.html"
+  logo2.png: "assets/logo2.png"
+  CREATE.png: "assets/CREATE.png"
+  DELETE.png: "assets/DELETE.png"
+  EDIT.png: "assets/UPDATE.png"
 
 folders:
   - "app/custom"

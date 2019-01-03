@@ -21714,7 +21714,7 @@ export function getInitialTestStoreState(): AppState {
         [testSCFGuid]: {
           guid: testSCFGuid,
           name: 'SCF',
-          cnsi_type: 'cf',
+          cnsi_type: 'web',
           api_endpoint: {
             Scheme: 'https',
             Opaque: '',

@@ -132,7 +132,7 @@ export class PermissionsEffects {
   @Effect() getPermissionForNewlyConnectedEndpoint$ = this.actions$.ofType<EndpointActionComplete>(CONNECT_ENDPOINTS_SUCCESS).pipe(
     switchMap(action => {
       const endpoint = action.endpoint as INewlyConnectedEndpointInfo;
-      if (endpoint.user.admin || action.endpointType !== 'cf') {
+      if (endpoint.user.admin || action.endpointType !== 'web') {
         return endpoint.user.admin ? [new GetUserCfRelations(action.guid, GET_CURRENT_USER_CF_RELATIONS_SUCCESS)] : [];
       }
 

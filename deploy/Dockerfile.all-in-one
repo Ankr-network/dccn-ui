@@ -4,17 +4,18 @@ FROM splatform/stratos-aio-base:opensuse as builder
 COPY --chown=stratos:users *.json ./
 COPY --chown=stratos:users gulpfile.js ./
 COPY --chown=stratos:users Gopkg.* ./
+COPY --chown=stratos:users vendor ./vendor
 COPY --chown=stratos:users src ./src
 COPY --chown=stratos:users build ./build/
 COPY --chown=stratos:users deploy/tools/generate_cert.sh generate_cert.sh
 COPY --chown=stratos:users deploy/db deploy/db
 COPY --chown=stratos:users deploy/all-in-one/config.all-in-one.properties config.properties
 
-RUN npm install \
-    && npm run build \
-    && npm run build-backend \
-    && cp src/jetstream/jetstream . \
-    && mv dist ui
+RUN npm install
+RUN npm run build --watch
+RUN npm run build-backend --watch
+RUN cp src/jetstream/jetstream .
+RUN mv dist ui
 
 # Generate dev-certs
 RUN CERTS_PATH=/home/stratos/dev-certs ./generate_cert.sh \
@@ -32,5 +33,11 @@ EXPOSE 443
 
 # Need to be root to bind to port 443
 USER root
+
+#COPY id_rsa /root/.ssh/
+#RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+#RUN chmod go-w /root
+#RUN chmod 700 /root/.ssh
+#RUN chmod 600 /root/.ssh/id_rsa
 
 ENTRYPOINT ["./jetstream"]

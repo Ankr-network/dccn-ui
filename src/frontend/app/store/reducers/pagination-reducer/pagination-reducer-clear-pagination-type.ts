@@ -24,7 +24,7 @@ export function paginationClearType(state: PaginationState, entityKey, defaultPa
 }
 
 export function clearEndpointEntities(state: PaginationState, action: EndpointAction, defaultPaginationEntityState) {
-  if (action.endpointType === 'cf') {
+  if (action.endpointType === 'web') {
     let newState = paginationClearType(state, applicationSchemaKey, defaultPaginationEntityState);
     newState = paginationClearType(newState, spaceSchemaKey, defaultPaginationEntityState);
     newState = paginationClearType(newState, organizationSchemaKey, defaultPaginationEntityState);

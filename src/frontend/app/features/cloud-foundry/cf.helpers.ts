@@ -252,7 +252,7 @@ export function waitForCFPermissions(store: Store<AppState>, cfGuid: string): Ob
 export function selectConnectedCfs(store: Store<AppState>): Observable<EndpointModel[]> {
   return store.select(selectEntities<EndpointModel>(endpointSchemaKey)).pipe(
     map(endpoints => Object.values(endpoints)),
-    map(endpoints => endpoints.filter(endpoint => endpoint.cnsi_type === 'cf' && endpoint.connectionStatus === 'connected')),
+    map(endpoints => endpoints.filter(endpoint => endpoint.cnsi_type === 'web' && endpoint.connectionStatus === 'connected')),
   );
 }
 

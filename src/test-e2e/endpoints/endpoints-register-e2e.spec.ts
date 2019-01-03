@@ -44,7 +44,7 @@ describe('Endpoints', () => {
 
       describe('Invalid address -', () => {
 
-        const invalidUrl = 'Invalid API URL';
+        const invalidUrl = 'Invalid APIxiaowu URL';
 
         beforeEach(() => {
           // Enter a name so the form will become valid on valid address
