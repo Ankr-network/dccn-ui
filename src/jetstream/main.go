@@ -779,9 +779,11 @@ func (p *portalProxy) registerRoutes(e *echo.Echo, addSetupMiddleware *setupMidd
 
 	sessionGroup.POST("/create", p.createJob)
 
-	sessionGroup.POST("/delete", p.deleteJob)
+	sessionGroup.POST("/delete", p.cancelJob)
 
 	sessionGroup.POST("/update", p.updateJob)
+
+	sessionGroup.POST("/purge", p.deleteJob)
 
 	// Info
 	sessionGroup.GET("/info", p.info)

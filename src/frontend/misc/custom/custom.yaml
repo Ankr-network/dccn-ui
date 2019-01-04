@@ -7,7 +7,7 @@ files:
   logo.png: "assets/logo.png"
   eula.html: "assets/eula.html"
   logo2.png: "assets/logo2.png"
-  CREATE.png: "assets/CREATE.png"
+  ADD.png: "assets/CREATE.png"
   DELETE.png: "assets/DELETE.png"
   EDIT.png: "assets/UPDATE.png"
 

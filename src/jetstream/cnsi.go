@@ -346,6 +346,7 @@ func (p *portalProxy) cancelJob(c echo.Context) error {
 func (p *portalProxy) deleteJob(c echo.Context) error {
 	log.Info("Delete Job")
 	s, err := ioutil.ReadAll(c.Request().Body())
+	log.Info(s)
 	if err != nil {
 		return err
 	}
@@ -356,6 +357,7 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 	}
 
 	log.Info(body)
+	log.Info("xiaowu")
 
 	url := "client-dev.dccn.ankr.network"
 	port := "50051"
@@ -367,14 +369,18 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 	dc := pb.NewDccncliClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
-
-	id, err := strconv.Atoi(body["taskID"].(string))
+	
+	idinterface := body["taskID"]
+	log.Info(idinterface)
+	idfloat64 := idinterface.(float64)
+	log.Info("BeforeID")
+	id := int64(idfloat64)
 	log.Info(id)
 	if err != nil {
 		log.Fatalf("ID is not an integer")
 	}
-
-	if ctr, err := dc.PurgeTask(ctx, &pb.PurgeTaskRequest{Taskid: int64(id), Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
+		log.Info("Afterid")
+	if ctr, err := dc.PurgeTask(ctx, &pb.PurgeTaskRequest{Taskid: id, Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
 		return fmt.Errorf("unable to delete task %d: %v", id, err)
 	} else {
 		fmt.Printf("Delete task id %d ...%s! \n", id, ctr.Status)

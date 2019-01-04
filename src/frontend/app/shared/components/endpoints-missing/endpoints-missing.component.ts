@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { UserService } from '../../../core/user.service';
 import { EndpointsService } from '../../../core/endpoints.service';
+import { Refresh } from '@ngrx/store-devtools/src/actions';
 
 @Component({
   selector: 'app-endpoints-missing',
@@ -91,19 +92,31 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  // private sendPostRequest() {
-  //   this.httpClient.post('/pp/v1/create', {
-  //     datacenter: 'datacenter_1',
-  //     taskname: 'nginx1.12',
-  //     replica: '1'
-  //   }).subscribe(
-  //       res => {
-  //         console.log(res);
-  //       },
-  //       err => {
-  //         console.log("Error occured");
-  //       }
-  //     );
-  // }
+   private sendPostRequest(id: string) {
+     console.log("Test")
+     this.httpClient.post('/pp/v1/purge', {
+       taskID: id,
+     }).subscribe(
+         res => {
+           console.log(res);
+           this.httpClient.get('/pp/v1/jobs')
+      // .subscribe(data => console.log(data));
+      .subscribe(data => this.jobs = data);
+         },
+         err => {
+           console.log("Error occured");
+         }
+       );
+      
+        // Do something before delay
+        
+    
+        
+    
+        // Do something after
+        
+       
+       //window.location.reload();
+   }
 
 }
