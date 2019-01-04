@@ -7,9 +7,9 @@ files:
   logo.png: "assets/logo.png"
   eula.html: "assets/eula.html"
   logo2.png: "assets/logo2.png"
-  CREATE2.png: "assets/CREATE.png"
-  DELETE2.png: "assets/DELETE.png"
-  UPDATE2.png: "assets/UPDATE.png"
+  ADD.png: "assets/CREATE.png"
+  DELETE.png: "assets/DELETE.png"
+  EDIT.png: "assets/UPDATE.png"
 
 folders:
   - "app/custom"
