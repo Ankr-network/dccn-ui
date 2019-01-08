@@ -1,7 +1,20 @@
 .login {
   &__card {
     padding: 0;
+    //width: 300px;
+    
+    //border-style: solid; border-width: 5px;
+    //border-image: linear-gradient(to bottom, #363795, #3499CC) 1 100%;
+    //border-top: 3px solid black;
+    
     width: 300px;
+ background: #eee;
+ border: 5px solid transparent;
+ -moz-border-image: -moz-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
+ -webkit-border-image: -webkit-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
+ border-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
+ border-image-slice: 1;
+
     mat-form-field {
       width: 100%;
     }
@@ -11,6 +24,12 @@
   }
   &__submit {
     width: 100%;
+    background: #eee;
+ border: 2px solid transparent;
+ -moz-border-image: -moz-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
+ -webkit-border-image: -webkit-linear-gradient(top, #3acfd5 0%, #3a4ed5 100%);
+ border-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
+ border-image-slice: 1;
   }
   &-message {
     font-size: 18px;
