@@ -44,7 +44,7 @@ const appRoutes: Routes = [
         path: 'applications', loadChildren: 'app/features/applications/applications.module#ApplicationsModule',
         data: {
           stratosNavigation: {
-            text: 'Applications',
+            text: 'Market Place',
             matIcon: 'apps',
             position: 20
           }
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
         path: 'endpoints',
         data: {
           stratosNavigation: {
-            text: 'Endpoints',
+            text: 'Running Tasks',
             matIcon: 'settings_ethernet',
             position: 100
           }

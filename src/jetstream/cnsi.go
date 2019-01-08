@@ -152,10 +152,11 @@ func (p *portalProxy) unregisterCluster(c echo.Context) error {
 	log.WithField("cnsiGUID", cnsiGUID).Debug("unregisterCluster")
 
 	if len(cnsiGUID) == 0 {
-		return interfaces.NewHTTPShadowError(
-			http.StatusBadRequest,
-			"Missing target endpoint",
-			"Need CNSI GUID passed as form param")
+		//return interfaces.NewHTTPShadowError(
+		//	http.StatusBadRequest,
+		//	"Missing target endpoint",
+		//	"Need CNSI GUID passed as form param")
+		return nil
 	}
 
 	p.unsetCNSIRecord(cnsiGUID)
@@ -205,7 +206,7 @@ func (p *portalProxy) listCNSIs(c echo.Context) error {
 }
 
 func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {
-	url := "client-dev.dccn.ankr.network"
+	url := "client-stage.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -254,7 +255,7 @@ func (p *portalProxy) createJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client-dev.dccn.ankr.network"
+	url := "client-stage.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -265,14 +266,18 @@ func (p *portalProxy) createJob(c echo.Context) error {
 	dc := pb.NewDccncliClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
-
+	Datacenterids := body["datacenter"].(string)
+	Datacenteridint64, err := strconv.ParseInt(Datacenterids, 10, 64)
+	if err != nil {
+		log.Info("Coversion Error")
+	}
 	tcrq := &pb.AddTaskRequest{
 		Name:       body["taskname"].(string),
 		Type:       "web",
-		Datacenterid: body["datacenter"].(int64),
+		Datacenterid: Datacenteridint64,
 		Usertoken:  "ed1605e17374bde6c68864d072c9f5c9",
 	}
-
+	log.Info("xiaowu")
 	if body["replica"].(string) != "" {
 		replicaCount, err := strconv.Atoi(body["replica"].(string))
 		if err != nil {
@@ -315,7 +320,7 @@ func (p *portalProxy) cancelJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client-dev.dccn.ankr.network"
+	url := "client-stage.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -359,7 +364,7 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 	log.Info(body)
 	log.Info("xiaowu")
 
-	url := "client-dev.dccn.ankr.network"
+	url := "client-stage.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -405,7 +410,7 @@ func (p *portalProxy) updateJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client-dev.dccn.ankr.network"
+	url := "client-stage.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {

@@ -1,63 +1,80 @@
-<!-- <app-no-content-message *ngIf="noContent$ | async as message" [icon]="'settings_ethernet'" [hidden]="!message" [firstLine]="message.firstLine" [secondLine]="'yo'" [toolbarLink]="message.toolbarLink">
-</app-no-content-message>
-<app-steppers cancel="/endpoints">
-  <app-step [title]="'Task Details'" [valid]="step1.validate | async" [onNext]="step1.onNext">
-    <app-delete-endpoint-cf-step-1 #step1></app-delete-endpoint-cf-step-1>
-  </app-step>
-</app-steppers>
-
-ul>
- <li *ngFor="let job of jobs">
-   	{{ job.taskname }}
- </li>
-</ul>
-<title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- -->
-
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 </head>
 <body>
+	
+	<div class="limiter">
+				<div class="table100 ver1 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Task name</th>
+									<th class="cell100 column3">Status</th>
+									<th class="cell100 column4">TaskId</th>
+									<th class="cell100 column5" >Action</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
 
-<div class="container">
-  <h2>Working Task</h2>
-  <p>Task which is working now in the Ankr_hub</p>            
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>taskname</th>
-        <th>Status</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let job of jobs">
-          <td>{{job.taskname}}</td>
-          <td>{{job.status}}</td>
-          <td>{{job.taskid}}</td>
-          <td><button class="btn btn-danger" [routerLink]="'/endpoints/update/'">edit</button></td>
-          <td><button type="button" (click)="sendPostRequest(job.taskid)">clear</button></td>
-        </tr>
-      
-    </tbody>
-  </table>
-</div>
-<script>
-angular.module('myApp', [])
-.controller('myCtrl', ['$scope', function($scope) {
-    $scope.count = 0;
-    $scope.myFunc = function() {
-        $scope.count++;
-    };
-}]);
-</script>
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+                  <tr class="row100 body" *ngFor="let job of jobs">
+                    <td class="cell100 column1">{{job.taskname}}</td>
+                    <td class="cell100 column3">{{job.status}}</td>
+                    <td class="cell100 column4">&nbsp;{{job.taskid}}</td>
+                    <td class="cell100 column5"><button  [routerLink]="'/endpoints/update/'">edit</button> &nbsp; <button  type="button" (click)="sendPostRequest(job.taskid)">clear</button></td>
+                  </tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+	</div>
+
+
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+			
+		
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
 </body>
 </html>
