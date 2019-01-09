@@ -44,7 +44,7 @@ const appRoutes: Routes = [
         path: 'applications', loadChildren: 'app/features/applications/applications.module#ApplicationsModule',
         data: {
           stratosNavigation: {
-            text: 'Market Place',
+            text: 'Datacenter',
             matIcon: 'apps',
             position: 20
           }
