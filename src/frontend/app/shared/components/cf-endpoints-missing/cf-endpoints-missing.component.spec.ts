@@ -21,10 +21,7 @@ describe('CfEndpointsMissingComponent', () => {
         RouterTestingModule
       ]
     })
-      .compileComponents({
-
-        alert("this is a test")
-      });
+      .compileComponents();
   }));
 
   beforeEach(() => {

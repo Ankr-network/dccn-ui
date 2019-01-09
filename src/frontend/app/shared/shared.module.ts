@@ -141,6 +141,7 @@ import { MetricsRangeSelectorComponent } from './components/metrics-range-select
 import { MetricsParentRangeSelectorComponent } from './components/metrics-parent-range-selector/metrics-parent-range-selector.component';
 import { MetricsRangeSelectorService } from './services/metrics-range-selector.service';
 import { MultilineTitleComponent } from './components/multiline-title/multiline-title.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -153,6 +154,7 @@ import { MultilineTitleComponent } from './components/multiline-title/multiline-
     CdkTableModule,
     NgxChartsModule,
     MomentModule,
+    AgmCoreModule,
   ],
   declarations: [
     LoadingPageComponent,

@@ -189,7 +189,7 @@ export class EndpointsEffect {
   @Effect() updateregister$ = this.actions$.ofType<UpdateregisterEndpoint>(UPDATEREGISTER_ENDPOINTS).pipe(
     mergeMap(action => {
 
-      const apiAction = this.getEndpointDeleteAction(action.guid, action.type);
+      const apiAction = this.getEndpointUpdateAction(action.guid(), action.type, EndpointsEffect.registeringKey);
       const params: HttpParams = new HttpParams({
         fromObject: {
           //'cnsi_guid': action.guid
@@ -218,11 +218,13 @@ export class EndpointsEffect {
 
       return this.doEndpointAction(
         apiAction,
-        '/pp/v1/unregister',
+        '/pp/v1/register/' + action.endpointType,
         params,
-        'delete',
-        [UNREGISTER_ENDPOINTS_SUCCESS, UNREGISTER_ENDPOINTS_FAILED],
-        action.endpointType
+        'create',
+        [REGISTER_ENDPOINTS_SUCCESS, REGISTER_ENDPOINTS_FAILED],
+        action.endpointType,
+        null,
+        this.processRegisterError
       );
     }));
 
