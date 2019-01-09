@@ -107,16 +107,28 @@ export class EndpointsMissingComponent implements AfterViewInit, OnDestroy {
            console.log("Error occured");
          }
        );
-      
-        // Do something before delay
-        
-    
-        
-    
-        // Do something after
-        
-       
-       //window.location.reload();
+   }
+   private sendCancelRequest(id: string) {
+    console.log("Test")
+    this.httpClient.post('/pp/v1/delete', {
+      taskID: id,
+    }).subscribe(
+        res => {
+          console.log(res);
+          this.httpClient.get('/pp/v1/jobs')
+     // .subscribe(data => console.log(data));
+     .subscribe(data => this.jobs = data);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+  }
+
+   public sendRefreshRequest(){
+    this.httpClient.get('/pp/v1/jobs')
+    // .subscribe(data => console.log(data));
+    .subscribe(data => this.jobs = data);
    }
 
 }

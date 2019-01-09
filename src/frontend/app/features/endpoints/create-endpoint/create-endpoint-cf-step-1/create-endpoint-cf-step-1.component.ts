@@ -87,10 +87,6 @@ export class CreateEndpointCfStep1Component implements IStepperStep, AfterConten
       this.typeField.value,
       this.nameField.value,
       this.urlField.value,
-      !!this.skipSllField.value,
-      this.clientIDField ? this.clientIDField.value : '',
-      this.clientSecretField ? this.clientSecretField.value : '',
-      this.ssoAllowedField ? !!this.ssoAllowedField.value : false,
     );
 
     this.store.dispatch(action);

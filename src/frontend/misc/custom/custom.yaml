@@ -11,6 +11,7 @@ files:
   DELETE.png: "assets/DELETE.png"
   EDIT.png: "assets/UPDATE.png"
   LIST.png: "assets/LIST.png"
+  REFRESH.png: "assets/REFRESH.png"
 
 folders:
   - "app/custom"

@@ -233,20 +233,15 @@ export class EndpointsEffect {
       const params: HttpParams = new HttpParams({
         fromObject: {
           'cnsi_name': action.name,
-          'api_endpoint': action.endpoint,
-          'skip_ssl_validation': action.skipSslValidation ? 'true' : 'false',
-          'cnsi_client_id': action.clientID,
-          'cnsi_client_secret': action.clientSecret,
-          'sso_allowed': action.ssoAllowed ? 'true' : 'false',
+          'api_endpoint': action.endpointType,
+          'cnsi_client_id': action.replica,
         }
       });
       const new_params: HttpParams = new HttpParams({
         fromObject: {
           'name': action.name,
           'type': action.endpointType,
-          'replica': action.endpoint,
-          'task_id': action.clientID,
-          'user_token': action.clientSecret,
+          'replica': action.replica,
         }
       });
       console.log(new_params);
