@@ -8,6 +8,7 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
   height: 100%;
   width: 200px;
   &__top {
+    margin-top: 100px;
     display: flex;
     flex: 0 0 56px;
     flex-direction: column;
@@ -58,10 +59,18 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
       text-transform: uppercase;
     }
   }
+
   &__bottom {
     flex: 0 0 auto;
     font-weight: 300;
     font-size: 14px;
     padding: 12px;
   }
+}
+.side-nav__logo-img{
+  align-items: center;
+  margin-top: -80px;
+  margin-left: -55px;
+  width: 150px;
+  height: 150px;
 }

@@ -1,2 +1,166 @@
-<app-no-content-message *ngIf="noContent$ | async as message" [icon]="'settings_ethernet'" [hidden]="!message" [firstLine]="message.firstLine" [secondLine]="message.secondLine">
-</app-no-content-message>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Arrow Symbols (Polyline)</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map">this is a test</div>
+    <script>
+      // This example adds a predefined symbol (an arrow) to a polyline.
+      // Setting offset to 100% places the arrow at the end of the line.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 6,
+          center: {lat: 38.97728854681858, lng: -123.04740625},
+          styles: [
+  {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+  {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+  {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+  {
+    featureType: 'administrative.locality',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#d59563'}]
+  },
+  {
+    featureType: 'poi',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#d59563'}]
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'geometry',
+    stylers: [{color: '#263c3f'}]
+  },
+  {
+    featureType: 'poi.park',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#6b9a76'}]
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [{color: '#38414e'}]
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry.stroke',
+    stylers: [{color: '#212a37'}]
+  },
+  {
+    featureType: 'road',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#9ca5b3'}]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry',
+    stylers: [{color: '#746855'}]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'geometry.stroke',
+    stylers: [{color: '#1f2835'}]
+  },
+  {
+    featureType: 'road.highway',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#f3d19c'}]
+  },
+  {
+    featureType: 'transit',
+    elementType: 'geometry',
+    stylers: [{color: '#2f3948'}]
+  },
+  {
+    featureType: 'transit.station',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#d59563'}]
+  },
+  {
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [{color: '#17263c'}]
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [{color: '#515c6d'}]
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.stroke',
+    stylers: [{color: '#17263c'}]
+  }
+],
+          mapTypeId: 'terrain'
+        });
+
+        // Define a symbol using a predefined path (an arrow)
+        // supplied by the Google Maps JavaScript API.
+        var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+        };
+
+        var image = new google.maps.MarkerImage(
+  "ankr3.png",
+    new google.maps.Size(71, 71),
+    new google.maps.Point(0, 0),
+    new google.maps.Point(10, 10),
+    new google.maps.Size(25, 25));
+
+       var hubLatLng = {lat: 37.423339170178615, lng: -121.729046875};
+       var marker = new google.maps.Marker({
+  position: hubLatLng,
+  map: map,
+  icon:image,
+  title: 'Ankr Hub'
+});
+
+
+var image2 = new google.maps.MarkerImage(
+"database2.png",
+new google.maps.Size(71, 71),
+new google.maps.Point(0, 0),
+new google.maps.Point(10, 10),
+new google.maps.Size(25, 25));
+
+
+var datacenters = [{lat: 38.97628854681858, lng: -123.04540625, name:"dataceneter1"},{lat: 38.18728854681858, lng: -120.14740625, name:"dataceneter2"},{lat: 36.69728854681858, lng: -115.05740625, name:"dataceneter3"}]
+
+datacenters.forEach(function(element) {
+  var marker = new google.maps.Marker({
+  position: element,
+  map: map,
+  icon:image2,
+//  label: element.name
+  });
+});
+
+
+      }
+
+
+
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDY2cTSEYlfq0TyJSYlMP36rIxUZyF-n_M&callback=initMap">
+    </script>
+  </body>
+</html>

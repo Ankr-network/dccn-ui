@@ -21,7 +21,9 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
+	<button  type="button" class="refresh" (click)="sendRefreshRequest()">
+		<img src="/assets/DELETE.png" width="40" height="40">
+	</button>
 	<div class="limiter">
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">
@@ -44,7 +46,7 @@
                     <td class="cell100 column1">{{job.taskname}}</td>
                     <td class="cell100 column3">{{job.status}}</td>
                     <td class="cell100 column4">&nbsp;{{job.taskid}}</td>
-                    <td class="cell100 column5"><button  [routerLink]="'/endpoints/update/'">edit</button> &nbsp; <button  type="button" (click)="sendPostRequest(job.taskid)">clear</button></td>
+                    <td class="cell100 column5"><button  [routerLink]="'/endpoints/update/'" class="one">edit</button> &nbsp; <button  type="button" class="one" (click)="sendCancelRequest(job.taskid)">cancel</button> &nbsp; <button  type="button" class="one" (click)="sendPostRequest(job.taskid)">delete</button></td>
                   </tr>
 							</tbody>
 						</table>

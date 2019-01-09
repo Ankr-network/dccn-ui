@@ -331,13 +331,17 @@ func (p *portalProxy) cancelJob(c echo.Context) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	id, err := strconv.Atoi(body["taskID"].(string))
+	idinterface := body["taskID"]
+	log.Info(idinterface)
+	idfloat64 := idinterface.(float64)
+	log.Info("BeforeID")
+	id := int64(idfloat64)
 	log.Info(id)
 	if err != nil {
 		log.Fatalf("ID is not an integer")
 	}
-
-	if ctr, err := dc.CancelTask(ctx, &pb.CancelTaskRequest{Taskid: int64(id), Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
+		log.Info("Afterid")
+	if ctr, err := dc.CancelTask(ctx, &pb.CancelTaskRequest{Taskid: id, Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
 		return fmt.Errorf("unable to delete task %d: %v", id, err)
 	} else {
 		fmt.Printf("Delete task id %d ...%s! \n", id, ctr.Status)
