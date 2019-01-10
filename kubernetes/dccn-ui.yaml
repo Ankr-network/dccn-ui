@@ -5,12 +5,14 @@ metadata:
   labels:
     app: dccn-ui
 spec:
+  type: LoadBalancer
   selector:
     app: dccn-ui
   ports:
   - name: dccn-ui-port
     port: 4443
     targetPort: 443
+    
 ---  
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -29,10 +31,3 @@ spec:
       - name: dccn-ui
         image: "815280425737.dkr.ecr.us-west-2.amazonaws.com/dccn-ui:feat"
         imagePullPolicy: Always
-      - ports:
-        - containerPort: 80
-          name: http
-          protocol: TCP
-        - containerPort: 443
-          name: https
-          protocol: TCP
