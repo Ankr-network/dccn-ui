@@ -26,7 +26,7 @@ spec:
       imagePullSecrets:
       - name: aws-ecr
       containers:
-      - name: dccn-daemon
+      - name: dccn-ui
         image: "815280425737.dkr.ecr.us-west-2.amazonaws.com/dccn-ui:feat"
         imagePullPolicy: Always
       - ports:
