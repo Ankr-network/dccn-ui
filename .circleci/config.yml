@@ -47,7 +47,7 @@ jobs:
               BRANCH_NAME="feat"
               K8S_CLUSTER="dev.ui"
             fi
-            docker build -f deploy/Dockerfile.all-in-one . -t dccn-ui:$BRANCH_NAME .
+            docker build -f deploy/Dockerfile.all-in-one -t dccn-ui:$BRANCH_NAME .
             for TAG in $BRANCH_NAME $SHA1_SHORT $BRANCH_NAME$DATE; do
             docker tag dccn-ui:$BRANCH_NAME $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/dccn-ui:$TAG
             docker push $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/dccn-ui:$TAG
