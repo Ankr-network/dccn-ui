@@ -30,10 +30,6 @@ jobs:
             chmod +x ./kubectl
             sudo mv ./kubectl /usr/local/bin/kubectl
       - run:
-          name: Set dependency
-          command: |
-            dep ensure --vendor-only
-      - run:
           name: "Build & Push Docker Image"
           command: |
             BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
