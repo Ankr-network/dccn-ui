@@ -1,0 +1,60 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      # Build in Go base container
+      - image: circleci/golang:1.10
+    working_directory: /go/src/github.com/Ankr-network/dccn-ui
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install AWSCLI
+          command: |
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: Log in to AWS ECR
+          command: eval $(aws ecr get-login --no-include-email --region $AWS_REGION)
+      - run:
+          name: Install Kops and Kubectl
+          command: |
+            wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+            chmod +x ./kops
+            sudo mv ./kops /usr/local/bin/kops
+            wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+      - run:
+          name: Set dependency
+          command: |
+            dep ensure --vendor-only
+      - run:
+          name: "Build & Push Docker Image"
+          command: |
+            BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+            SHA1_SHORT=$(git rev-parse --short HEAD)
+            DATE=`date +%Y%m%d%H%M%S`
+            if [[ ($BRANCH_NAME == "master") ]]
+            then
+              BRANCH_NAME="stage"
+              K8S_CLUSTER="ui"
+            elif [[ ($BRANCH_NAME == "develop") ]]
+            then
+              BRANCH_NAME="dev"
+              K8S_CLUSTER="stage.ui"
+            else 
+              BRANCH_NAME="feat"
+              K8S_CLUSTER="dev.ui"
+            fi
+            docker build -f deploy/Dockerfile.all-in-one -t dccn-ui:$BRANCH_NAME .
+            for TAG in $BRANCH_NAME $SHA1_SHORT $BRANCH_NAME$DATE; do
+            docker tag dccn-ui:$BRANCH_NAME $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/dccn-ui:$TAG
+            docker push $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/dccn-ui:$TAG
+            done
+            
+            
