@@ -6,8 +6,8 @@ jobs:
   build:
     docker:
       # Build in Go base container
-      - image: circleci/python:2.7.15-stretch
-    working_directory: ~/app
+      - image: circleci/golang:1.10
+    working_directory: /go/src/github.com/Ankr-network/dccn-ui
     steps:
       - checkout
       - setup_remote_docker
@@ -29,6 +29,10 @@ jobs:
             wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
             chmod +x ./kubectl
             sudo mv ./kubectl /usr/local/bin/kubectl
+      - run:
+          name: Set dependency
+          command: |
+            dep ensure --vendor-only
       - run:
           name: "Build & Push Docker Image"
           command: |
