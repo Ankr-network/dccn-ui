@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dccn-ui-svc
+  labels:
+    app: dccn-ui
+spec:
+  selector:
+    app: dccn-ui
+  ports:
+  - name: dccn-ui-port
+    port: 4443
+    targetPort: 443
+---  
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: dccn-ui
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dccn-ui
+    spec:
+      imagePullSecrets:
+      - name: aws-ecr
+      containers:
+      - name: dccn-daemon
+        image: "815280425737.dkr.ecr.us-west-2.amazonaws.com/dccn-ui:feat"
+        imagePullPolicy: Always
+      - ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
