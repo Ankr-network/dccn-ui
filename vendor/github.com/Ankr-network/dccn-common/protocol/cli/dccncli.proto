@@ -1,0 +1,133 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package dccncli;
+
+// The dccncli service definition.
+service dccncli {
+  // Sends request to start a task and list task
+  rpc AddTask (AddTaskRequest) returns (AddTaskResponse) {}
+  rpc TaskList (TaskListRequest) returns (TaskListResponse) {}
+  rpc DataCenterList (DataCenterListRequest) returns (DataCenterListResponse) {}
+  rpc CancelTask (CancelTaskRequest) returns (CancelTaskResponse) {}
+  rpc PurgeTask (PurgeTaskRequest) returns (PurgeTaskResponse) {}
+  rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskResponse) {}
+  rpc TaskDetail (TaskDetailRequest) returns (TaskDetailResponse) {}
+}
+
+
+
+// The dccn client request message containing the user's token
+message AddTaskRequest {
+  string name = 1; // name of the task/image to run
+  string type = 2; // default or "web" as website
+  int64 datacenterid = 3; // datacenter id if value = 0 or default hub will pickup by random
+  string usertoken = 4; //user account, alphanumeric chars, may not be used now for authentication
+  int64 replica = 5;   // how many replica of docker instance
+}
+
+// The Ankr Hub response message containing the success or failure
+message AddTaskResponse {
+  string status = 1; // Success or Failure
+  int64 taskid = 2; //  id of task if success, in case of failure return -1
+  string reason = 3;
+}
+
+// The Client List request message
+message TaskListRequest {
+  string usertoken = 1; // List task for the account
+}
+
+message TaskInfo {
+  int64  taskid = 1;
+  string taskname = 2; // List task for the account
+  uint32 uptime = 3; // uptime of the task
+  uint64 creationdate = 4; //task creation date
+  string status = 5; // Active or inactive, Right now all tasks active
+  string datacenter = 6;
+  int64 replica = 7;  //
+}
+
+message TaskListResponse {
+  repeated TaskInfo tasksinfo = 1; // repeated groups of taskinfo list
+  string reason = 2;
+}
+
+
+// DataCenterList request message
+message DataCenterListRequest {
+  string usertoken = 1; // List task for the account
+}
+
+message DataCenterInfo {
+  int64  id = 1;  // datacenter id
+  string name = 2; // datacenter name
+  string status =3;
+}
+
+message DataCenterListResponse {
+  repeated DataCenterInfo dcList= 1; // repeated groups of DataCenterInfo list
+  string reason = 2;
+}
+
+message CancelTaskRequest{
+     string usertoken = 1;
+     int64  taskid = 2;
+}
+
+
+message CancelTaskResponse{
+     string status = 1; // Success or Failure
+     string reason = 2;
+}
+
+
+message PurgeTaskRequest{
+     string usertoken = 1;
+     int64  taskid = 2;
+}
+
+
+message  PurgeTaskResponse{
+     string status = 1; // Success or Failure
+     string reason = 2;
+}
+
+
+message UpdateTaskRequest{
+     string usertoken = 1;
+     int64  taskid = 2;
+     string name = 3;
+     int64 replica = 4;
+}
+
+
+message UpdateTaskResponse{
+     string status = 1; // Success or Failure
+     string reason = 2;
+}
+
+
+message TaskDetailRequest{
+     int64 taskid = 1;
+     string usertoken = 2;
+}
+
+message TaskDetailResponse{
+     string body = 1;
+     TaskInfo taskinfo = 2;
+     string reason = 3;
+}

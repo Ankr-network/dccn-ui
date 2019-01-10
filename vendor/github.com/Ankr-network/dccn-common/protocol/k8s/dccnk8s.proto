@@ -1,0 +1,42 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package k8s;
+
+// The k8s service definition.
+service dccnk8s {
+  rpc K8Task(stream K8SMessage)returns (stream Task) {} // k8s task stream
+}
+
+message Task{
+    string Type = 1;  //"NewTask"  "CancelTask"  "UpdateTask"
+    int64 taskid = 2;  //id of task
+    string taskType = 3; // default or "web"
+    string name = 4;  // UniqueName of the task as taskid
+    string image = 5; // name of docker image
+    int64 replica = 6;
+    string extra = 7; //extra for other arguments
+}
+
+message K8SMessage{
+    string Type = 1;  //"HeartBeat"  "Task"
+    int64 taskid = 2;  // id of task
+    string taskname = 3;  // UniqueName of task
+    string status = 4; // StartSuccess or StartFailure  JobDone Cancelled  Running  Other
+    string datacenter = 5; // name of datacenter
+    string url = 6;  // url of web application
+    string report = 7;
+}
