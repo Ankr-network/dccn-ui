@@ -38,14 +38,14 @@ jobs:
             if [[ ($BRANCH_NAME == "master") ]]
             then
               BRANCH_NAME="stage"
-              K8S_CLUSTER="ui"
+              K8S_CLUSTER="hub"
             elif [[ ($BRANCH_NAME == "develop") ]]
             then
               BRANCH_NAME="dev"
-              K8S_CLUSTER="stage.ui"
+              K8S_CLUSTER="stage.hub"
             else 
               BRANCH_NAME="feat"
-              K8S_CLUSTER="dev.ui"
+              K8S_CLUSTER="dev.hub"
             fi
             docker build -f deploy/Dockerfile.all-in-one -t dccn-ui:$BRANCH_NAME .
             for TAG in $BRANCH_NAME $SHA1_SHORT $BRANCH_NAME$DATE; do
