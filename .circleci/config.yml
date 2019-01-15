@@ -52,5 +52,12 @@ jobs:
             docker tag dccn-ui:$BRANCH_NAME $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/dccn-ui:$TAG
             docker push $AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/dccn-ui:$TAG
             done
-            
+
+            kops export kubecfg --name ${K8S_CLUSTER}.k8s.ankr.network --state s3://kops.${K8S_CLUSTER}.config
+            kubectl patch deployment/dccn-ui -p \
+            '{"spec":{"template":{"spec":{"containers":[{"name":"dccn-ui","image":"'${AWS_ACCOUNT}'.dkr.ecr.'${AWS_REGION}'.amazonaws.com/dccn-ui:'${BRANCH_NAME}'"}]}}}}'
+            if ! kubectl rollout status deploy/dccn-ui; then
+              echo "Deploy failed, roll back to previous version"
+              kubectl rollout undo deploy/dccn-ui 
+            fi
             
