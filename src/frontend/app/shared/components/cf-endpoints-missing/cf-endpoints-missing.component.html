@@ -3,12 +3,20 @@
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
 <agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-  <agm-marker [latitude]="lat1" [longitude]="lng1"></agm-marker>
-  <agm-marker [latitude]="lat2" [longitude]="lng2"></agm-marker>
-  <agm-marker [latitude]="lat3" [longitude]="lng3"></agm-marker>
-  <agm-marker [latitude]="lat4" [longitude]="lng4"></agm-marker>
-  <agm-marker [latitude]="lat5" [longitude]="lng5"></agm-marker>
+  <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" ><agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
+      <ng-template>
+        My first Snazzy Info Window!
+      </ng-template>
+    </agm-snazzy-info-window></agm-marker>
+  <agm-marker [latitude]="lat1" [longitude]="lng1"><agm-snazzy-info-window [latitude]="lat1" [longitude]="lng1" backgroundColor="orange" [fontSize] = "500" [maxWidth]="200" [closeWhenOthersOpen]="true">
+      <ng-template>
+        My second Snazzy Info Window!
+      </ng-template>
+    </agm-snazzy-info-window></agm-marker>
+  <agm-marker [latitude]="lat2" [longitude]="lng2"><agm-info-window>Börk</agm-info-window></agm-marker>
+  <agm-marker [latitude]="lat3" [longitude]="lng3"><agm-info-window>Börk</agm-info-window></agm-marker>
+  <agm-marker [latitude]="lat4" [longitude]="lng4"><agm-info-window>Börk</agm-info-window></agm-marker>
+  <agm-marker [latitude]="lat5" [longitude]="lng5" ><agm-info-window>Börk</agm-info-window> </agm-marker>
   <agm-marker [latitude]="lat6" [longitude]="lng6"></agm-marker>
   <agm-marker [latitude]="lat7" [longitude]="lng7"></agm-marker>
   <agm-marker [latitude]="lat8" [longitude]="lng8"></agm-marker>

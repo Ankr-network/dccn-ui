@@ -6,7 +6,7 @@ import { delay, map, startWith, tap } from 'rxjs/operators';
 import { UserService } from '../../../core/user.service';
 import { CloudFoundryService } from '../../data-services/cloud-foundry.service';
 
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cf-endpoints-missing',
@@ -15,8 +15,9 @@ import { CloudFoundryService } from '../../data-services/cloud-foundry.service';
 })
 export class CfEndpointsMissingComponent implements AfterViewInit {
   title: string = 'Working Datacenter';
+  datacenters;
   lat: number = 37.587841986062806;
-  lng: number = -122.42805200195312;
+  lng : number = -122.42805200195312;
   lat1: number = 38.53097422958369;
   lng1: number =  -121.48700433349609;
   lat2: number = 31.112616816388908;
@@ -47,6 +48,7 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
   lng13: number =  -122.33709292983997;
   center : {lat: 38.97628854681858, lng: -123.04540625}
   styles = [
+    "../node_modules/snazzy-info-window/dist/snazzy-info-window.css",
     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -120,7 +122,7 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
     },
   };
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar, public cloudFoundryService: CloudFoundryService) { }
+  constructor(private userService: UserService, private snackBar: MatSnackBar, public cloudFoundryService: CloudFoundryService, private httpClient: HttpClient) { }
 
   ngAfterViewInit() {
     this.noContent$ = observableCombineLatest(
@@ -139,4 +141,17 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
       })
     ).pipe(startWith(null));
   }
+
+  public sendDatacenterRequest(){
+    this.httpClient.get('/pp/v1/datacenters')
+    // .subscribe(data => console.log(data));
+    .subscribe(data => this.datacenters = data);
+   }
+   public icon = {
+    url: "/assets/logo2.png", 
+    scaledSize: {
+      height: 40,
+      width: 40
+    }
+  };
 }

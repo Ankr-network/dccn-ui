@@ -776,6 +776,7 @@ func (p *portalProxy) registerRoutes(e *echo.Echo, addSetupMiddleware *setupMidd
 	sessionGroup.GET("/cnsis/registered", p.listRegisteredCNSIs)
 
 	sessionGroup.GET("/jobs", p.getJobs)
+	sessionGroup.GET("/datacenters", p.getDatacenters)	
 
 	sessionGroup.POST("/create", p.createJob)
 
@@ -784,6 +785,8 @@ func (p *portalProxy) registerRoutes(e *echo.Echo, addSetupMiddleware *setupMidd
 	sessionGroup.POST("/update", p.updateJob)
 
 	sessionGroup.POST("/purge", p.deleteJob)
+
+	//sessionGroup.POST("/login", p.grpclogin)
 
 	// Info
 	sessionGroup.GET("/info", p.info)
