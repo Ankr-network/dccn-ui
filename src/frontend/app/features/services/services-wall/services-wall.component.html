@@ -10,7 +10,44 @@
     </ng-container>
   </div>
 </app-page-header>
-<app-cf-endpoints-missing></app-cf-endpoints-missing>
+
+
+<!--Wallet Html-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="wallet">
+  <div class="wallet__title">
+    <div>Your wallet</div>
+
+  </div>
+
+  <div class="wallet__amount">
+    <div>1000.00 <span>Ankr</span></div>
+    <div>10,000.00 <span>USD</span></div>
+  </div>
+
+  <button class="wallet__add">Add Funds</button>
+  <hr>
+  <div class="wallet__history">
+    <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Dec 18th, 2018</div>
+    <div class="wallet__history__item">89bneig paid you 100 Ankr coin on Dec 28th, 2018</div>
+    <div class="wallet__history__item">You paid @abc345 50 Ankr coin on Dec 29th, 2018</div>
+    <div class="wallet__history__item">You paid 89bneig 100 Ankr coin on Dec 30th, 2018</div>
+    <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Jan 1st, 2019</div>
+  </div>
+</div>
+</body>
+</html>
+
+
 <ng-template #noEntriesForCurrentFilter>
   <app-no-content-message iconFont="stratos-icons" icon="service" [firstLine]="'There are no services instances for the current filter'" [secondLine]="{
   text: ''
