@@ -18,7 +18,7 @@ import { environment } from '../environments/environment';
 import { CustomRoutingImportModule } from './custom-import.module';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'applications', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'uaa', component: ConsoleUaaWizardComponent },
   { path: 'upgrade', component: UpgradePageComponent },
   { path: 'domainMismatch', component: DomainMismatchComponent },
@@ -41,20 +41,20 @@ const appRoutes: Routes = [
         }
       },
       {
-        path: 'applications', loadChildren: 'app/features/applications/applications.module#ApplicationsModule',
+        path: 'marketplace', loadChildren: 'app/features/applications/applications.module#ApplicationsModule',
         data: {
           stratosNavigation: {
-            text: 'Datacenter',
+            text: 'Marketplace',
             matIcon: 'apps',
             position: 20
           }
         },
       },
       {
-        path: 'endpoints',
+        path: 'tasks',
         data: {
           stratosNavigation: {
-            text: 'Running Tasks',
+            text: 'Tasks',
             matIcon: 'settings_ethernet',
             position: 100
           }
