@@ -53,6 +53,8 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
     padding: 15px $side-nav-padding-h;
     text-decoration: none;
     mat-icon {
+      height: 20px;
+      width: 20px;
       border: 1px solid;
       margin-right: $side-nav-mat-icon-padding-right;
       text-align: center;
@@ -82,4 +84,8 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
   margin-left: -55px;
   width: 150px;
   height: 150px;
+}
+.ico{
+  height: 20px;
+  width: 20px;
 }

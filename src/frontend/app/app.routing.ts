@@ -49,7 +49,8 @@ const appRoutes: Routes = [
           stratosNavigation: {
             text: 'Marketplace',
             matIcon: 'apps',
-            position: 20
+            position: 20,
+            imglocation: 'assets/MARKETPLACE.svg'
           }
         },
       },
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
           stratosNavigation: {
             text: 'Tasks',
             matIcon: 'settings_ethernet',
-            position: 100
+            position: 100,
+            imglocation: 'assets/task.svg'
           }
         },
         children: [{
@@ -88,7 +90,8 @@ const appRoutes: Routes = [
             text: 'Payment',
             matIcon: 'service',
             matIconFont: 'stratos-icons',
-            position: 40
+            position: 40,
+            imglocation: 'assets/wallet.svg'
           }
         },
       },

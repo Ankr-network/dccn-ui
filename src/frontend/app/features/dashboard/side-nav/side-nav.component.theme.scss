@@ -30,8 +30,12 @@
       -o-linear-gradient(bottom, #363795, #3499CC) 1 100%;
     border-image:
       linear-gradient(to top, #363795, #3499CC) 1 100%;
-        color: black;
-        
+      .ico{ 
+        height: 20px;
+        width: 20px;
+      color: #3499CC;
+      }
+      color: black;
       }
     }
     &__items {

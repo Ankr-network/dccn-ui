@@ -11,11 +11,8 @@
     <li *ngFor="let tab of tabs">
       <a *ngIf="!tab.hidden || !(tab.hidden | async)" class="side-nav__item" [routerLink]="[tab.link]"
         [routerLinkActive]="['side-nav__item--active']">
-        <div>
-
-        </div>
-        <img [src]="tab.imglocation"/>
-        <mat-icon [fontSet]="tab.matIconFont">{{ tab.matIcon }}</mat-icon> {{ tab.text }}
+         <img [src]="tab.imglocation" class = ico>
+        <mat-icon [fontSet]="tab.matIconFont" class=ico>{{ tab.matIcon }}</mat-icon> {{ tab.text }}
       </a>
     </li>
   </ul>
