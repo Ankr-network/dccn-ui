@@ -1,5 +1,9 @@
 $top-index: 2;
 $bottom-index: $top-index - 1;
+.topbar{
+  background-image: linear-gradient(to right, #363795, #3499CC);
+  color: white;
+}
 .page-header {
   $breadcrumb-opacity: .7;
   $breadcrumb-hover-opacity: 1;

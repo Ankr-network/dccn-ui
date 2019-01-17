@@ -23,7 +23,8 @@
             ],
             "styles": [
               "src/frontend/styles.scss",
-              "node_modules/xterm/dist/xterm.css"
+              "node_modules/xterm/dist/xterm.css",
+              "node_modules/snazzy-info-window/dist/snazzy-info-window.css"
             ],
             "scripts": []
           },

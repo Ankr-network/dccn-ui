@@ -53,9 +53,9 @@ export class EndpointsService implements CanActivate {
           // Redirect to endpoints if there's no connected endpoints
           let redirect: string;
           if (!haveRegistered) {
-            redirect = isAdmin ? '/endpoints' : '/noendpoints';
+            redirect = isAdmin ? '/dashboard' : '/dashboard';
           } else if (!haveConnected) {
-            redirect = '/endpoints';
+            redirect = '/dashboard';
           }
 
           // Abort redirect if there's no redirect needed (endpoints are ok or we're already heading to redirect)
