@@ -13,9 +13,13 @@ import (
 	"time"
 
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/cnsis"
+	"google.golang.org/grpc"
 
 	log "github.com/sirupsen/logrus"
 
+	ctext "context"
+
+	pb "github.com/Ankr-network/dccn-common/protocol/cli"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 
@@ -212,11 +216,14 @@ func (p *portalProxy) loginToUAA(c echo.Context) error {
 	log.Debug("loginToUAA")
 	resp, err := p.doLoginToUAA(c)
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 
 	jsonString, err := json.Marshal(resp)
+
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 
@@ -232,6 +239,7 @@ func (p *portalProxy) loginToUAA(c echo.Context) error {
 func (p *portalProxy) doLoginToUAA(c echo.Context) (*interfaces.LoginRes, error) {
 	log.Debug("loginToUAA")
 	uaaRes, u, err := p.login(c, p.Config.ConsoleConfig.SkipSSLValidation, p.Config.ConsoleConfig.ConsoleClient, p.Config.ConsoleConfig.ConsoleClientSecret, p.getUAAIdentityEndpoint())
+	fmt.Println(u)
 	if err != nil {
 		// Check the Error
 		errMessage := "Access Denied"
@@ -258,22 +266,26 @@ func (p *portalProxy) doLoginToUAA(c echo.Context) (*interfaces.LoginRes, error)
 	req := c.Request().(*standard.Request).Request
 	req.Header.Set("Cookie", "")
 	if err = p.setSessionValues(c, sessionValues); err != nil {
+		fmt.Println(err)
 		return nil, err
 	}
 
 	err = p.handleSessionExpiryHeader(c)
 	if err != nil {
+		fmt.Println(err)
 		return nil, err
 	}
 
 	_, err = p.saveAuthToken(*u, uaaRes.AccessToken, uaaRes.RefreshToken)
 	if err != nil {
+		fmt.Println(err)
 		return nil, err
 	}
 
 	if p.Config.LoginHook != nil {
 		err = p.Config.LoginHook(c)
 		if err != nil {
+			fmt.Println(err)
 			log.Warn("Login hook failed", err)
 		}
 	}
@@ -657,11 +669,12 @@ func (p *portalProxy) login(c echo.Context, skipSSLValidation bool, client strin
 		uaaRes, err = p.getUAATokenWithCreds(skipSSLValidation, username, password, client, clientSecret, endpoint)
 	}
 	if err != nil {
+		fmt.Println(err)
 		return uaaRes, u, err
 	}
-
 	u, err = p.GetUserTokenInfo(uaaRes.AccessToken)
 	if err != nil {
+		fmt.Println(err)
 		return uaaRes, u, err
 	}
 
@@ -757,7 +770,7 @@ func (p *portalProxy) getUAAToken(body url.Values, skipSSLValidation bool, clien
 	req.SetBasicAuth(client, clientSecret)
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationForm)
 
-	var h = p.GetHttpClientForRequest(req, skipSSLValidation)
+	/*var h = p.GetHttpClientForRequest(req, skipSSLValidation)
 	res, err := h.Do(req)
 	if err != nil || res.StatusCode != http.StatusOK {
 		log.Errorf("Error performing http request - response: %v, error: %v", res, err)
@@ -765,15 +778,37 @@ func (p *portalProxy) getUAAToken(body url.Values, skipSSLValidation bool, clien
 		return nil, interfaces.LogHTTPError(res, err)
 	}
 
-	defer res.Body.Close()
+	defer res.Body.Close()*/
 
 	var response UAAResponse
 
-	dec := json.NewDecoder(res.Body)
+	conn, err := grpc.Dial("client-dev.dccn.ankr.network:50051", grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+	dc := pb.NewDccncliClient(conn)
+	ctx, cancel := ctext.WithTimeout(ctext.Background(), 30*time.Second)
+	defer cancel()
+	fmt.Printf("username: %s \n", body.Get("username"))
+	fmt.Printf("password: %s \n", body.Get("password"))
+
+	if ctr, err := dc.Login(ctx, &pb.LoginRequest{Name: body.Get("username"), Password: body.Get("password")}); err != nil {
+		return &response, fmt.Errorf("unable to login to hub: %v", err)
+	} else {
+		fmt.Printf("login to ankr hub...%s! %s\n Token: %s\n", ctr.Status, ctr.Reason, ctr.Token)
+		response.AccessToken = ctr.Token
+		response.RefreshToken = "f77e1462f9494e6895639e7d1626c763-r"
+		response.ExpiresIn = int(time.Now().Unix() + 86400)
+		response.Scope = "stratos.admin"
+		response.JTI = "c6409f738a27496ea17f595850ce2032"
+		response.TokenType = "bearer"
+	}
+	/*dec := json.NewDecoder(res.Body)
 	if err = dec.Decode(&response); err != nil {
 		log.Errorf("Error decoding response: %v", err)
 		return nil, fmt.Errorf("getUAAToken Decode: %s", err)
-	}
+	}*/
 
 	return &response, nil
 }
@@ -788,7 +823,7 @@ func (p *portalProxy) saveAuthToken(u interfaces.JWTUserTokenInfo, authTok strin
 		TokenExpiry:  u.TokenExpiry,
 		AuthType:     interfaces.AuthTypeOAuth2,
 	}
-
+	fmt.Printf("key: %s \n", u.UserGUID)
 	err := p.setUAATokenRecord(key, tokenRecord)
 	if err != nil {
 		return tokenRecord, err
@@ -858,31 +893,33 @@ func (p *portalProxy) setUAATokenRecord(key string, t interfaces.TokenRecord) er
 
 func (p *portalProxy) verifySession(c echo.Context) error {
 	log.Debug("verifySession")
-
+	fmt.Println("GetSessionInt64Value..")
 	sessionExpireTime, err := p.GetSessionInt64Value(c, "exp")
+	fmt.Printf("sessionExpireTime: %v", time.Unix(sessionExpireTime, 0))
+
 	if err != nil {
 		msg := "Could not find session date"
 		log.Error(msg)
 		return echo.NewHTTPError(http.StatusForbidden, msg)
 	}
-
+	fmt.Println("GetSessionStringValue..")
 	sessionUser, err := p.GetSessionStringValue(c, "user_id")
 	if err != nil {
 		msg := "Could not find user_id in Session"
 		log.Error(msg)
 		return echo.NewHTTPError(http.StatusForbidden, msg)
 	}
-
+	fmt.Println("GetUAATokenRecord..")
 	tr, err := p.GetUAATokenRecord(sessionUser)
 	if err != nil {
 		msg := fmt.Sprintf("Unable to find UAA Token: %s", err)
 		log.Error(msg, err)
 		return echo.NewHTTPError(http.StatusForbidden, msg)
 	}
-
+	fmt.Println("Check token..")
 	// Check if UAA token has expired
 	if time.Now().After(time.Unix(sessionExpireTime, 0)) {
-
+		fmt.Println("toker expired...")
 		// UAA Token has expired, refresh the token, if that fails, fail the request
 		uaaRes, tokenErr := p.getUAATokenWithRefreshToken(p.Config.ConsoleConfig.SkipSSLValidation, tr.RefreshToken, p.Config.ConsoleConfig.ConsoleClient, p.Config.ConsoleConfig.ConsoleClientSecret, p.getUAAIdentityEndpoint(), "")
 		if tokenErr != nil {
@@ -912,17 +949,17 @@ func (p *portalProxy) verifySession(c echo.Context) error {
 			return err
 		}
 	}
-
+	fmt.Println("handleSessionExpiryHeader..")
 	err = p.handleSessionExpiryHeader(c)
 	if err != nil {
 		return err
 	}
-
+	fmt.Println("getInfo..")
 	info, err := p.getInfo(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
-
+	fmt.Println("ensureXSRFToken..")
 	// Add XSRF Token
 	p.ensureXSRFToken(c)
 
