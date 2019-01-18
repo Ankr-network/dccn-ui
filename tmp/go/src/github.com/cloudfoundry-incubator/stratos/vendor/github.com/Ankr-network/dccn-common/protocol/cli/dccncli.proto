@@ -26,6 +26,9 @@ service dccncli {
   rpc PurgeTask (PurgeTaskRequest) returns (PurgeTaskResponse) {}
   rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskResponse) {}
   rpc TaskDetail (TaskDetailRequest) returns (TaskDetailResponse) {}
+  rpc Login (LoginRequest) returns (LoginResponse) {}
+  rpc Logout (LogoutRequest) returns (LogoutResponse) {}
+  rpc Register (RegisterRequest) returns (RegisterResponse) {}
 }
 
 
@@ -75,7 +78,9 @@ message DataCenterListRequest {
 message DataCenterInfo {
   int64  id = 1;  // datacenter id
   string name = 2; // datacenter name
-  string status =3;
+  string lat = 3; // latitude of data center
+  string lng = 4; // longitude of data center
+  string status =5; // data center status
 }
 
 message DataCenterListResponse {
@@ -88,7 +93,6 @@ message CancelTaskRequest{
      int64  taskid = 2;
 }
 
-
 message CancelTaskResponse{
      string status = 1; // Success or Failure
      string reason = 2;
@@ -100,12 +104,10 @@ message PurgeTaskRequest{
      int64  taskid = 2;
 }
 
-
 message  PurgeTaskResponse{
      string status = 1; // Success or Failure
      string reason = 2;
 }
-
 
 message UpdateTaskRequest{
      string usertoken = 1;
@@ -114,12 +116,10 @@ message UpdateTaskRequest{
      int64 replica = 4;
 }
 
-
 message UpdateTaskResponse{
      string status = 1; // Success or Failure
      string reason = 2;
 }
-
 
 message TaskDetailRequest{
      int64 taskid = 1;
@@ -130,4 +130,35 @@ message TaskDetailResponse{
      string body = 1;
      TaskInfo taskinfo = 2;
      string reason = 3;
+}
+
+message LoginRequest{
+     string name = 1;  //email
+     string password =2;
+}
+
+message LoginResponse{
+     string token = 1;
+     string status = 2;
+     string reason = 3;
+}
+
+message LogoutRequest{
+     string usertoken = 1;
+}
+
+message LogoutResponse{
+     string status = 1;
+     string reason = 2;
+}
+
+message RegisterRequest{
+     string name = 1;    // email
+     string password = 2;
+     string Erc20address = 3;  //optional
+}
+
+message RegisterResponse{
+     string status = 1;
+     string reason = 2;
 }

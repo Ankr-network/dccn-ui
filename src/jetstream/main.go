@@ -731,7 +731,7 @@ func (p *portalProxy) registerRoutes(e *echo.Echo, addSetupMiddleware *setupMidd
 		pp.POST("/v1/setup", p.setupConsole)
 		pp.POST("/v1/setup/update", p.setupConsoleUpdate)
 	}
-
+	pp.POST("/v1/auth/signup/uaa", p.signupToUAA)
 	pp.POST("/v1/auth/login/uaa", p.loginToUAA)
 	pp.POST("/v1/auth/logout", p.logout)
 

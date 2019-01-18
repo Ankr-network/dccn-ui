@@ -14,4 +14,4 @@ import { GrpcsignupComponent } from './signup/signup.component';
     GrpcsignupComponent
   ]
 })
-export class SignupModule { }
+export class GrpcsignupModule { }

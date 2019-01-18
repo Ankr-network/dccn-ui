@@ -1,6 +1,11 @@
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
+<label class="switch">
+    <input type="checkbox" checked>
+    <span class="slider round"></span>
+  </label>
+
 <agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map" [zoom] = "2">
   <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" >
     <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >

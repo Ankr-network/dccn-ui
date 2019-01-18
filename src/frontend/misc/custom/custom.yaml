@@ -17,7 +17,8 @@ files:
   point.png: "assets/point.png"
   line.svg: "assets/line.svg"
   arrow.svg: "assets/arrow.svg"
-  deploy_button.svg: "assets/deploy_button.svg"
+  bg.png: "assets/bg.png"
+  deploy_button.png: "assets/deploy_button.svg"
   /navicons/dashboard.svg: "assets/dashboard.svg"
   /navicons/dashboard_color.svg: "assets/dashboard_color.svg"
   /navicons/marketplace.svg: "assets/marketplace.svg"
@@ -26,6 +27,7 @@ files:
   /navicons/task_color.svg: "assets/task_color.svg"
   /navicons/wallet.svg: "assets/wallet.svg"
   /navicons/wallet_color.svg: "assets/wallet_color.svg"
+
 
 
 folders:

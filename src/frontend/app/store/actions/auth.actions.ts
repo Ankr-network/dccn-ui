@@ -6,6 +6,10 @@ export const LOGIN = '[Auth] Login';
 export const LOGIN_SUCCESS = '[Auth] Login success';
 export const LOGIN_FAILED = '[Auth] Login failed';
 
+export const SIGNUP = '[Auth] Signup';
+export const SIGNUP_SUCCESS = '[Auth] Signup success';
+export const SIGNUP_FAILED = '[Auth] Signup failed';
+
 export const LOGOUT = '[Auth] Logout';
 export const LOGOUT_SUCCESS = '[Auth] Logout success';
 export const LOGOUT_FAILED = '[Auth] Logout failed';
@@ -18,6 +22,20 @@ export const GET_INFO = '[Auth] Get session info';
 
 export const RESET_AUTH = '[Auth] Reset auth data';
 export const RESET_SSO_AUTH = '[Auth] Reset auth data (SSO)';
+
+export class Signup implements Action {
+  constructor(public username: string, public password: string) { }
+  type = SIGNUP;
+}
+
+export class SignupSuccess implements Action {
+  type = SIGNUP_SUCCESS;
+}
+
+export class SignupFailed implements Action {
+  constructor(public error: any) { }
+  type = SIGNUP_FAILED;
+}
 
 export class Login implements Action {
   constructor(public username: string, public password: string) { }

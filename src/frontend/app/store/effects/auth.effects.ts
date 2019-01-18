@@ -14,6 +14,10 @@ import { AppState } from '../app-state';
 import { SessionData } from '../types/auth.types';
 import {
   InvalidSession,
+  SIGNUP,
+  Signup,
+  SignupFailed,
+  SignupSuccess,
   LOGIN,
   Login,
   LoginFailed,
@@ -47,6 +51,29 @@ export class AuthEffect {
     private router: Router,
     public dialog: MatDialog
   ) { }
+
+
+  @Effect() signupRequest$ = this.actions$.ofType<Signup>(SIGNUP).pipe(
+    switchMap(({ username, password }) => {
+      const encoder = new BrowserStandardEncoder();
+      const headers = new HttpHeaders();
+      const params = new HttpParams({
+        encoder: new BrowserStandardEncoder(),
+        fromObject: {
+          username: username,
+          password: password
+        }
+      });
+
+      headers.set('Content-Type', 'application/x-www-form-urlencoded');
+      headers.set('x-cap-request-date', (Math.floor(Date.now() / 1000)).toString());
+      return this.http.post('/pp/v1/auth/signup/uaa', params, {
+        headers: headers,
+      }).pipe(
+        map(data => new VerifySession()),
+        catchError((err, caught) => [new SignupFailed(err)]), );
+    }));
+
 
   @Effect() loginRequest$ = this.actions$.ofType<Login>(LOGIN).pipe(
     switchMap(({ username, password }) => {

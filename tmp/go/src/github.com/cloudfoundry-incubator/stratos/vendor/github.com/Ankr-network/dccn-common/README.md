@@ -1,2 +1,2 @@
-# dccn-comm
+# dccn-common
 combine both grpc protocol and constant values, functions for other part of dccn to work.
