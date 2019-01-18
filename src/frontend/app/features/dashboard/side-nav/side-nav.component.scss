@@ -12,9 +12,10 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
   &__top {
     margin-top: 100px;
     display: flex;
-    flex: 0 0 56px;
+    flex: 0;
     flex-direction: column;
-    height: 56px;
+    height: 0px;
+    margin-bottom: 56px;
     &-inner {
       display: flex;
       flex: 1;
@@ -22,7 +23,14 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
     }
   }
   &__items {
-    
+    li {
+      border-bottom: 1px solid;
+      border-color: #e6e5e5;
+    }
+    li:first-child {
+      border-top-width: 1px;
+      border-top-style: solid;
+    }
     list-style-type: none;
     flex: 1;
     margin: 0;
@@ -40,9 +48,8 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
   }
   &__item {
     align-items: center;
-    border-bottom: 1px solid;
-    border-top: 1px solid;
-    border-color: black;
+    // border-bottom: 1px solid;
+    border-left: 5px solid transparent;
     
     //border-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
     cursor: pointer;
@@ -52,12 +59,27 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
     outline: 0;
     padding: 15px $side-nav-padding-h;
     text-decoration: none;
-    mat-icon {
-      height: 20px;
-      width: 20px;
-      border: 1px solid;
+    // img {
+    //   height: 20px;
+    //   width: 20px;
+    //   // border: 1px solid;
+    //   margin-right: $side-nav-mat-icon-padding-right;
+    //   text-align: center;
+    // }
+    span.ico {
       margin-right: $side-nav-mat-icon-padding-right;
-      text-align: center;
+    }
+    .dashboard {
+      background: transparent url("assets/dashboard.svg") no-repeat right top
+    }
+    .marketplace {
+      background: transparent url("assets/marketplace.svg") no-repeat right top
+    }
+    .tasks {
+      background: transparent url("assets/task.svg") no-repeat right top
+    }
+    .payment {
+      background: transparent url("assets/wallet.svg") no-repeat right top
     }
   }
   &__logo {
@@ -80,7 +102,7 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
 }
 .side-nav__logo-img{
   align-items: center;
-  margin-top: -80px;
+  margin-top: -160px;
   margin-left: -55px;
   width: 150px;
   height: 150px;

@@ -3,7 +3,8 @@
     <div class="side-nav__top-inner">
       <div class="side-nav__logo" (click)="logoClicked.next(true)">
         <!-- <div class="side-nav__logo-text">{{ customizations.logoText || 'Ankr-UI' }}</div> -->
-        <img class="side-nav__logo-img" src="/../../../../assets/logo2.png"/>
+        <!-- <img class="side-nav__logo-img" src="/../../../../assets/logo2.png"/> -->
+        <img class="side-nav__logo-img" src="assets/ankr_logo.svg"/>
       </div>
     </div>
   </div>
@@ -11,8 +12,9 @@
     <li *ngFor="let tab of tabs">
       <a *ngIf="!tab.hidden || !(tab.hidden | async)" class="side-nav__item" [routerLink]="[tab.link]"
         [routerLinkActive]="['side-nav__item--active']">
-         <img [src]="tab.imglocation" class = ico>
-        <mat-icon [fontSet]="tab.matIconFont" class=ico>{{ tab.matIcon }}</mat-icon> {{ tab.text }}
+         <span [ngClass]="['ico', tab.type]"></span>
+         <!-- <mat-icon [fontSet]="tab.matIconFont" class=ico>{{ tab.matIcon }}</mat-icon>  -->
+         {{ tab.text }}
       </a>
     </li>
   </ul>

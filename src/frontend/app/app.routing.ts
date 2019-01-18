@@ -20,10 +20,7 @@ import { GrpcsignupComponent } from './features/signup/signup/signup.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-<<<<<<< HEAD
-=======
-  { path:'signup', component: GrpcsignupComponent},
->>>>>>> b25a500d6... [SWDEV-114]Jan-16 improve the map and design of sidebar
+  { path: 'signup', component: GrpcsignupComponent},
   { path: 'uaa', component: ConsoleUaaWizardComponent },
   { path: 'upgrade', component: UpgradePageComponent },
   { path: 'domainMismatch', component: DomainMismatchComponent },
@@ -42,7 +39,8 @@ const appRoutes: Routes = [
             // Experimental - only show in development
             hidden: observableOf(environment.production),
             position: 10,
-            imglocation: 'assets/DASHBOARD.svg'
+            // imglocation: 'assets/dashboard.svg'
+            type: 'dashboard'
           }
         }
       },
@@ -53,7 +51,8 @@ const appRoutes: Routes = [
             text: 'Marketplace',
             matIcon: 'apps',
             position: 20,
-            imglocation: 'assets/MARKETPLACE.svg'
+            // imglocation: 'assets/marketplace.svg'
+            type: 'marketplace'
           }
         },
       },
@@ -63,8 +62,9 @@ const appRoutes: Routes = [
           stratosNavigation: {
             text: 'Tasks',
             matIcon: 'settings_ethernet',
-            position: 100,
-            imglocation: 'assets/task.svg'
+            position: 30,
+            // imglocation: 'assets/task.svg'
+            type: 'tasks'
           }
         },
         children: [{
@@ -87,14 +87,15 @@ const appRoutes: Routes = [
         },
       },*/
       {
-        path: 'services', loadChildren: 'app/features/services/services.module#ServicesModule',
+        path: 'payment', loadChildren: 'app/features/services/services.module#ServicesModule',
         data: {
           stratosNavigation: {
             text: 'Payment',
             matIcon: 'service',
             matIconFont: 'stratos-icons',
             position: 40,
-            imglocation: 'assets/wallet.svg'
+            // imglocation: 'assets/wallet.svg'
+            type: 'payment'
           }
         },
       },
@@ -109,8 +110,8 @@ const appRoutes: Routes = [
           }
         },
       },*/
-      //{ path: 'about', loadChildren: 'app/features/about/about.module#AboutModule' },
-      //{ path: 'user-profile', loadChildren: 'app/features/user-profile/user-profile.module#UserProfileModule' },
+      // { path: 'about', loadChildren: 'app/features/about/about.module#AboutModule' },
+      // { path: 'user-profile', loadChildren: 'app/features/user-profile/user-profile.module#UserProfileModule' },
     ]
   },
   {

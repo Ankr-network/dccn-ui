@@ -14,40 +14,38 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./cf-endpoints-missing.component.scss']
 })
 export class CfEndpointsMissingComponent implements AfterViewInit {
-  title: string = 'Working Datacenter';
-<<<<<<< HEAD
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-=======
+  title = 'Working Datacenter';
   datacenters;
-  lat: number = 37.587841986062806;
-  lng : number = -122.42805200195312;
-  lat1: number = 38.53097422958369;
-  lng1: number =  -121.48700433349609;
-  lat2: number = 31.112616816388908;
-  lng2: number = 121.38071340942383;
-  lat3: number = 1.3268178776839399; 
-  lng3: number = 103.92120642089844;
-  lat4: number = 37.424429784838;
-  lng4: number = -121.8883486328125;
-  lat5: number = 37.73297778721093; 
-  lng5: number = -122.16712670898437;
-  lat6: number = 37.36087499833259; 
-  lng6: number = -122.08198266601562;
-  lat7: number = 37.32375374237436; 
-  lng7: number =  -121.87530236816406;
+  lat = 37.587841986062806;
+  lng  = -122.42805200195312;
+  lat1 = 38.53097422958369;
+  lng1 =  -121.48700433349609;
+  lat2 = 31.112616816388908;
+  lng2 = 121.38071340942383;
+  lat3 = 1.3268178776839399;
+  lng3 = 103.92120642089844;
+  lat4 = 37.424429784838;
+  lng4 = -121.8883486328125;
+  lat5 = 37.73297778721093;
+  lng5 = -122.16712670898437;
+  lat6 = 37.36087499833259;
+  lng6 = -122.08198266601562;
+  lat7 = 37.32375374237436;
+  lng7 =  -121.87530236816406;
 
-  lat8: number = 33.95617080536196;  
-  lng8: number =  -118.27521997070312;
-  lat9: number = 32.708800571297964; 
-  lng9: number =  -117.13907914733886;
-  lat10: number = 33.62926608829064;
-  lng10: number =  -117.8988524017334;
+  lat8 = 33.95617080536196;
+  lng8 =  -118.27521997070312;
+  lat9 = 32.708800571297964;
+  lng9 =  -117.13907914733886;
+  lat10 = 33.62926608829064;
+  lng10 =  -117.8988524017334;
 
-  lat11: number = 44.03959742762122;
-  lng11: number =  -123.07088094329822;
-  center : {lat: 38.97628854681858, lng: -123.04540625}
->>>>>>> 3d5acc4a9... [SWDEV-114]Jan-15
+  lat11 = 44.03959742762122;
+  lng11 =  -123.07088094329822;
+  center = {
+    lat: 38.97628854681858,
+    lng: -123.04540625
+  };
   styles = [
     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -72,7 +70,6 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
       elementType: 'labels.text.fill',
       stylers: [{color: '#6b9a76'}]
     },
-    
     {
       featureType: 'transit',
       elementType: 'geometry',
@@ -98,10 +95,15 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
       elementType: 'labels.text.stroke',
       stylers: [{color: '#17263c'}]
     }
-            
-  ]
+  ];
 
-
+  icon = {
+    url: '/assets/datacenter.svg',
+    scaledSize: {
+      height: 40,
+      width: 40
+    }
+  };
 
   noContent$: Observable<{ firstLine: string; secondLine: { text: string; }; }>;
 
@@ -122,7 +124,12 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
     },
   };
 
-  constructor(private userService: UserService, private snackBar: MatSnackBar, public cloudFoundryService: CloudFoundryService, private httpClient: HttpClient) { }
+  constructor(
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    public cloudFoundryService: CloudFoundryService,
+    private httpClient: HttpClient
+  ) { }
 
   ngAfterViewInit() {
     this.noContent$ = observableCombineLatest(
@@ -142,16 +149,9 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
     ).pipe(startWith(null));
   }
 
-  public sendDatacenterRequest(){
+  public sendDatacenterRequest() {
     this.httpClient.get('/pp/v1/datacenters')
     // .subscribe(data => console.log(data));
     .subscribe(data => this.datacenters = data);
    }
-   public icon = {
-    url: "/assets/DATACENTER.svg", 
-    scaledSize: {
-      height: 40,
-      width: 40
-    }
-  };
 }
