@@ -15,27 +15,51 @@
       &:hover {
         background-color: mat-color($side-nav-colors, hover);
         color: mat-color($side-nav-colors, hover-text);
+        .dashboard {
+          background: transparent url("assets/dashboard_color.svg") no-repeat right top !important;
+        }
+        .marketplace {
+          background: transparent url("assets/marketplace_color.svg") no-repeat right top !important;
+        }
+        .tasks {
+          background: transparent url("assets/task_color.svg") no-repeat right top !important;
+        }
+        .payment {
+          background: transparent url("assets/wallet_color.svg") no-repeat right top !important;
+        }
       }
       &--active,
       &--active:hover {
         background-color: white;
         border-left: 5px solid;
         -webkit-border-image: 
-      -webkit-gradient(linear, 0 100%, 0 0, from(#363795), to(#3499CC)) 1 100%;
-    -webkit-border-image: 
-      -webkit-linear-gradient(bottom, #363795, #3499CC) 1 100%;
-    -moz-border-image:
-      -moz-linear-gradient(bottom, #363795, #3499CC) 1 100%;  
-    -o-border-image:
-      -o-linear-gradient(bottom, #363795, #3499CC) 1 100%;
-    border-image:
-      linear-gradient(to top, #363795, #3499CC) 1 100%;
-      .ico{ 
-        height: 20px;
-        width: 20px;
-      color: #3499CC;
-      }
-      color: black;
+        -webkit-gradient(linear, 0 100%, 0 0, from(#363795), to(#3499CC)) 1 100%;
+        -webkit-border-image: 
+          -webkit-linear-gradient(bottom, #363795, #3499CC) 1 100%;
+        -moz-border-image:
+          -moz-linear-gradient(bottom, #363795, #3499CC) 1 100%;  
+        -o-border-image:
+          -o-linear-gradient(bottom, #363795, #3499CC) 1 100%;
+        border-image:
+          linear-gradient(to top, #363795, #3499CC) 1 100%;
+        .ico{ 
+          height: 20px;
+          width: 20px;
+          color: #3499CC;
+        }
+        color: black;
+        .dashboard {
+          background: transparent url("assets/dashboard_color.svg") no-repeat right top !important;
+        }
+        .marketplace {
+          background: transparent url("assets/marketplace_color.svg") no-repeat right top !important;
+        }
+        .tasks {
+          background: transparent url("assets/task_color.svg") no-repeat right top !important;
+        }
+        .payment {
+          background: transparent url("assets/wallet_color.svg") no-repeat right top !important;
+        }
       }
     }
     &__items {

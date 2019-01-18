@@ -17,6 +17,7 @@ STRATOS="`cd "${DIR}/..";pwd`"
 
 pushd "${STRATOS}" > /dev/null
 
+rm -rf tmp
 STRATOS_GOBASE=tmp/go/src/github.com/cloudfoundry-incubator/stratos
 mkdir -p ${STRATOS_GOBASE}/src
 
