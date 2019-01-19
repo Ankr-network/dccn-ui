@@ -18,7 +18,7 @@ files:
   line.svg: "assets/line.svg"
   arrow.svg: "assets/arrow.svg"
   bg.png: "assets/bg.png"
-  deploy_button.png: "assets/deploy_button.svg"
+  deploy_button.svg: "assets/deploy_button.svg"
   /navicons/dashboard.svg: "assets/dashboard.svg"
   /navicons/dashboard_color.svg: "assets/dashboard_color.svg"
   /navicons/marketplace.svg: "assets/marketplace.svg"
