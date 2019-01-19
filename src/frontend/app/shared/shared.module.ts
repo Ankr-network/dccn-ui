@@ -142,6 +142,7 @@ import { MetricsParentRangeSelectorComponent } from './components/metrics-parent
 import { MetricsRangeSelectorService } from './services/metrics-range-selector.service';
 import { MultilineTitleComponent } from './components/multiline-title/multiline-title.component';
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 @NgModule({
   imports: [
@@ -155,6 +156,7 @@ import { AgmCoreModule } from '@agm/core';
     NgxChartsModule,
     MomentModule,
     AgmCoreModule,
+    AgmSnazzyInfoWindowModule
   ],
   declarations: [
     LoadingPageComponent,

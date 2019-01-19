@@ -24,6 +24,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppStoreModule } from './store/store.module';
 import { XSRFModule } from './xsrf.module';
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 // Create action for router navigation. See
 // - https://github.com/ngrx/platform/issues/68
 // - https://github.com/ngrx/platform/issues/201 (https://github.com/ngrx/platform/pull/355)
@@ -83,7 +84,8 @@ export class CustomRouterStateSerializer
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
       apiKey: 'AIzaSyBlF7b-58yrcx1iYyJX_G57hAV-yafpzy0'
-    })
+    }),
+    AgmSnazzyInfoWindowModule
   ],
   providers: [
     LoggedInService,

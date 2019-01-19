@@ -205,6 +205,42 @@ func (p *portalProxy) listCNSIs(c echo.Context) error {
 	return nil
 }
 
+func (p *portalProxy) getDatacenters(c echo.Context) error {
+	log.Debug("get Datacenters")
+	jobList := p.buildDatacenters(c)
+
+	jsonString, err := json.Marshal(jobList)
+	if err != nil {
+		return err
+	}
+
+	c.Response().Header().Set("Content-Type", "application/json")
+	c.Response().Write(jsonString)
+	return nil
+}
+
+func (p *portalProxy) buildDatacenters(c echo.Context) []*pb.DataCenterInfo {
+	url := "client-stage.dccn.ankr.network"
+	port := "50051"
+	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+
+	defer conn.Close()
+	dc2 := pb.NewDccncliClient(conn)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	r, err := dc2.DataCenterList(ctx, &pb.DataCenterListRequest{Usertoken: "ed1605e17374bde6c68864d072c9f5c9"})
+	if err != nil {
+		log.Fatalf("Client: could not send: %v", err)
+	}
+	Taskinfos := r.DcList
+	log.Info(Taskinfos)
+	log.Info("Sucessfully obtained list of tasks")
+	return Taskinfos
+}
+
 func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {
 	url := "client-stage.dccn.ankr.network"
 	port := "50051"
