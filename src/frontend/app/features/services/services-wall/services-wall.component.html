@@ -17,27 +17,40 @@
  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
- <div class="wallet">
-  <h1 class="wallet__title">Your wallet</h1>
+  <div class="wallet">
+    <div class="main">
+      <div class="title">
+          <h3 style="margin: 20px 0 10px;">Coming Soon</h3>
+      </div>
 
-  <div class="wallet__amount">
-   <h2>1000.00 <span>Ankr</span></h2>
-   <h2>10,000.00 <span>USD</span></h2>
+      <div >
+        <div class="balance">
+            <div class="wallet__amount">
+              <h2>1000.00 <span>Ankr</span></h2>
+              <h2>10,000.00 <span>USD</span></h2>
+            </div>
+        </div>
+
+        <div id='divider'></div>
+      </div>
+    </div>
+
+    <div class='transactions'>
+      <h2>Transaction</h2>
+      <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Dec 18th, 2018</div>
+      <div class="wallet__history__item">89bneig paid you 100 Ankr coin on Dec 28th, 2018</div>
+      <div class="wallet__history__item">You paid @abc345 50 Ankr coin on Dec 29th, 2018</div>
+      <div class="wallet__history__item">You paid 89bneig 100 Ankr coin on Dec 30th, 2018</div>
+      <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Jan 1st, 2019</div>
+    </div>
+
+    <div class='usage'>
+      <h2>Usage</h2>
+      <div class="wallet__history__item">CPU: 756 hours vCPU</div>
+      <div class="wallet__history__item">Memory: 240 hours (16GB)</div>
+      <div class="wallet__history__item">Disk: 240 hours (1TB)</div>
+    </div>
   </div>
-
-  <button class="wallet__add"><i class="fas fa-coins"></i>Add Funds</button>
-
-  <div class="wallet__divider"></div>
-
-  <div class="wallet__history">
-   <div class="wallet__history__title">History</div>
-   <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Dec 18th, 2018</div>
-   <div class="wallet__history__item">89bneig paid you 100 Ankr coin on Dec 28th, 2018</div>
-   <div class="wallet__history__item">You paid @abc345 50 Ankr coin on Dec 29th, 2018</div>
-   <div class="wallet__history__item">You paid 89bneig 100 Ankr coin on Dec 30th, 2018</div>
-   <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Jan 1st, 2019</div>
-  </div>
- </div>
 </body>
 </html>
 

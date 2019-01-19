@@ -1,0 +1,20 @@
+.container {
+    margin: 20px 3%;
+    .quarter {
+        width: 25%;
+    }
+    .half {
+        width: 50%;
+    }
+    .metric {
+        
+        text-align: center;
+        display: inline-block;
+        svg {
+            margin-bottom: 10px;
+        }
+        span.title {
+            font-weight: bold;
+        }
+    }
+}
