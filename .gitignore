@@ -107,3 +107,24 @@ src/frontend/index.html
 # Prebuild package
 
 stratos-frontend-prebuild.zip
+/src/frontend/assets/ankr_logo.svg
+/src/frontend/assets/arrow.svg
+/src/frontend/assets/bg.png
+/src/frontend/assets/CREATE.png
+/src/frontend/assets/dashboard_color.svg
+/src/frontend/assets/dashboard.svg
+/src/frontend/assets/datacenter.svg
+/src/frontend/assets/DELETE.png
+/src/frontend/assets/deploy_button.svg
+/src/frontend/assets/edit.png
+/src/frontend/assets/line.svg
+/src/frontend/assets/list.png
+/src/frontend/assets/logo2.png
+/src/frontend/assets/marketplace_color.svg
+/src/frontend/assets/marketplace.svg
+/src/frontend/assets/point.png
+/src/frontend/assets/refresh.png
+/src/frontend/assets/task_color.svg
+/src/frontend/assets/task.svg
+/src/frontend/assets/wallet_color.svg
+/src/frontend/assets/wallet.svg

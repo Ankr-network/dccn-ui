@@ -25,10 +25,10 @@ const liquidFillGaugeDefaultSettings = function() {
     };
 }
 
-const loadLiquidFillGauge = function(element, value, config) {
+const loadLiquidFillGauge = function(elementId, value, config) {
     if(config == null) config = liquidFillGaugeDefaultSettings();
 
-    var gauge = d3.select(element);
+    var gauge = d3.select("#" + elementId);
     var radius = Math.min(parseInt(gauge.style("width")), parseInt(gauge.style("height")))/2;
     var locationX = parseInt(gauge.style("width"))/2 - radius;
     var locationY = parseInt(gauge.style("height"))/2 - radius;
@@ -129,7 +129,7 @@ const loadLiquidFillGauge = function(element, value, config) {
         .y1(function(d) { return (fillCircleRadius*2 + waveHeight); } );
     var waveGroup = gaugeGroup.append("defs")
         .append("clipPath")
-        .attr("id", "clipWave" + element.id);
+        .attr("id", "clipWave" + elementId);
     var wave = waveGroup.append("path")
         .datum(data)
         .attr("d", clipArea)
@@ -137,7 +137,7 @@ const loadLiquidFillGauge = function(element, value, config) {
 
     // The inner circle with the clipping wave attached.
     var fillCircleGroup = gaugeGroup.append("g")
-        .attr("clip-path", "url(#clipWave" + element.id + ")");
+        .attr("clip-path", "url(#clipWave" + elementId + ")");
     fillCircleGroup.append("circle")
         .attr("cx", radius)
         .attr("cy", radius)

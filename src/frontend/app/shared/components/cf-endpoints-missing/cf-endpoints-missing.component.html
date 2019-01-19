@@ -1,38 +1,18 @@
 
 <!-- this creates a google map on the page with the given lat/lng from -->
-<<<<<<< HEAD
-<!-- the component as the initial center of the map: -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map">
-<<<<<<< HEAD
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-=======
-  <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" ><agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
-=======
-=======
-<label class="switch">
-    <input type="checkbox" checked>
-    <span class="slider round"></span>
-  </label>
-
->>>>>>> 58ced8487... [SWDEV-114]Get stuck on front change
-=======
 
 
 
 
-  <div>
+<div>
   <button (click)="changeElement()" class = "switchbutton">
       <font color="#FFFFFF" size = "3">Switch</font>
   </button>
   <div [ngSwitch]="num">
         <div *ngSwitchCase="1">
->>>>>>> 1dc449fcd... [swdev-114]Finish the basic setup
 <agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map" [zoom] = "2">
   <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" ><!--  SF-->
     <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
->>>>>>> b25a500d6... [SWDEV-114]Jan-16 improve the map and design of sidebar
       <ng-template>
         <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
         <font color="#FFFFFF">Cpu Usage: 70%</font><br/>
@@ -156,22 +136,6 @@
           </details>
 
       </ng-template>
-<<<<<<< HEAD
-    </agm-snazzy-info-window></agm-marker>
-  <agm-marker [latitude]="lat2" [longitude]="lng2"><agm-info-window>Börk</agm-info-window></agm-marker>
-  <agm-marker [latitude]="lat3" [longitude]="lng3"><agm-info-window>Börk</agm-info-window></agm-marker>
-  <agm-marker [latitude]="lat4" [longitude]="lng4"><agm-info-window>Börk</agm-info-window></agm-marker>
-  <agm-marker [latitude]="lat5" [longitude]="lng5" ><agm-info-window>Börk</agm-info-window> </agm-marker>
-  <agm-marker [latitude]="lat6" [longitude]="lng6"></agm-marker>
-  <agm-marker [latitude]="lat7" [longitude]="lng7"></agm-marker>
-  <agm-marker [latitude]="lat8" [longitude]="lng8"></agm-marker>
-  <agm-marker [latitude]="lat9" [longitude]="lng9"></agm-marker>
-  <agm-marker [latitude]="lat10" [longitude]="lng10"></agm-marker>
-  <agm-marker [latitude]="lat11" [longitude]="lng11"></agm-marker>
-  <agm-marker [latitude]="lat12" [longitude]="lng12"></agm-marker>
-  <agm-marker [latitude]="lat13" [longitude]="lng13"></agm-marker>
->>>>>>> 3d5acc4a9... [SWDEV-114]Jan-15
-=======
     </agm-snazzy-info-window>
     </agm-marker>
     <agm-marker [latitude]="lat6" [longitude]="lng6" [iconUrl]="icon" ><!--Hongkong-->
@@ -200,10 +164,6 @@
       </agm-snazzy-info-window>
       </agm-marker>
 
-<<<<<<< HEAD
->>>>>>> b25a500d6... [SWDEV-114]Jan-16 improve the map and design of sidebar
-</agm-map>
-=======
 </agm-map>
 
 </div>
@@ -301,4 +261,3 @@
 
 </div>
 </div>
->>>>>>> 1dc449fcd... [swdev-114]Finish the basic setup
