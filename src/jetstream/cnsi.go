@@ -329,7 +329,7 @@ func (p *portalProxy) createJob(c echo.Context) error {
 	if tcrp.Status == "Success" {
 		log.Info("Task id %d created successfully. \n", tcrp.Taskid)
 	} else {
-		log.Info("Fail to create task. \n")
+		log.Info("Fail to create task. \n", tcrp.Reason)
 	}
 
 	// jsonString, err := json.Marshal(jobList)

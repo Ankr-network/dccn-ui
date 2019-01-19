@@ -132,6 +132,7 @@ export class RegisterEndpoint extends EndpointAction {
     public endpointType: EndpointType,
     public name: string,
     public replica = '',
+    public dcid: string,
   ) {
     super();
   }

@@ -248,10 +248,10 @@ export class EndpointsEffect {
       });
       console.log(new_params);
       this.http.post('/pp/v1/create', {
-        datacenter: 'datacenter_1',
         taskname: action.name,
         type: action.endpointType,
-         replica: '1'
+         replica: action.replica,
+        datacenter: action.dcid
       }).subscribe(
          res => {
            console.log(res);

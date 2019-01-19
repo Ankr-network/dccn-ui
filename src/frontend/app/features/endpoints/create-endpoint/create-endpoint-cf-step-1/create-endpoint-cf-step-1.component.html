@@ -17,5 +17,8 @@
     <mat-error *ngIf="urlField.errors && urlField.errors.required">Replica is required</mat-error>
   <mat-error *ngIf="urlField.errors && urlField.errors.appUnique">Replica is not unique</mat-error>
 </mat-form-field> 
+<mat-form-field>
+    <input matInput id="dcid" name="dcid" ngModel #dcidField="ngModel" type="dcid" placeholder="DatacenterId">
+</mat-form-field> 
 
 </form>
