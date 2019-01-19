@@ -17,9 +17,12 @@ files:
   LINE.svg: "assets/LINE.svg"
   arrow.svg: "assets/arrow.svg"
   DEPLOYBUTTON.svg: "assets/DEPLOYBUTTON.svg"
-  /NAVICONS/DASHBOARD.svg: "assets/DASHBOARD.svg"
+  /NAVICONS/DASHBOARD1.svg: "assets/DASHBOARD.svg"
   /NAVICONS/Marketplace(color).svg: "assets/Marketplace(color).svg"
   /NAVICONS/MARKETPLACE.svg: "assets/MARKETPLACE.svg"
+  /NAVICONS/task.svg: "assets/task.svg"
+  /NAVICONS/wallet.svg: "assets/wallet.svg"
+
 
 folders:
   - "app/custom"
