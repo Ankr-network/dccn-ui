@@ -1,25 +1,202 @@
-<app-intro-screen id="app-login-page" class="login login__busy" [ngClass]="{'login__busy': busy$ | async }">
-  <mat-card class="login__card">
-    <app-stratos-title></app-stratos-title>
-    <div class="login__body">
-      <div class="login__form-outer" [ngClass]="{'login-sso': ssoLogin}">
-        <form class="login__form" name="loginForm" (ngSubmit)="login()" #loginForm="ngForm">
-          <mat-form-field *ngIf="!ssoLogin">
-            <input matInput required [(ngModel)]="username" name="username" placeholder="Username">
-          </mat-form-field>
-          <mat-form-field *ngIf="!ssoLogin">
-            <input matInput required type="password" [(ngModel)]="password" name="password" placeholder="Password">
-          </mat-form-field>
-          <button class="login__submit" color="primary" *ngIf="!loggedIn" type="submit" mat-button mat-raised-button [disabled]="!ssoLogin && !loginForm.valid">Login</button>
-          <button class="login__submit" color="primary" type="signup" mat-button mat-raised-button [routerLink]="'/signup'" >signup</button>
-        </form>
-      </div>
-      <div id="login__loading" class="login__loading">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </div>
-    </div>
-  </mat-card>
-  <div id="login-error-message" class="login-message" [ngClass]="{'login-message--show': !!message, 'login-message-error': this.error}">
-    {{ message }}
-  </div>
-</app-intro-screen>
+<!DOCTYPE html>
+<html>
+<head>
+	<!--Google fonts here-->
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+
+	<!--Font Awesome-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+	<!--bootstrap toggle button-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+	<!--style sheet-->
+	<style>
+		html {
+			font-size: 62.5%;
+			
+		}
+
+		body {
+			background-image: url("/assets/bg.png");
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-attachment: fixed;
+		}
+
+		/*Style close btn*/
+		.signin-close-btn {
+			margin-left: 85%;
+			margin-top: 3rem;
+			font-size: 5rem;
+			width: 7rem;
+			height: 7rem;
+			border-radius: 50%;
+			color: #fff;
+			background: rgba(255,255,255, 0.2);
+			border: none;
+		}
+
+		/*Style login body*/
+		.signin-body {
+			width: 40%;
+			margin-top: 2rem;
+			margin-left: auto;
+			margin-right: auto;
+			background: rgba(255,255,255, 0.2);
+			border-radius: 5rem;
+		}
+
+		.signin-body-sign {
+			font-family: "Roboto", sans-serif;
+			font-size: 4rem;
+			font-weight: 500;
+			text-transform: none;
+			line-height: 1.4;
+			letter-spacing: 0.1em;
+			color: #fff;
+			text-align: center;
+			padding-top: 5rem;
+		}
+
+		.signin-body-main {
+			width: 80%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.signin-body h1 {
+			font-family: "Roboto", sans-serif;
+			font-size: 4rem;
+			font-weight: 500;
+			text-transform: none;
+			line-height: 1.4;
+			letter-spacing: 0.1rem;
+			color: #D3D3D3;
+			text-align: left;
+			margin-top: 2rem;
+		}
+
+		.signin-body-divider {
+			width: 8%;
+			height: 1rem;
+			background: #fff;
+			margin-top: 1rem;
+		}
+
+		.signin-form {
+			margin-top: 8rem;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.signin-form label {
+			display: block;
+			color: #fff;
+			font-size: 1.5rem;
+			font-weight: 300;
+			letter-spacing: 0.2em;
+			font-family: "Roboto", sans-serif;
+		}
+
+		.input-box {
+			width: 85%;
+			font-size: 2rem;
+			margin-top: 1rem;
+			margin-bottom: 5rem;
+			background: Transparent;
+			border-top: none;
+			border-left: none;
+			border-right: none;
+		}
+
+		.signin-submit-btn {
+			width: 90%;
+			height: 5rem;
+			border-radius: 5px;
+			border: none;
+			background: #fff;
+			color: #7587C6;
+			font-size: 2rem;
+			margin-bottom: 5rem;
+		}
+
+		/*Style on/off toggle btn*/
+		.signin-form-toggle {
+			margin-bottom: 2rem;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			width: 85%;
+		}
+		.signin-form-toggle span{
+			color: #fff;
+			font-size: 1.5rem;
+			font-weight: 600;
+			font-family: "Roboto", sans-serif;
+		}
+
+		.toggle.round, .toggle-on.round, .toggle-off.round {
+			border-radius: 20px;
+		}
+		.toggle.round .toggle-handle {
+			border-radius: 20px;
+		}
+
+		.btn-primary {
+			background: #7587C6;
+		}
+
+		.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+			background: rgba(255,255,255, 0.2);
+			color: #7587C6;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="signin">
+		<button class="signin-close-btn" [routerLink]="'/frontpage'"><i class="fas fa-times"></i></button>
+		<div class="signin-body">
+			<div class="signin-body-sign">LOGIN</div>
+			<div class="signin-body-main">
+				<h1>Log into your account & check your data.</h1>
+				<form class="signin-form" name="loginForm" (ngSubmit)="login()" #loginForm="ngForm">
+					<div>
+						<label for="email">EMAIL</label>
+						<input class="input-box" matInput required [(ngModel)]="username" name="username">
+					</div>
+
+					<div>
+						<label for="password">PASSWORD</label>
+						<input class="input-box" matInput required type="password" [(ngModel)]="password" name="password">
+					</div>
+
+					<div class="signin-form-toggle">
+						<span>Remember me</span>
+						<input
+							type="checkbox"
+							checked data-toggle="toggle"
+							data-style="round"
+						>
+					</div>
+
+					<button class="signin-submit-btn" color="primary" *ngIf="!loggedIn" type="submit" mat-button mat-raised-button [disabled]="!ssoLogin && !loginForm.valid">Login</button>
+				</form>
+				<div id="login-error-message" class="login-message" [ngClass]="{'login-message--show': !!message, 'login-message-error': this.error}">
+						{{ message }}
+					  </div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

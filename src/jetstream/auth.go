@@ -68,6 +68,11 @@ const XSRFTokenCookie = "XSRF-TOKEN"
 // XSRFTokenSessionName - XSRF Token Session name
 const XSRFTokenSessionName = "xsrf_token"
 
+const (
+	address = "client-dev.dccn.ankr.network:50051"
+	//address = "127.0.0.1:50051"
+)
+
 type LogoutResponse struct {
 	IsSSO bool `json:"isSSO"`
 }
@@ -235,6 +240,30 @@ func (p *portalProxy) loginToUAA(c echo.Context) error {
 
 	return nil
 }
+
+func (p *portalProxy) signupToUAA(c echo.Context) error {
+	log.Debug("signupToUAA")
+	username := c.FormValue("username")
+	password := c.FormValue("password")
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("did not connect: %v", err)
+	}
+	defer conn.Close()
+	c1 := pb.NewDccncliClient(conn)
+
+	ctx, cancel := ctext.WithTimeout(ctext.Background(), 30*time.Second)
+	defer cancel()
+	r, err := c1.Register(ctx, &pb.RegisterRequest{Name: username, Password : password, Erc20Address:"asfasfasdgasg"})
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("received Status : %s reason %s \n", r.Status, r.Reason)
+	return nil
+
+}
+
 
 func (p *portalProxy) doLoginToUAA(c echo.Context) (*interfaces.LoginRes, error) {
 	log.Debug("loginToUAA")

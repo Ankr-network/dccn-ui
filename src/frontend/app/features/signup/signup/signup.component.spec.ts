@@ -7,15 +7,15 @@ import { StoreModule } from '@ngrx/store';
 import { CoreModule } from '../../../core/core.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { appReducers } from '../../../store/reducers.module';
-import { HomePageComponent } from './home-page.component';
+import { GrpcsignupComponent } from './signup.component';
 
 describe('HomePageComponent', () => {
-  let component: HomePageComponent;
-  let fixture: ComponentFixture<HomePageComponent>;
+  let component: GrpcsignupComponent;
+  let fixture: ComponentFixture<GrpcsignupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HomePageComponent],
+      declarations: [GrpcsignupComponent],
       imports: [
         CommonModule,
         CoreModule,
@@ -31,7 +31,7 @@ describe('HomePageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomePageComponent);
+    fixture = TestBed.createComponent(GrpcsignupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
