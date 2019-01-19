@@ -38,6 +38,7 @@ export class CreateEndpointCfStep1Component implements IStepperStep, AfterConten
   @ViewChild('urlField') urlField: NgModel;
   @ViewChild('skipSllField') skipSllField: NgModel;
   @ViewChild('ssoAllowedField') ssoAllowedField: NgModel;
+  @ViewChild('dcidField') dcidField: NgModel;
 
   // Optional Client ID and Client Secret
   @ViewChild('clientIDField') clientIDField: NgModel;
@@ -87,6 +88,7 @@ export class CreateEndpointCfStep1Component implements IStepperStep, AfterConten
       this.typeField.value,
       this.nameField.value,
       this.urlField.value,
+      this.dcidField.value,
     );
 
     this.store.dispatch(action);
