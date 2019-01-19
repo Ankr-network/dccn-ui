@@ -1,54 +1,113 @@
 
-  .wallet {
-   width: 50%;
-   display: flex;
-   flex-direction: column;
-  }
+.wallet {
+  display: flex;
+  flex-direction: column;
+}
 
-  .wallet__title {
-   text-align: center;
-   margin-top: 5%;
-   margin-bottom: 5%;
-  }
+.wallet__title {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 
-  .wallet__amount {
-   text-align: center;
-  }
+.wallet__amount {
+  text-align: center;
+  min-width: 200px;
+}
 
-  .wallet__amount span {
-   font-size: 20px;
-  }
+.wallet__amount span {
+  font-size: 20px;
+}
 
-  .wallet__add {
-   width: 15%;
-   margin: 20px auto 20px auto;
-   font-size: 16px;
-  }
+.wallet__add {
+  width: 15%;
+  margin: 20px auto 20px auto;
+  font-size: 16px;
+}
 
-  .wallet__add i {
-   margin-right: 20px;
-  }
+.wallet__add i {
+  margin-right: 20px;
+}
 
-  .wallet__divider {
-   width: 60%;
-   height: 1px;
-   margin: 20px auto 20px auto;
-   background: #00b0ff;
-  }
+.wallet__divider {
+  width: 60%;
+  height: 1px;
+  margin: 20px auto 20px auto;
+  background: #00b0ff;
+}
 
-  .wallet__history {
-   width: 60%;
-   margin-left: auto;
-   margin-right: auto;
-  }
+.wallet__history {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  .wallet__history__title {
-   font-size: 20px;
-   text-align: center;
-  }
+.wallet__history__title {
+  font-size: 20px;
+  text-align: center;
+}
 
-  .wallet__history__item {
-   font-size: 16px;
-   margin-top: 20px;
-   border-bottom: 1px solid #00b0ff;
-  }
+.wallet__history__item {
+  font-size: 16px;
+  margin: 20px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+// body {
+//   font-family: 'Roboto', sans-serif;
+//   background: #EFF2F9;
+// }
+
+.title {
+  background-image: linear-gradient(180deg, #35addd 30%, #3d4599 70%);
+  background-clip: text;
+  color:transparent;
+  font-size: 56px;
+  -webkit-background-clip: text;
+
+}
+
+#USD {
+  background: #686a6b;
+  -webkit-background-clip: text;
+  color:transparent;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+#balance {
+  background: #686a6b;
+   -webkit-background-clip: text;
+   color:transparent;
+   font-weight: bold;
+   font-size: 40px;
+}
+
+.switch {
+  margin-left: 0%;
+}
+
+.add_fund {
+  height: 7vh;
+  width: 10vw;
+  margin-left: 27%;
+}
+
+.transaction-history {
+  border: 1px solid rgba(0,0,0,0.5);
+  height: 10vh;
+}
+
+.transactions {
+  margin: 0 10%;
+}
+
+.usage {
+  margin-left: 10%;
+}

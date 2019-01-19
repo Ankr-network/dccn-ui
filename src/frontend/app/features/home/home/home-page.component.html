@@ -1,3 +1,59 @@
 <app-page-header>
   <h1>Dashboard</h1>
 </app-page-header>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Arrow Symbols (Polyline)</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Total Usage:</h3>
+      <div>
+        <div class="quarter metric">
+            <svg id="dashboard_cpu" width="100%" height="200"></svg>
+            <span>CPU</span>
+        </div>
+        <div class="quarter metric">
+            <svg id="dashboard_mem" width="100%" height="200"></svg>
+            <span>Memory</span>
+        </div>
+        <div class="quarter metric">
+            <svg id="dashboard_storage" width="100%" height="200"></svg>
+            <span>Disk</span>
+        </div>
+        <div class="quarter metric">
+            <svg id="dashboard_network" width="100%" height="200"></svg>
+            <span>Network</span>
+        </div>
+      </div>
+      <br>
+      <h3>Summary:</h3>
+      <div>
+          <div class="half metric">
+              <svg id="dashboard_pod" width="100%" height="200"></svg>
+              <span># of Pods</span>
+          </div>
+          <div class="half metric">
+              <svg id="dashboard_image" width="100%" height="200"></svg>
+              <span># of Images</span>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
