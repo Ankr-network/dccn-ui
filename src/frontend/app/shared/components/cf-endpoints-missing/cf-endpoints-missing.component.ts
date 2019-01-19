@@ -26,8 +26,8 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
   lng1: number =  -121.48700433349609;
   lat2: number = 31.112616816388908;
   lng2: number = 121.38071340942383;
-  lat3: number = 37.71288227364865;
-  lng3: number = -121.92542749023437;
+  lat3: number = 1.3268178776839399; 
+  lng3: number = 103.92120642089844;
   lat4: number = 37.424429784838;
   lng4: number = -121.8883486328125;
   lat5: number = 37.73297778721093; 
@@ -46,14 +46,9 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
 
   lat11: number = 44.03959742762122;
   lng11: number =  -123.07088094329822;
-  lat12: number = 45.56544181720936;
-  lng12: number =  -122.63546186065662;
-  lat13: number = 47.60834353342266;
-  lng13: number =  -122.33709292983997;
   center : {lat: 38.97628854681858, lng: -123.04540625}
 >>>>>>> 3d5acc4a9... [SWDEV-114]Jan-15
   styles = [
-    "../node_modules/snazzy-info-window/dist/snazzy-info-window.css",
     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
     {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -153,7 +148,7 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
     .subscribe(data => this.datacenters = data);
    }
    public icon = {
-    url: "/assets/logo2.png", 
+    url: "/assets/DATACENTER.svg", 
     scaledSize: {
       height: 40,
       width: 40

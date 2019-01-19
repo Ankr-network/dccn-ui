@@ -1,0 +1,54 @@
+
+  .wallet {
+   width: 50%;
+   display: flex;
+   flex-direction: column;
+  }
+
+  .wallet__title {
+   text-align: center;
+   margin-top: 5%;
+   margin-bottom: 5%;
+  }
+
+  .wallet__amount {
+   text-align: center;
+  }
+
+  .wallet__amount span {
+   font-size: 20px;
+  }
+
+  .wallet__add {
+   width: 15%;
+   margin: 20px auto 20px auto;
+   font-size: 16px;
+  }
+
+  .wallet__add i {
+   margin-right: 20px;
+  }
+
+  .wallet__divider {
+   width: 60%;
+   height: 1px;
+   margin: 20px auto 20px auto;
+   background: #00b0ff;
+  }
+
+  .wallet__history {
+   width: 60%;
+   margin-left: auto;
+   margin-right: auto;
+  }
+
+  .wallet__history__title {
+   font-size: 20px;
+   text-align: center;
+  }
+
+  .wallet__history__item {
+   font-size: 16px;
+   margin-top: 20px;
+   border-bottom: 1px solid #00b0ff;
+  }

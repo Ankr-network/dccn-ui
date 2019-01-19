@@ -10,7 +10,37 @@
     </ng-container>
   </div>
 </app-page-header>
-<app-cf-endpoints-missing></app-cf-endpoints-missing>
+
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+ <div class="wallet">
+  <h1 class="wallet__title">Your wallet</h1>
+
+  <div class="wallet__amount">
+   <h2>1000.00 <span>Ankr</span></h2>
+   <h2>10,000.00 <span>USD</span></h2>
+  </div>
+
+  <button class="wallet__add"><i class="fas fa-coins"></i>Add Funds</button>
+
+  <div class="wallet__divider"></div>
+
+  <div class="wallet__history">
+   <div class="wallet__history__title">History</div>
+   <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Dec 18th, 2018</div>
+   <div class="wallet__history__item">89bneig paid you 100 Ankr coin on Dec 28th, 2018</div>
+   <div class="wallet__history__item">You paid @abc345 50 Ankr coin on Dec 29th, 2018</div>
+   <div class="wallet__history__item">You paid 89bneig 100 Ankr coin on Dec 30th, 2018</div>
+   <div class="wallet__history__item">@abc345 paid you 100 Ankr coin on Jan 1st, 2019</div>
+  </div>
+ </div>
+</body>
+</html>
+
 <ng-template #noEntriesForCurrentFilter>
   <app-no-content-message iconFont="stratos-icons" icon="service" [firstLine]="'There are no services instances for the current filter'" [secondLine]="{
   text: ''

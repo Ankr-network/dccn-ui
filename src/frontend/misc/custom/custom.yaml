@@ -9,9 +9,17 @@ files:
   logo2.png: "assets/logo2.png"
   CREATE.png: "assets/CREATE.png"
   DELETE.png: "assets/DELETE.png"
-  EDIT.png: "assets/UPDATE.png"
+  EDIT.png: "assets/EDIT.png"
   LIST.png: "assets/LIST.png"
   REFRESH.png: "assets/REFRESH.png"
+  datacenter.svg: "assets/DATACENTER.svg"
+  POINT.png: "assets/POINT.png"
+  LINE.svg: "assets/LINE.svg"
+  arrow.svg: "assets/arrow.svg"
+  DEPLOYBUTTON.svg: "assets/DEPLOYBUTTON.svg"
+  /NAVICONS/DASHBOARD.svg: "assets/DASHBOARD.svg"
+  /NAVICONS/Marketplace(color).svg: "assets/Marketplace(color).svg"
+  /NAVICONS/MARKETPLACE.svg: "assets/MARKETPLACE.svg"
 
 folders:
   - "app/custom"

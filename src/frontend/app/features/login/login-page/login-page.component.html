@@ -11,6 +11,7 @@
             <input matInput required type="password" [(ngModel)]="password" name="password" placeholder="Password">
           </mat-form-field>
           <button class="login__submit" color="primary" *ngIf="!loggedIn" type="submit" mat-button mat-raised-button [disabled]="!ssoLogin && !loginForm.valid">Login</button>
+          <button class="login__submit" color="primary" type="signup" mat-button mat-raised-button [routerLink]="'/signup'" >signup</button>
         </form>
       </div>
       <div id="login__loading" class="login__loading">

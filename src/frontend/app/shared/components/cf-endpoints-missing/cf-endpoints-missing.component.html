@@ -1,20 +1,120 @@
-<h1>{{ title }}</h1>
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
+<<<<<<< HEAD
 <agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map">
 <<<<<<< HEAD
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 =======
   <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" ><agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
+=======
+<agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map" [zoom] = "2">
+  <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" >
+    <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+>>>>>>> b25a500d6... [SWDEV-114]Jan-16 improve the map and design of sidebar
       <ng-template>
-        My first Snazzy Info Window!
+        <img src="/assets/POINT.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+        <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
+        <font color="#FFFFFF">Cache Uage: 50%</font><br/>
+        <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
+        <img src="/assets/LINE.svg" class = "Lineinfo"/><br/>
+        <img src="/assets/POINT.png" height="10px" width="10px"/><button [routerLink]="'/endpoints/new/'">
+          <img src="/assets/DEPLOYBUTTON.svg" height="10px" width="20px"/>
+        </button><br/>
+        <details>
+            <summary><img src="/assets/POINT.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp; <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+            <font color="#FFFFFF">CPU: I7870</font><br/>
+            <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+            <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+            <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+            <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+            <font color="#FFFFFF">Stability: 99.983%</font><br/>
+            <font color="#FFFFFF">Working: 8days</font><br/>
+          </details>
+
       </ng-template>
-    </agm-snazzy-info-window></agm-marker>
-  <agm-marker [latitude]="lat1" [longitude]="lng1"><agm-snazzy-info-window [latitude]="lat1" [longitude]="lng1" backgroundColor="orange" [fontSize] = "500" [maxWidth]="200" [closeWhenOthersOpen]="true">
+    </agm-snazzy-info-window>
+    </agm-marker>
+  <agm-marker [latitude]="lat2" [longitude]="lng2" [iconUrl]="icon" >
+      <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+        <ng-template>
+          <img src="/assets/POINT.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+          <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
+          <font color="#FFFFFF">Cache Uage: 50%</font><br/>
+          <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
+          <img src="/assets/LINE.svg" class = "Lineinfo"/><br/>
+          <img src="/assets/POINT.png" height="10px" width="10px"/><button [routerLink]="'/endpoints/new/'">
+            Use this datacenter
+          </button><br/>
+          <details>
+              <summary><img src="/assets/POINT.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect">More Info</font> <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+              <font color="#FFFFFF">CPU: I7870</font><br/>
+              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+              <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+              <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+              <font color="#FFFFFF">Stability: 99.983%</font><br/>
+              <font color="#FFFFFF">Working: 8days</font><br/>
+            </details>
+  
+        </ng-template>
+      </agm-snazzy-info-window>
+      </agm-marker>
+  <agm-marker [latitude]="lat3" [longitude]="lng3" [iconUrl]="icon" >
+      <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+        <ng-template>
+          <img src="/assets/POINT.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+          <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
+          <font color="#FFFFFF">Cache Uage: 50%</font><br/>
+          <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
+          <img src="/assets/LINE.svg" class = "Lineinfo"/><br/>
+          <img src="/assets/POINT.png" height="10px" width="10px"/><button [routerLink]="'/endpoints/new/'">
+            Use this datacenter
+          </button><br/>
+          <details>
+              <summary><img src="/assets/POINT.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect">More Info</font> <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+              <font color="#FFFFFF">CPU: I7870</font><br/>
+              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+              <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+              <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+              <font color="#FFFFFF">Stability: 99.983%</font><br/>
+              <font color="#FFFFFF">Working: 8days</font><br/>
+            </details>
+  
+        </ng-template>
+      </agm-snazzy-info-window>
+      </agm-marker>
+  <agm-marker [latitude]="lat4" [longitude]="lng4" [iconUrl]="icon"><agm-info-window>Börk</agm-info-window></agm-marker>
+  <agm-marker [latitude]="lat5" [longitude]="lng5" [iconUrl]="icon" ><agm-info-window>Börk</agm-info-window> </agm-marker>
+  <agm-marker [latitude]="lat6" [longitude]="lng6" [iconUrl]="icon"></agm-marker>
+  <agm-marker [latitude]="lat7" [longitude]="lng7" [iconUrl]="icon"></agm-marker>
+  <agm-marker [latitude]="lat8" [longitude]="lng8" [iconUrl]="icon"></agm-marker>
+  <agm-marker [latitude]="lat9" [longitude]="lng9" [iconUrl]="icon"></agm-marker>
+  <agm-marker [latitude]="lat10" [longitude]="lng10" [iconUrl]="icon"></agm-marker>
+  <agm-marker [latitude]="lat11" [longitude]="lng11" [iconUrl]="icon"><agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
       <ng-template>
-        My second Snazzy Info Window!
+        <img src="/assets/POINT.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+        <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
+        <font color="#FFFFFF">Cache Uage: 50%</font><br/>
+        <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
+        <img src="/assets/LINE.svg" class = "Lineinfo"/><br/>
+        <img src="/assets/POINT.png" height="10px" width="10px"/><button [routerLink]="'/endpoints/new/'">
+          Use this datacenter
+        </button><br/>
+        <details>
+            <summary><img src="/assets/POINT.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp;  <img src="assets/arrow.svg" height="10px" width="10px" class = "arrow"/></summary>
+            <font color="#FFFFFF">CPU: I7870</font><br/>
+            <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+            <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+            <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+            <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+            <font color="#FFFFFF">Stability: 99.983%</font><br/>
+            <font color="#FFFFFF">Working: 8days</font><br/>
+          </details>
+
       </ng-template>
+<<<<<<< HEAD
     </agm-snazzy-info-window></agm-marker>
   <agm-marker [latitude]="lat2" [longitude]="lng2"><agm-info-window>Börk</agm-info-window></agm-marker>
   <agm-marker [latitude]="lat3" [longitude]="lng3"><agm-info-window>Börk</agm-info-window></agm-marker>
@@ -29,4 +129,34 @@
   <agm-marker [latitude]="lat12" [longitude]="lng12"></agm-marker>
   <agm-marker [latitude]="lat13" [longitude]="lng13"></agm-marker>
 >>>>>>> 3d5acc4a9... [SWDEV-114]Jan-15
+=======
+    </agm-snazzy-info-window>
+    </agm-marker>
+  <agm-marker [latitude]="lat2" [longitude]="lng2" [iconUrl]="icon" >
+      <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+        <ng-template>
+          <img src="/assets/POINT.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+          <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
+          <font color="#FFFFFF">Cache Uage: 50%</font><br/>
+          <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
+          <img src="/assets/LINE.svg" class = "Lineinfo"/><br/>
+          <img src="/assets/POINT.png" height="10px" width="10px"/><button [routerLink]="'/endpoints/new/'">
+            Use this datacenter
+          </button><br/>
+          <details>
+              <summary><img src="/assets/POINT.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect">More Info</font>&nbsp;   <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+              <font color="#FFFFFF">CPU: I7870</font><br/>
+              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+              <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+              <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+              <font color="#FFFFFF">Stability: 99.983%</font><br/>
+              <font color="#FFFFFF">Working: 8days</font><br/>
+            </details>
+  
+        </ng-template>
+      </agm-snazzy-info-window>
+      </agm-marker>
+
+>>>>>>> b25a500d6... [SWDEV-114]Jan-16 improve the map and design of sidebar
 </agm-map>

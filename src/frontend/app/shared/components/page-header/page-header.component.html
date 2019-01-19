@@ -1,7 +1,7 @@
 <div class="page-header__outer">
   <div class="page-header">
     <div>
-      <mat-toolbar color="primary">
+      <mat-toolbar class = "topbar">
         <div class="page-header__nav-toggle-wrapper">
           <button mat-icon-button *ngIf="!hideSideNavButton" (click)="toggleSidenav()">
             
@@ -46,9 +46,10 @@
               <button mat-menu-item routerLink="/about">
                 <span>About</span>
               </button>
-              <button mat-menu-item routerLink="/user-profile">
+              <!-- <button mat-menu-item routerLink="/user-profile">
                 <span>Profile</span>
-              </button>
+              </button> -->
+              
               <div class="page-header__menu-separator"></div>
             </div>
             <button mat-menu-item (click)="logout()">

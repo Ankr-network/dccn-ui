@@ -3,6 +3,8 @@ $side-nav-mat-icon-width: 24px;
 $side-nav-mat-icon-padding-right: 15px;
 $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $side-nav-mat-icon-padding-right;
 .side-nav {
+  
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -20,6 +22,7 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
     }
   }
   &__items {
+    
     list-style-type: none;
     flex: 1;
     margin: 0;
@@ -27,6 +30,7 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
     padding: 0;
   }
   &__itemContainer {
+    
     height: 54px;
     overflow: hidden;
     transition: height .3s ease-in-out;
@@ -36,7 +40,11 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
   }
   &__item {
     align-items: center;
-    border-color: transparent;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    border-color: black;
+    
+    //border-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
     cursor: pointer;
     display: flex;
     font-size: 15px;
@@ -45,6 +53,7 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
     padding: 15px $side-nav-padding-h;
     text-decoration: none;
     mat-icon {
+      border: 1px solid;
       margin-right: $side-nav-mat-icon-padding-right;
       text-align: center;
     }

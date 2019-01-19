@@ -16,9 +16,14 @@ import { PageNotFoundComponentComponent } from './core/page-not-found-component/
 import { DomainMismatchComponent } from './features/setup/domain-mismatch/domain-mismatch.component';
 import { environment } from '../environments/environment';
 import { CustomRoutingImportModule } from './custom-import.module';
+import { GrpcsignupComponent } from './features/signup/signup/signup.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+<<<<<<< HEAD
+=======
+  { path:'signup', component: GrpcsignupComponent},
+>>>>>>> b25a500d6... [SWDEV-114]Jan-16 improve the map and design of sidebar
   { path: 'uaa', component: ConsoleUaaWizardComponent },
   { path: 'upgrade', component: UpgradePageComponent },
   { path: 'domainMismatch', component: DomainMismatchComponent },
@@ -36,7 +41,8 @@ const appRoutes: Routes = [
             matIcon: 'assessment',
             // Experimental - only show in development
             hidden: observableOf(environment.production),
-            position: 10
+            position: 10,
+            imglocation: 'assets/DASHBOARD.svg'
           }
         }
       },
@@ -77,19 +83,19 @@ const appRoutes: Routes = [
             position: 30
           }
         },
-      },
+      },*/
       {
         path: 'services', loadChildren: 'app/features/services/services.module#ServicesModule',
         data: {
           stratosNavigation: {
-            text: 'Services',
+            text: 'Payment',
             matIcon: 'service',
             matIconFont: 'stratos-icons',
             position: 40
           }
         },
       },
-      {
+      /*{
         path: 'cloud-foundry', loadChildren: 'app/features/cloud-foundry/cloud-foundry.module#CloudFoundryModule',
         data: {
           stratosNavigation: {
@@ -100,8 +106,8 @@ const appRoutes: Routes = [
           }
         },
       },*/
-      { path: 'about', loadChildren: 'app/features/about/about.module#AboutModule' },
-      { path: 'user-profile', loadChildren: 'app/features/user-profile/user-profile.module#UserProfileModule' },
+      //{ path: 'about', loadChildren: 'app/features/about/about.module#AboutModule' },
+      //{ path: 'user-profile', loadChildren: 'app/features/user-profile/user-profile.module#UserProfileModule' },
     ]
   },
   {

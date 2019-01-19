@@ -18,8 +18,20 @@
       }
       &--active,
       &--active:hover {
-        background-color: mat-color($side-nav-colors, active);
-        color: mat-color($side-nav-colors, active-text);
+        background-color: white;
+        border-left: 5px solid;
+        -webkit-border-image: 
+      -webkit-gradient(linear, 0 100%, 0 0, from(#363795), to(#3499CC)) 1 100%;
+    -webkit-border-image: 
+      -webkit-linear-gradient(bottom, #363795, #3499CC) 1 100%;
+    -moz-border-image:
+      -moz-linear-gradient(bottom, #363795, #3499CC) 1 100%;  
+    -o-border-image:
+      -o-linear-gradient(bottom, #363795, #3499CC) 1 100%;
+    border-image:
+      linear-gradient(to top, #363795, #3499CC) 1 100%;
+        color: black;
+        
       }
     }
     &__items {

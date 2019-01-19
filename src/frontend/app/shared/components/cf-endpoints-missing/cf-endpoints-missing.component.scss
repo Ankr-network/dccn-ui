@@ -8,3 +8,20 @@ app-no-content-message {
 agm-map {
   height: 600px;
 }
+.Lineinfo{
+  padding-bottom: 0px;
+}
+.arrow{
+  padding-left: 6px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+  padding-bottom: 0px;
+}

@@ -8,17 +8,24 @@
   }
 }
 .refresh{
-  padding-left: 1100px;
+  padding-left: 0px;
 }
-
+.wrap-table100
+{
+  padding-top: 50px;
+  margin: auto auto;
+  width: 80%;
+  height: 100%;
+}
 .container-table100
 {
   padding: 0%;
+  height: 430px;
 }
 
 .table100.ver1.m-b-110 
 {
-  margin: 40px auto;
+  margin: auto auto;
   width: 80%;
   height: 530px;
 }
@@ -28,6 +35,9 @@
   margin: 0px auto;
   width: 100%;
   height: 500px;
+}
+.table100-body{
+  height: 480px;
 }
 
 .dashboard__inner{
