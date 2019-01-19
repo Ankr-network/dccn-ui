@@ -1,22 +1,26 @@
 
 <!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<label class="switch">
-    <input type="checkbox" checked>
-    <span class="slider round"></span>
-  </label>
 
+
+
+
+  <div>
+  <button (click)="changeElement()" class = "switchbutton">
+      <font color="#FFFFFF" size = "3">Switch</font>
+  </button>
+  <div [ngSwitch]="num">
+        <div *ngSwitchCase="1">
 <agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map" [zoom] = "2">
-  <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" >
+  <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" ><!--  SF-->
     <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
       <ng-template>
         <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
-        <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
-        <font color="#FFFFFF">Cache Uage: 50%</font><br/>
+        <font color="#FFFFFF">Cpu Usage: 70%</font><br/>
+        <font color="#FFFFFF">Cache Uage: 40%</font><br/>
         <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
         <img src="/assets/line.svg" class = "Lineinfo"/><br/>
-        <img src="/assets/point.png" height="10px" width="10px"/><button [routerLink]="'/tasks/new/'">
-          <img src="/assets/deploy_button.svg" height="10px" width="20px"/>
+        <button class = "deploybutton" [routerLink]="'/tasks/new/'">
+          <font size = "2" color="#257AA5" class = "noselect" text-align: center>Deploy this center</font>
         </button><br/>
         <details>
             <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp; <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
@@ -25,114 +29,135 @@
             <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
             <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
             <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
-            <font color="#FFFFFF">Stability: 99.983%</font><br/>
-            <font color="#FFFFFF">Working: 8days</font><br/>
+            <font color="#FFFFFF">Stability: 99.0%</font><br/>
+            <font color="#FFFFFF">Working: 28 days</font><br/>
           </details>
 
       </ng-template>
     </agm-snazzy-info-window>
     </agm-marker>
-  <agm-marker [latitude]="lat2" [longitude]="lng2" [iconUrl]="icon" >
-      <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
-        <ng-template>
-          <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
-          <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
-          <font color="#FFFFFF">Cache Uage: 50%</font><br/>
-          <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
-          <img src="/assets/line.svg" class = "Lineinfo"/><br/>
-          <img src="/assets/point.png" height="10px" width="10px"/><button [routerLink]="'/tasks/new/'">
-            Use this datacenter
-          </button><br/>
-          <details>
-              <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect">More Info</font> <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
-              <font color="#FFFFFF">CPU: I7870</font><br/>
-              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
-              <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
-              <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
-              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
-              <font color="#FFFFFF">Stability: 99.983%</font><br/>
-              <font color="#FFFFFF">Working: 8days</font><br/>
-            </details>
-  
-        </ng-template>
-      </agm-snazzy-info-window>
-      </agm-marker>
-  <agm-marker [latitude]="lat3" [longitude]="lng3" [iconUrl]="icon" >
-      <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
-        <ng-template>
-          <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
-          <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
-          <font color="#FFFFFF">Cache Uage: 50%</font><br/>
-          <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
-          <img src="/assets/line.svg" class = "Lineinfo"/><br/>
-          <img src="/assets/point.png" height="10px" width="10px"/><button [routerLink]="'/tasks/new/'">
-            Use this datacenter
-          </button><br/>
-          <details>
-              <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect">More Info</font> <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
-              <font color="#FFFFFF">CPU: I7870</font><br/>
-              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
-              <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
-              <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
-              <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
-              <font color="#FFFFFF">Stability: 99.983%</font><br/>
-              <font color="#FFFFFF">Working: 8days</font><br/>
-            </details>
-  
-        </ng-template>
-      </agm-snazzy-info-window>
-      </agm-marker>
-  <agm-marker [latitude]="lat4" [longitude]="lng4" [iconUrl]="icon"><agm-info-window>Börk</agm-info-window></agm-marker>
-  <agm-marker [latitude]="lat5" [longitude]="lng5" [iconUrl]="icon" ><agm-info-window>Börk</agm-info-window> </agm-marker>
-  <agm-marker [latitude]="lat6" [longitude]="lng6" [iconUrl]="icon"></agm-marker>
-  <agm-marker [latitude]="lat7" [longitude]="lng7" [iconUrl]="icon"></agm-marker>
-  <agm-marker [latitude]="lat8" [longitude]="lng8" [iconUrl]="icon"></agm-marker>
-  <agm-marker [latitude]="lat9" [longitude]="lng9" [iconUrl]="icon"></agm-marker>
-  <agm-marker [latitude]="lat10" [longitude]="lng10" [iconUrl]="icon"></agm-marker>
-  <agm-marker [latitude]="lat11" [longitude]="lng11" [iconUrl]="icon"><agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+
+    <agm-marker [latitude]="lat2" [longitude]="lng2" [iconUrl]="icon" ><!--Shanghai-->
+        <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+          <ng-template>
+            <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+            <font color="#FFFFFF">Cpu Usage: 66%</font><br/>
+            <font color="#FFFFFF">Cache Uage: 34%</font><br/>
+            <font color="#FFFFFF">Price: 14 Ankr-token/day</font><br/>
+            <img src="/assets/line.svg" class = "Lineinfo"/><br/>
+            <button class = "deploybutton" [routerLink]="'/tasks/new/'">
+              <font size = "2" color="#257AA5" class = "noselect" text-align: center>Deploy this center</font>
+            </button><br/>
+            <details>
+                <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp; <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+                <font color="#FFFFFF">CPU: I7870</font><br/>
+                <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+                <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+                <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+                <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+                <font color="#FFFFFF">Stability: 99.5%</font><br/>
+                <font color="#FFFFFF">Working: 14 days</font><br/>
+              </details>
+    
+          </ng-template>
+        </agm-snazzy-info-window>
+        </agm-marker>
+        <agm-marker [latitude]="lat3" [longitude]="lng3" [iconUrl]="icon" ><!--Singopore-->
+          <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+            <ng-template>
+              <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+              <font color="#FFFFFF">Cpu Usage: 4%</font><br/>
+              <font color="#FFFFFF">Cache Uage: 8%</font><br/>
+              <font color="#FFFFFF">Price: 11 Ankr-token/day</font><br/>
+              <img src="/assets/line.svg" class = "Lineinfo"/><br/>
+              <button class = "deploybutton" [routerLink]="'/tasks/new/'">
+                <font size = "2" color="#257AA5" class = "noselect" text-align: center>Deploy this center</font>
+              </button><br/>
+              <details>
+                  <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp; <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+                  <font color="#FFFFFF">CPU: I7870</font><br/>
+                  <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+                  <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+                  <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+                  <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+                  <font color="#FFFFFF">Stability: 100%</font><br/>
+                  <font color="#FFFFFF">Working: 3 days</font><br/>
+                </details>
+      
+            </ng-template>
+          </agm-snazzy-info-window>
+          </agm-marker>
+          <agm-marker [latitude]="lat5" [longitude]="lng5" [iconUrl]="icon" ><!--New York-->
+            <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
+              <ng-template>
+                <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
+                <font color="#FFFFFF">Cpu Usage: 49%</font><br/>
+                <font color="#FFFFFF">Cache Uage: 37%</font><br/>
+                <font color="#FFFFFF">Price: 14 Ankr-token/day</font><br/>
+                <img src="/assets/line.svg" class = "Lineinfo"/><br/>
+                <button class = "deploybutton" [routerLink]="'/tasks/new/'">
+                  <font size = "2" color="#257AA5" class = "noselect" text-align: center>Deploy this center</font>
+                </button><br/>
+                <details>
+                    <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp; <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+                    <font color="#FFFFFF">CPU: I7870</font><br/>
+                    <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+                    <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
+                    <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
+                    <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
+                    <font color="#FFFFFF">Stability: 99.1%</font><br/>
+                    <font color="#FFFFFF">Working: 34 days</font><br/>
+                  </details>
+        
+              </ng-template>
+            </agm-snazzy-info-window>
+            </agm-marker>
+
+  <agm-marker [latitude]="lat11" [longitude]="lng11" [iconUrl]="icon" ><!--Eugune-->
+    <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
       <ng-template>
         <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
-        <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
-        <font color="#FFFFFF">Cache Uage: 50%</font><br/>
+        <font color="#FFFFFF">Cpu Usage: 62%</font><br/>
+        <font color="#FFFFFF">Cache Uage: 48%</font><br/>
         <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
         <img src="/assets/line.svg" class = "Lineinfo"/><br/>
-        <img src="/assets/point.png" height="10px" width="10px"/><button [routerLink]="'/tasks/new/'">
-          Use this datacenter
+        <button class = "deploybutton" [routerLink]="'/tasks/new/'">
+          <font size = "2" color="#257AA5" class = "noselect" text-align: center>Deploy this center</font>
         </button><br/>
         <details>
-            <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp;  <img src="assets/arrow.svg" height="10px" width="10px" class = "arrow"/></summary>
+            <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp; <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
             <font color="#FFFFFF">CPU: I7870</font><br/>
             <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
             <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
             <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
             <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
-            <font color="#FFFFFF">Stability: 99.983%</font><br/>
-            <font color="#FFFFFF">Working: 8days</font><br/>
+            <font color="#FFFFFF">Stability: 99.7%</font><br/>
+            <font color="#FFFFFF">Working: 21 days</font><br/>
           </details>
 
       </ng-template>
     </agm-snazzy-info-window>
     </agm-marker>
-  <agm-marker [latitude]="lat2" [longitude]="lng2" [iconUrl]="icon" >
+    <agm-marker [latitude]="lat6" [longitude]="lng6" [iconUrl]="icon" ><!--Hongkong-->
       <agm-snazzy-info-window [maxHeight]="500" [closeOnMapClick]="true" [showCloseButton]="false"[closeWhenOthersOpen]="true" >
         <ng-template>
           <img src="/assets/point.png" height="10px" width="10px"/> <font color="#257AA5">Nginx: 1.13: Running</font> <br/>
-          <font color="#FFFFFF">Cpu Usage: 60%</font><br/>
-          <font color="#FFFFFF">Cache Uage: 50%</font><br/>
-          <font color="#FFFFFF">Price: 15 Ankr-token/day</font><br/>
+          <font color="#FFFFFF">Cpu Usage: 26%</font><br/>
+          <font color="#FFFFFF">Cache Uage: 14%</font><br/>
+          <font color="#FFFFFF">Price: 12 Ankr-token/day</font><br/>
           <img src="/assets/line.svg" class = "Lineinfo"/><br/>
-          <img src="/assets/point.png" height="10px" width="10px"/><button [routerLink]="'/tasks/new/'">
-            Use this datacenter
+          <button class = "deploybutton" [routerLink]="'/tasks/new/'">
+            <font size = "2" color="#257AA5" class = "noselect" text-align: center>Deploy this center</font>
           </button><br/>
           <details>
-              <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect">More Info</font>&nbsp;   <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
+              <summary><img src="/assets/point.png" height="10px" width="10px"/><font color="#257AA5" class = "noselect" text-align: center>More Info</font>&nbsp; <img src="assets/arrow.svg"height="10px" width="10px"/></summary>
               <font color="#FFFFFF">CPU: I7870</font><br/>
               <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
               <font color="#FFFFFF">Hard Disk: 20TB SSD</font><br/>
               <font color="#FFFFFF">GPU: RTX 2080TI</font><br/>
               <font color="#FFFFFF">Memory: 32GB DDR3</font><br/>
-              <font color="#FFFFFF">Stability: 99.983%</font><br/>
-              <font color="#FFFFFF">Working: 8days</font><br/>
+              <font color="#FFFFFF">Stability: 99.4%</font><br/>
+              <font color="#FFFFFF">Working: 19 days</font><br/>
             </details>
   
         </ng-template>
@@ -140,3 +165,99 @@
       </agm-marker>
 
 </agm-map>
+
+</div>
+
+<div *ngSwitchCase="2">
+    <div class="price-table-wrapper">
+        <div class="pricing-table">
+          <h2 class="pricing-table__header">- Ankr-US-West-1 -</h2>
+          <h3 class="pricing-table__price">15Token/Day</h3>
+          <button [routerLink]="'/tasks/new/'" class="pricing-table__button">
+            <font size="5">Deploy Now!</font>
+          </button>
+          <ul class="pricing-table__list">
+            <li>CPU: 70%</li>
+            <li>Memory: 40%</li>
+            <li>Network: 30%</li>
+            <li>Pod：10</li>
+            <li>Image：10</li>
+          </ul>
+        </div>
+        <div class="pricing-table featured-table">
+          <h2 class="pricing-table__header">- Ankr-US-West-2 -</h2>
+          <h3 class="pricing-table__price">15Token/Day</h3>
+          <button [routerLink]="'/tasks/new/'" class="pricing-table__button">
+            <font size="5">Deploy Now!</font>
+          </button>
+          <ul class="pricing-table__list">
+            <li>CPU: 62%</li>
+            <li>Memory: 48%</li>
+            <li>Network: 30%</li>
+            <li>Pod：10</li>
+            <li>Image：10</li>
+          </ul>
+        </div>
+        <div class="pricing-table featured-table">
+            <h2 class="pricing-table__header">- Ankr-US-East-1 -</h2>
+            <h3 class="pricing-table__price">14Token/Day</h3>
+            <button [routerLink]="'/tasks/new/'" class="pricing-table__button">
+              <font size="5">Deploy Now!</font>
+            </button>
+            <ul class="pricing-table__list">
+              <li>CPU: 49%</li>
+              <li>Memory: 37%</li>
+              <li>Network: 26%</li>
+              <li>Pod：7</li>
+              <li>Image：7</li>
+            </ul>
+          </div>
+        <div class="pricing-table">
+          <h2 class="pricing-table__header">- Ankr-China-East-1 -</h2>
+          <h3 class="pricing-table__price">14Token/Day</h3>
+          <button [routerLink]="'/tasks/new/'" class="pricing-table__button">
+            <font size="5">Deploy Now!</font>
+          </button>
+          <ul class="pricing-table__list">
+              <li>CPU: 66%</li>
+              <li>Memory: 34%</li>
+              <li>Network: 30%</li>
+              <li>Pod：10</li>
+              <li>Image：10</li>
+          </ul>
+        </div>
+        <div class="pricing-table">
+            <h2 class="pricing-table__header">- Ankr-HongKong-1 -</h2>
+            <h3 class="pricing-table__price">12Token/Day</h3>
+            <button [routerLink]="'/tasks/new/'" class="pricing-table__button">
+              <font size="5">Deploy Now!</font>
+            </button>
+            <ul class="pricing-table__list">
+                <li>CPU: 26%</li>
+                <li>Memory: 14%</li>
+                <li>Network: 10%</li>
+                <li>Pod：2</li>
+                <li>Image：2</li>
+            </ul>
+          </div>
+          <div class="pricing-table">
+              <h2 class="pricing-table__header">- Ankr-Singapore-1 -</h2>
+              <h3 class="pricing-table__price">11Token/Day</h3>
+              <button [routerLink]="'/tasks/new/'" class="pricing-table__button">
+                <font size="5">Deploy Now!</font>
+              </button>
+              <ul class="pricing-table__list">
+                  <li>CPU: 4%</li>
+                  <li>Memory: 8%</li>
+                  <li>Network: 3%</li>
+                  <li>Pod：1</li>
+                  <li>Image：1</li>
+              </ul>
+            </div>
+      </div>
+
+
+</div>
+
+</div>
+</div>

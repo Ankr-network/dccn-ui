@@ -26,10 +26,10 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
   lng3 = 103.92120642089844;
   lat4 = 37.424429784838;
   lng4 = -121.8883486328125;
-  lat5 = 37.73297778721093;
-  lng5 = -122.16712670898437;
-  lat6 = 37.36087499833259;
-  lng6 = -122.08198266601562;
+  lat5 = 40.72518092072731; 
+  lng5 = -73.62588124847412;
+  lat6 = 22.370599179467654; 
+  lng6 = 114.12085337066651;
   lat7 = 37.32375374237436;
   lng7 =  -121.87530236816406;
 
@@ -154,4 +154,11 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
     // .subscribe(data => console.log(data));
     .subscribe(data => this.datacenters = data);
    }
+  public num = 1;
+  changeElement(): void {
+    if (this.num > 1) {
+      this.num = 0;
+    }
+    this.num++;
+  }
 }
