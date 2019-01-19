@@ -9,6 +9,7 @@
 /node_modules
 
 # IDEs and editors
+.DS_Store
 .idea
 .project
 .classpath
