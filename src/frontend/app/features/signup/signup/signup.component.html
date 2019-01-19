@@ -22,12 +22,12 @@
 
 		/*Style close btn*/
 		.signup-close-btn {
-			margin-left: 85%;
+			margin-left: 80%;
 			margin-top: 3rem;
-			font-size: 5rem;
-			width: 7rem;
+			font-size: 4rem;
+			width: 15rem;
 			height: 7rem;
-			border-radius: 50%;
+			border-radius: 4rem;
 			color: #fff;
 			background: rgba(255,255,255, 0.2);
 			border: none;
@@ -35,7 +35,7 @@
 
 		/*Style login body*/
 		.signup-body {
-			width: 40%;
+			width: 60%;
 			margin-top: 2rem;
 			margin-left: auto;
 			margin-right: auto;
@@ -170,7 +170,8 @@
 
 <body>
 <div class="signup">
-	<button class="signup-close-btn"><i class="fas fa-times"></i></button>
+	<div id="web_bg" style="background-image: url('/assets/bg.png');"></div>
+	<button class="signup-close-btn" [routerLink]="'/login'">Login</button>
 	<div class="signup-body">
 		<div class="signup-body-sign">SIGN UP</div>
 		<div class="signup-body-main">

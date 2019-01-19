@@ -17,10 +17,12 @@ import { DomainMismatchComponent } from './features/setup/domain-mismatch/domain
 import { environment } from '../environments/environment';
 import { CustomRoutingImportModule } from './custom-import.module';
 import { GrpcsignupComponent } from './features/signup/signup/signup.component';
+import { ListDcComponent } from './features/list-center/list/list.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'signup', component: GrpcsignupComponent},
+ 
   { path: 'uaa', component: ConsoleUaaWizardComponent },
   { path: 'upgrade', component: UpgradePageComponent },
   { path: 'domainMismatch', component: DomainMismatchComponent },
@@ -56,6 +58,7 @@ const appRoutes: Routes = [
           }
         },
       },
+      
       {
         path: 'tasks',
         data: {
@@ -110,7 +113,8 @@ const appRoutes: Routes = [
           }
         },
       },*/
-      // { path: 'about', loadChildren: 'app/features/about/about.module#AboutModule' },
+      { path: 'listdc', loadChildren: 'app/features/list-center/list.module#ListDcModule'},
+      //{ path: 'about', loadChildren: 'app/features/about/about.module#AboutModule' },
       // { path: 'user-profile', loadChildren: 'app/features/user-profile/user-profile.module#UserProfileModule' },
     ]
   },
