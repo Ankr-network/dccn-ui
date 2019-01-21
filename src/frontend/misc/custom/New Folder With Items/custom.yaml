@@ -1,0 +1,36 @@
+# Customization manifest
+
+files:
+  custom.scss: "sass/custom.scss"
+  favicon.ico: "favicon.ico"
+  login-bg.jpg: "assets/login-bg.jpg"
+  logo.png: "assets/logo.png"
+  ankr_logo.svg: "assets/ankr_logo.svg"
+  eula.html: "assets/eula.html"
+  logo2.png: "assets/logo2.png"
+  create_circle.png: "assets/create.png"
+  delete.png: "assets/delete.png"
+  edit.png: "assets/edit.png"
+  list_circle.png: "assets/list.png"
+  refresh.png: "assets/refresh.png"
+  datacenter.svg: "assets/datacenter.svg"
+  point.png: "assets/point.png"
+  line.svg: "assets/line.svg"
+  arrow.svg: "assets/arrow.svg"
+  bg.png: "assets/bg.png"
+  deploy_button.svg: "assets/deploy_button.svg"
+  /navicons/dashboard.svg: "assets/dashboard.svg"
+  /navicons/dashboard_color.svg: "assets/dashboard_color.svg"
+  /navicons/marketplace.svg: "assets/marketplace.svg"
+  /navicons/marketplace_color.svg: "assets/marketplace_color.svg"
+  /navicons/task.svg: "assets/task.svg"
+  /navicons/task_color.svg: "assets/task_color.svg"
+  /navicons/wallet.svg: "assets/wallet.svg"
+  /navicons/wallet_color.svg: "assets/wallet_color.svg"
+
+
+
+folders:
+  - "app/custom"
+  - "assets/custom"
+  - "sass/custom"
