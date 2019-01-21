@@ -70,16 +70,16 @@ $side-nav-header-spacing: $side-nav-padding-h / 2 + $side-nav-mat-icon-width + $
       margin-right: $side-nav-mat-icon-padding-right;
     }
     .dashboard {
-      background: transparent url("assets/dashboard.svg") no-repeat right top
+      background: transparent url("/assets/dashboard.svg") no-repeat right top
     }
     .marketplace {
-      background: transparent url("assets/marketplace.svg") no-repeat right top
+      background: transparent url("/assets/marketplace.svg") no-repeat right top
     }
     .tasks {
-      background: transparent url("assets/task.svg") no-repeat right top
+      background: transparent url("/assets/task.svg") no-repeat right top
     }
     .payment {
-      background: transparent url("assets/wallet.svg") no-repeat right top
+      background: transparent url("/assets/wallet.svg") no-repeat right top
     }
   }
   &__logo {

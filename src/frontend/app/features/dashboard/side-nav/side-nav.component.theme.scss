@@ -16,16 +16,16 @@
         background-color: mat-color($side-nav-colors, hover);
         color: mat-color($side-nav-colors, hover-text);
         .dashboard {
-          background: transparent url("assets/dashboard_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/dashboard_color.svg") no-repeat right top !important;
         }
         .marketplace {
-          background: transparent url("assets/marketplace_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/marketplace_color.svg") no-repeat right top !important;
         }
         .tasks {
-          background: transparent url("assets/task_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/task_color.svg") no-repeat right top !important;
         }
         .payment {
-          background: transparent url("assets/wallet_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/wallet_color.svg") no-repeat right top !important;
         }
       }
       &--active,
@@ -49,16 +49,16 @@
         }
         color: black;
         .dashboard {
-          background: transparent url("assets/dashboard_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/dashboard_color.svg") no-repeat right top !important;
         }
         .marketplace {
-          background: transparent url("assets/marketplace_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/marketplace_color.svg") no-repeat right top !important;
         }
         .tasks {
-          background: transparent url("assets/task_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/task_color.svg") no-repeat right top !important;
         }
         .payment {
-          background: transparent url("assets/wallet_color.svg") no-repeat right top !important;
+          background: transparent url("/assets/wallet_color.svg") no-repeat right top !important;
         }
       }
     }

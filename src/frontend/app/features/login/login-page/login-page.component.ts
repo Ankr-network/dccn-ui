@@ -45,7 +45,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.ssoLogin = false;
-    this.store.dispatch(new VerifySession());
     const auth$ = this.store.select(s => ({ auth: s.auth, endpoints: s.endpoints }));
     this.busy$ = auth$.pipe(
       map(

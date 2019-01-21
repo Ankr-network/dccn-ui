@@ -1,0 +1,124 @@
+# compiled output
+/dist
+.dist
+/tmp
+/out-tsc
+/out
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+.DS_Store
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+.vscode/settings.json
+!.vscode/tasks.json
+.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+yarn-error.log
+
+# e2e
+src/test-e2e/*.map
+src/test-e2e/e2e.secrets.ts
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Git
+*.orig
+
+# Angular CLI
+proxy.conf.js
+environment.dev.ts
+
+#v1
+*.iml
+docs/src
+lib
+tools/test-backend/config/mock.config.json
+tools/.coverage-karma/
+dev-certs/*
+**/*.so
+tools/ssl
+build/secrets.json
+deploy/data/
+deploy/hsc-upgrade-volume/
+deploy/development.rc
+deploy/ci/secrets.yml
+deploy/kubernetes/values.yaml
+deploy/cloud-foundry/db-migration/goose
+outputs/
+deploy/kubernetes/console/charts/
+deploy/stratos-ui-release/.dev_builds
+deploy/stratos-ui-release/blobs
+deploy/stratos-ui-release/.blobs
+deploy/stratos-ui-release/dev_releases/
+output/fissile
+deploy/ci/travis/temp/
+
+.dist/
+deploy/uaa/tmp/
+src/backend/*/vendor/
+.v8flags*
+
+*.bak
+secrets.yaml
+build/dev_config.json
+e2e-reports/
+.stratos-git-metadata.json
+src/jetstream/jetstream
+src/jetstream/console-database.db
+src/jetstream/config.properties
+
+# Customisations
+
+src/frontend/favicon.ico
+src/frontend/sass/custom.scss
+src/frontend/assets/eula.html
+src/frontend/assets/logo.png
+src/frontend/assets/login-bg.jpg
+
+
+# Prebuild package
+
+stratos-frontend-prebuild.zip
+/src/frontend/assets/ankr_logo.svg
+/src/frontend/assets/arrow.svg
+/src/frontend/assets/bg.png
+/src/frontend/assets/create.png
+/src/frontend/assets/dashboard_color.svg
+/src/frontend/assets/dashboard.svg
+/src/frontend/assets/datacenter.svg
+/src/frontend/assets/delete.png
+/src/frontend/assets/deploy_button.svg
+/src/frontend/assets/edit.png
+/src/frontend/assets/line.svg
+/src/frontend/assets/list.png
+/src/frontend/assets/logo2.png
+/src/frontend/assets/marketplace_color.svg
+/src/frontend/assets/marketplace.svg
+/src/frontend/assets/point.png
+/src/frontend/assets/refresh.png
+/src/frontend/assets/task_color.svg
+/src/frontend/assets/task.svg
+/src/frontend/assets/wallet_color.svg
+/src/frontend/assets/wallet.svg

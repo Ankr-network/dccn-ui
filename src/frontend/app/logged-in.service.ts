@@ -119,7 +119,6 @@ export class LoggedInService {
 
     dialogRef.afterClosed().subscribe((verify = false) => {
       if (verify) {
-        this.store.dispatch(new VerifySession(false, false));
         this.openSessionCheckerPoll();
       }
       this._activityPromptShown = false;
@@ -140,7 +139,6 @@ export class LoggedInService {
       const idleDelta = now - this._lastUserInteraction;
       const userIsActive = idleDelta < this._userIdlePeriod;
       if (userIsActive) {
-        this.store.dispatch(new VerifySession(false, false));
       } else {
         this._promptInactiveUser(safeExpire);
         this.closeSessionCheckerPoll();

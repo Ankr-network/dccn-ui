@@ -16,7 +16,7 @@ import { PageNotFoundComponentComponent } from './core/page-not-found-component/
 import { DomainMismatchComponent } from './features/setup/domain-mismatch/domain-mismatch.component';
 import { environment } from '../environments/environment';
 import { CustomRoutingImportModule } from './custom-import.module';
-import { GrpcsignupComponent } from './features/signup/signup/signup.component';
+import { GrpcsignupComponent } from './features/signup/signup.component';
 import { ListDcComponent } from './features/list-center/list/list.component';
 
 const appRoutes: Routes = [

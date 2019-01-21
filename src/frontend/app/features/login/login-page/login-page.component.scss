@@ -34,7 +34,7 @@
   &-message {
     font-size: 18px;
     height: 20px;
-    padding-top: 20px;
+    padding-top: -20px;
   }
   &__form-outer {
     $cubic: cubic-bezier(.215, .61, .355, 1);

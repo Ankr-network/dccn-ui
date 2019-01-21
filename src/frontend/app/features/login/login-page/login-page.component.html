@@ -181,7 +181,9 @@
 						<label for="password">PASSWORD</label>
 						<input class="input-box" matInput required type="password" [(ngModel)]="password" name="password">
 					</div>
-
+					<div id="login-error-message" class="login-message" [ngClass]="{'login-message--show': !!message, 'login-message-error': this.error}">
+						{{ message }}
+					  </div>
 					<div class="signin-form-toggle">
 						<span>Remember me</span>
 						<input
@@ -192,10 +194,9 @@
 					</div>
 
 					<button class="signin-submit-btn" color="primary" *ngIf="!loggedIn" type="submit" mat-button mat-raised-button [disabled]="!ssoLogin && !loginForm.valid">Login</button>
+					
 				</form>
-				<div id="login-error-message" class="login-message" [ngClass]="{'login-message--show': !!message, 'login-message-error': this.error}">
-						{{ message }}
-					  </div>
+				
 			</div>
 		</div>
 
