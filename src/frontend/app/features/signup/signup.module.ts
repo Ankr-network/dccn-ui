@@ -6,9 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
 import { GrpcsignupComponent } from './signup.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
-
 
 @NgModule({
   imports: [
@@ -20,10 +17,8 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
   ],
   declarations: [
     GrpcsignupComponent,
-    ConfirmationDialogComponent
+
   ],
   bootstrap:    [ GrpcsignupComponent ],
-  providers: [ ConfirmationDialogService ],
-  entryComponents: [ ConfirmationDialogComponent ],
 })
 export class GrpcsignupModule { }
