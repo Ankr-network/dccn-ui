@@ -10,6 +10,7 @@ import { RouterNav } from '../../store/actions/router.actions';
 import { AppState } from '../../store/app-state';
 import { AuthState } from '../../store/reducers/auth.reducer';
 import { RouterRedirect } from '../../store/reducers/routing.reducer';
+import { Router} from '@angular/router'
 
 @Component({
   selector: 'app-signup-page',
@@ -19,14 +20,14 @@ import { RouterRedirect } from '../../store/reducers/routing.reducer';
 export class GrpcsignupComponent implements OnInit, OnDestroy {
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>, private _router: Router
   ) { }
 
-  loginForm: NgForm;
+  signupForm: NgForm;
 
   username: string;
   password: string;
-
+  repassword: string;
   loggedIn: boolean;
   loggingIn: boolean;
   verifying: boolean;
@@ -86,6 +87,14 @@ export class GrpcsignupComponent implements OnInit, OnDestroy {
     
     this.message = '';
     this.store.dispatch(new Signup(this.username, this.password));
+    if (this.error) {
+      alert("Couldn't Sign up, please try again.");
+      this._router.navigate(['/signup']);
+    }
+    else{
+    alert("Sucessfully Registered");
+    this._router.navigate(['/login']);
+    }
   }
 
   private handleSuccess() {
@@ -150,7 +159,7 @@ export class GrpcsignupComponent implements OnInit, OnDestroy {
 
   private setErrorMessage(auth: AuthState) {
     // Default error message
-    this.message = `Couldn't log in, please try again.`;
+    this.message = `Couldn't Sign up, please try again.`;
     if (auth.error && auth.errorResponse) {
       if (auth.errorResponse === 'Invalid session') {
         // Invalid session (redirected after attempting to access a protected page). Don't show any error
@@ -181,5 +190,4 @@ export class GrpcsignupComponent implements OnInit, OnDestroy {
       observer.complete();
     });
   }
-  public getTrainingName(){ confirm('solved!!'); }
 }

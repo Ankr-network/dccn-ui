@@ -170,7 +170,6 @@
 <body>
 <div class="signup">
 	<div id="web_bg" style="background-image: url('/assets/bg.png');"></div>
-	<button class="signup-close-btn" >Login</button>
 	<div class="signup-body">
 		<div class="signup-body-sign">SIGN UP</div>
 		<div class="signup-body-main">
@@ -202,11 +201,11 @@
 
 					<div>
 						<label for="redo-password">REDO-PASSWORD</label>
-						<input type="text" class="redo-input-box" matInput required type="password" id="redo-password" />
+						<input type="text" class="redo-input-box" matInput required type="password" [(ngModel)]="password" id="redo-password" />
 					</div>
 				</div>
 
-				<button onclick ="myFunction()" class="signup-submit-btn">Submit</button>
+				<button class="signup-submit-btn">Submit</button>
 
 				<div class="signup-bot-divider"></div>
 

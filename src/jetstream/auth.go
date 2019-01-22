@@ -260,6 +260,8 @@ func (p *portalProxy) signupToUAA(c echo.Context) error {
 	}
 
 	fmt.Printf("received Status : %s reason %s \n", r.Status, r.Reason)
+	if (r.Status == "Faiure") {
+		return fmt.Errorf("%s", r.Reason)}
 	return nil
 
 }
