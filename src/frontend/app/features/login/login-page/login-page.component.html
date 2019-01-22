@@ -36,10 +36,10 @@
 		.signin-close-btn {
 			margin-left: 80%;
 			margin-top: 3rem;
-			font-size: 4rem;
-			width: 20rem;
-			height: 7rem;
-			border-radius: 5rem;
+			font-size: 2rem;
+			width: 10rem;
+			height: 4rem;
+			border-radius: 3rem;
 			color: #fff;
 			background: rgba(255,255,255, 0.2);
 			border: none;
@@ -57,8 +57,8 @@
 
 		.signin-body-sign {
 			font-family: "Roboto", sans-serif;
-			font-size: 4rem;
-			font-weight: 500;
+			font-size: 2rem;
+			font-weight: 200;
 			text-transform: none;
 			line-height: 1.4;
 			letter-spacing: 0.1em;
@@ -75,8 +75,8 @@
 
 		.signin-body h1 {
 			font-family: "Roboto", sans-serif;
-			font-size: 4rem;
-			font-weight: 500;
+			font-size: 2rem;
+			font-weight: 200;
 			text-transform: none;
 			line-height: 1.4;
 			letter-spacing: 0.1rem;
@@ -93,7 +93,7 @@
 		}
 
 		.signin-form {
-			margin-top: 8rem;
+			margin-top: 3rem;
 			margin-left: auto;
 			margin-right: auto;
 		}
@@ -126,7 +126,7 @@
 			background: #fff;
 			color: #7587C6;
 			font-size: 2rem;
-			margin-bottom: 5rem;
+			margin-bottom: 3rem;
 		}
 
 		/*Style on/off toggle btn*/
@@ -166,7 +166,7 @@
 <body>
 	<div class="signin">
 		<div id="web_bg" style="background-image: url('/assets/bg.png');"></div>
-		<button class="signin-close-btn" [routerLink]="'/signup'">Signup</button>
+		
 		<div class="signin-body">
 			<div class="signin-body-sign">LOGIN</div>
 			<div class="signin-body-main">
@@ -194,7 +194,7 @@
 					</div>
 
 					<button class="signin-submit-btn" color="primary" *ngIf="!loggedIn" type="submit" mat-button mat-raised-button [disabled]="!ssoLogin && !loginForm.valid">Login</button>
-					
+					<button class="signin-submit-btn" color="primary" [routerLink]="'/signup'">Signup</button>
 				</form>
 				
 			</div>
