@@ -44,6 +44,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   ngOnInit() {
+    this.loadScript('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js');
+    this.loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
+    this.loadScript('https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js');
+    
+
     this.ssoLogin = false;
     const auth$ = this.store.select(s => ({ auth: s.auth, endpoints: s.endpoints }));
     this.busy$ = auth$.pipe(
@@ -169,6 +174,15 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         this.message = `Couldn't check credentials, please try again. If the problem persists please contact an administrator`;
       }
     }
+  }
+  public loadScript(url: string) {
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
   }
 
   private ssoNoSplashPage() {

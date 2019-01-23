@@ -44,7 +44,7 @@
                     <td class="cell100 column1">{{job.taskname}}</td>
                     <td class="cell100 column3">{{job.status}}</td>
                     <td class="cell100 column4">&nbsp;{{job.taskid}}</td>
-                    <td class="cell100 column5"><button  [routerLink]="'/endpoints/update/'" class="one">edit</button> &nbsp; <button  type="button" class="one" (click)="sendCancelRequest(job.taskid)">cancel</button> &nbsp; <button  type="button" class="one" (click)="sendPostRequest(job.taskid)">delete</button></td>
+                    <td class="cell100 column5"><button  [routerLink]="'/tasks/update/'" class="one">edit</button> &nbsp; <button  type="button" class="one" (click)="sendCancelRequest(job.taskid)">cancel</button> &nbsp; <button  type="button" class="one" (click)="sendPostRequest(job.taskid)">delete</button></td>
 								  </tr>
 								   
 							</tbody>

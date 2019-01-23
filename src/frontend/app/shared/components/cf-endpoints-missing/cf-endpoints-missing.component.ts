@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { combineLatest as observableCombineLatest, Observable } from 'rxjs';
 import { delay, map, startWith, tap } from 'rxjs/operators';
@@ -13,7 +13,10 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './cf-endpoints-missing.component.html',
   styleUrls: ['./cf-endpoints-missing.component.scss']
 })
-export class CfEndpointsMissingComponent implements AfterViewInit {
+export class CfEndpointsMissingComponent implements AfterViewInit, OnInit {
+
+  
+
   title = 'Working Datacenter';
   datacenters;
   lat = 37.587841986062806;
@@ -131,6 +134,12 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
     private httpClient: HttpClient
   ) { }
 
+  ngOnInit() {
+    this.loadScript('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js');
+    this.loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
+    this.loadScript('https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js');
+  }
+
   ngAfterViewInit() {
     this.noContent$ = observableCombineLatest(
       this.cloudFoundryService.hasRegisteredCFEndpoints$,
@@ -160,5 +169,14 @@ export class CfEndpointsMissingComponent implements AfterViewInit {
       this.num = 0;
     }
     this.num++;
+  }
+  public loadScript(url: string) {
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
   }
 }

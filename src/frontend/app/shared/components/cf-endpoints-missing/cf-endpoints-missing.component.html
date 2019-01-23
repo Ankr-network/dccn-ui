@@ -5,10 +5,16 @@
 
 
   <div>
-  <button (click)="changeElement()" class = "switchbutton">
-      <font color="#FFFFFF" size = "3">Switch</font>
-  </button>
-  <div [ngSwitch]="num">
+      <mat-button-toggle-group #group="matButtonToggleGroup" value="1" class="buttontoggle">
+          <mat-button-toggle value="1" class="buttontoggle1">
+            Map
+          </mat-button-toggle>
+          <mat-button-toggle value="2" class="buttontoggle2">
+            List
+          </mat-button-toggle>
+          
+        </mat-button-toggle-group>
+  <div [ngSwitch]="group.value">
         <div *ngSwitchCase="1">
 <agm-map [latitude]="lat" [longitude]="lng" [styles]="styles" class="map" [zoom] = "2">
   <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" ><!--  SF-->

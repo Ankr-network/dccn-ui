@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {liquidFillGaugeDefaultSettings, loadLiquidFillGauge} from './ankr-chart';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home-page',
@@ -7,11 +8,14 @@ import {liquidFillGaugeDefaultSettings, loadLiquidFillGauge} from './ankr-chart'
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
-
+  dclists;
   ngOnInit() {
     this.renderChartIfExist();
+    this.httpClient.get('/pp/v1/datacenters')
+    // .subscribe(data => console.log(data));
+    .subscribe(data => this.dclists = data);
   }
 
   renderChartIfExist() {

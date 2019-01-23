@@ -23,24 +23,27 @@
 
 		/*Style login body*/
 		.signup-body {
+			position: fixed;
+			 top: 50%;
+			 left: 50%;
+			 transform: translate(-50%, -50%);
 			width: 40%;
-			margin-top: 2rem;
 			margin-left: auto;
 			margin-right: auto;
 			background: rgba(255,255,255, 0.2);
-			border-radius: 4rem;
+			border-radius: 3rem;
 		}
 
 		.signup-body-sign {
 			font-family: "Roboto", sans-serif;
-			font-size: 2.2rem;
+			font-size: 20px;
 			font-weight: 200;
 			text-transform: none;
 			line-height: 1.4;
 			letter-spacing: 0.1em;
 			color: #fff;
 			text-align: center;
-			padding-top: 20px;
+			padding-top: 50px;
 		}
 
 		.signup-body-main {
@@ -51,12 +54,12 @@
 
 		.signup-body h1 {
 			font-family: "Roboto", sans-serif;
-			font-size: 2.3rem;
+			font-size: 1.3rem;
 			font-weight: 200;
 			text-transform: none;
 			line-height: 1.4;
 			letter-spacing: 0.1rem;
-			color: #D3D3D3;
+			color: #C2EBF9;
 			text-align: left;
 			margin-top: 2rem;
 		}
@@ -101,7 +104,9 @@
 			border: none;
 			background: #fff;
 			color: #7587C6;
-			font-size: 2rem;
+			font-size: 1.4rem;
+			font-family: "Roboto", sans-serif;
+			margin-bottom: 10px;
 		}
 
 		.redo-container {
@@ -130,12 +135,13 @@
 		}
 
 		.signup-login-link {
+			margin-bottom: 20px;
 			padding-bottom: 1rem;
 			display: flex;
 			flex-direction: row;
 			font-family: "Roboto", sans-serif;
 			font-size: 0.75rem;
-			font-weight: 700;
+			font-weight: 200;
 			text-transform: none;
 			line-height: 1.4;
 			letter-spacing: 0.1rem;
@@ -163,7 +169,6 @@
 		<div class="signup-body-sign">SIGN UP</div>
 		<div class="signup-body-main">
 			<h1>A resource efficient framework for you.</h1>
-			<div class="signup-body-divider"></div>
 			<form class="signup-form" name="loginForm" (ngSubmit)="signup()" #loginForm="ngForm">
 				<div class="redo-container">
 					<div>
@@ -194,9 +199,8 @@
 					</div>
 				</div>
 
-				<button class="signup-submit-btn">Signup</button>
+				<button class="signup-submit-btn">Sign up</button>
 
-				<div class="signup-bot-divider"></div>
 
 				<div class="signup-login-link">
 					<span>Already signed in?</span>
