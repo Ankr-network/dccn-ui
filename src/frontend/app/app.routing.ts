@@ -39,7 +39,7 @@ const appRoutes: Routes = [
             text: 'Dashboard',
             matIcon: 'assessment',
             // Experimental - only show in development
-            hidden: observableOf(environment.production),
+            //hidden: observableOf(environment.production),
             position: 10,
             // imglocation: 'assets/dashboard.svg'
             type: 'dashboard'
