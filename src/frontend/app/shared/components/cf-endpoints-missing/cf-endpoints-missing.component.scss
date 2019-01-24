@@ -185,3 +185,10 @@ margin-top: 30px;
 .buttontoggle2{
   border-radius: 5px;
 }
+
+.gmnoprint a, .gmnoprint span {
+  display:none;
+}
+.gmnoprint div {
+  background:none !important;
+}
