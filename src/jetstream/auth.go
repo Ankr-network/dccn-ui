@@ -941,7 +941,8 @@ func (p *portalProxy) verifySession(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusForbidden, msg)
 	}
 	fmt.Println("GetUAATokenRecord..")
-	tr, err := p.GetUAATokenRecord(sessionUser)
+	//tr, err := p.GetUAATokenRecord(sessionUser)
+	_, err = p.GetUAATokenRecord(sessionUser)
 	if err != nil {
 		msg := fmt.Sprintf("Unable to find UAA Token: %s", err)
 		log.Error(msg, err)
@@ -952,7 +953,7 @@ func (p *portalProxy) verifySession(c echo.Context) error {
 	if time.Now().After(time.Unix(sessionExpireTime, 0)) {
 		fmt.Println("toker expired...")
 		// UAA Token has expired, refresh the token, if that fails, fail the request
-		uaaRes, tokenErr := p.getUAATokenWithRefreshToken(p.Config.ConsoleConfig.SkipSSLValidation, tr.RefreshToken, p.Config.ConsoleConfig.ConsoleClient, p.Config.ConsoleConfig.ConsoleClientSecret, p.getUAAIdentityEndpoint(), "")
+		/*uaaRes, tokenErr := p.getUAATokenWithRefreshToken(p.Config.ConsoleConfig.SkipSSLValidation, tr.RefreshToken, p.Config.ConsoleConfig.ConsoleClient, p.Config.ConsoleConfig.ConsoleClientSecret, p.getUAAIdentityEndpoint(), "")
 		if tokenErr != nil {
 			msg := "Could not refresh UAA token"
 			log.Error(msg, tokenErr)
@@ -974,6 +975,7 @@ func (p *portalProxy) verifySession(c echo.Context) error {
 		if err = p.setSessionValues(c, sessionValues); err != nil {
 			return err
 		}
+		*/
 	} else {
 		// Still need to extend the expires_on of the Session
 		if err = p.setSessionValues(c, nil); err != nil {

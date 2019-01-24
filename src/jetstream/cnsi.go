@@ -24,6 +24,7 @@ import (
 	"context"
 
 	pb "github.com/Ankr-network/dccn-common/protocol/cli"
+	ankr_const "github.com/Ankr-network/dccn-common"
 	"google.golang.org/grpc"
 
 	"time"
@@ -219,8 +220,8 @@ func (p *portalProxy) getDatacenters(c echo.Context) error {
 	return nil
 }
 
-func (p *portalProxy) buildDatacenters(c echo.Context) []*pb.DataCenterInfo {
-	url := "client-stage.dccn.ankr.network"
+func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
+	url := "client-dev.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -232,13 +233,19 @@ func (p *portalProxy) buildDatacenters(c echo.Context) []*pb.DataCenterInfo {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	r, err := dc2.DataCenterList(ctx, &pb.DataCenterListRequest{Usertoken: "ed1605e17374bde6c68864d072c9f5c9"})
+	log.Info("xiaowu")
 	if err != nil {
 		log.Fatalf("Client: could not send: %v", err)
 	}
-	Taskinfos := r.DcList
-	log.Info(Taskinfos)
-	log.Info("Sucessfully obtained list of tasks")
-	return Taskinfos
+	Taskinfos := r.DcList[0]
+	var m ankr_const.Metrics
+	if Taskinfos == nil {
+		log.Fatalf("Client: could not receive the Datacenter information.")
+	}
+	log.Info(Taskinfos.Metrics)
+	json.Unmarshal([]byte(Taskinfos.Metrics), &m)
+	log.Info(m)
+	return m
 }
 
 func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {

@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
     configCPU.waveOffset = 0.25;
     configCPU.textSize = 0.75;
     configCPU.waveCount = 3;
-    loadLiquidFillGauge('dashboard_cpu', 32.14, configCPU);
+    loadLiquidFillGauge('dashboard_cpu', (this.dclists.UsedCPU*100/this.dclists.TotalCPU).toPrecision(2), configCPU);
 
     // Memory
     const configMem = liquidFillGaugeDefaultSettings();
@@ -59,7 +59,7 @@ export class HomePageComponent implements OnInit {
     configMem.waveOffset = 0.25;
     configMem.textSize = 0.75;
     configMem.waveCount = 3;
-    loadLiquidFillGauge('dashboard_mem', 60.44, configMem);
+    loadLiquidFillGauge('dashboard_mem', (this.dclists.UsedMemory*100/this.dclists.TotalMemory).toPrecision(2), configMem);
 
     // disk
     const configDisk = liquidFillGaugeDefaultSettings();
@@ -75,7 +75,8 @@ export class HomePageComponent implements OnInit {
     configDisk.waveOffset = 0.25;
     configDisk.textSize = 0.75;
     configDisk.waveCount = 3;
-    loadLiquidFillGauge('dashboard_storage', 18.65, configDisk);
+    loadLiquidFillGauge('dashboard_storage', (this.dclists.UsedStorage*100/this.dclists.TotalStorage).toPrecision(2)
+    , configDisk);
 
     // Network
     const configNet = liquidFillGaugeDefaultSettings();
@@ -91,7 +92,7 @@ export class HomePageComponent implements OnInit {
     configNet.waveOffset = 0.25;
     configNet.textSize = 0.75;
     configNet.waveCount = 3;
-    loadLiquidFillGauge('dashboard_network', 28.56, configNet);
+    loadLiquidFillGauge('dashboard_network', this.dclists.NetworkIO, configNet);
 
     // Pod
     const configPod = liquidFillGaugeDefaultSettings();
@@ -112,7 +113,7 @@ export class HomePageComponent implements OnInit {
     configPod.waveColor = 'transparent';
     configPod.waveTextColor = '#045681';
     // configPod.maxValue = 999999;
-    loadLiquidFillGauge('dashboard_pod', 120, configPod);
+    loadLiquidFillGauge('dashboard_pod', this.dclists.EndPointCount, configPod);
 
     // Image
     const configImg = liquidFillGaugeDefaultSettings();
@@ -133,6 +134,6 @@ export class HomePageComponent implements OnInit {
     configImg.waveColor = 'transparent';
     configImg.waveTextColor = '#045681';
     // configImg.maxValue = 999999;
-    loadLiquidFillGauge('dashboard_image', 213, configImg);
+    loadLiquidFillGauge('dashboard_image', this.dclists.ImageCount, configImg);
   }
 }

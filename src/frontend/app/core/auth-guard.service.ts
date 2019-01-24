@@ -37,7 +37,8 @@ export class AuthGuardService implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.store.select('auth').pipe(
       map((state: AuthState) => {
-        if (!state.sessionData || !state.sessionData.valid) {
+        if (!state.sessionData || !state.sessionData.valid) 
+        {
           this.store.dispatch(new RouterNav({
             path: ['/login']
           }, {

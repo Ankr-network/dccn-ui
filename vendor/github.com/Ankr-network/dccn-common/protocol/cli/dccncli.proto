@@ -80,7 +80,9 @@ message DataCenterInfo {
   string name = 2; // datacenter name
   string lat = 3; // latitude of data center
   string lng = 4; // longitude of data center
-  string status =5; // data center status
+  string status = 5; // data center status
+  string metrics = 6; //json string for Metrics struct which defined in constants
+  string extra = 7;
 }
 
 message DataCenterListResponse {
