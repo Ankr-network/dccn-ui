@@ -221,7 +221,7 @@ func (p *portalProxy) getDatacenters(c echo.Context) error {
 }
 
 func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
-	url := "client-dev.dccn.ankr.network"
+	url := "client.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -233,7 +233,6 @@ func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	r, err := dc2.DataCenterList(ctx, &pb.DataCenterListRequest{Usertoken: "ed1605e17374bde6c68864d072c9f5c9"})
-	log.Info("xiaowu")
 	if err != nil {
 		log.Fatalf("Client: could not send: %v", err)
 	}
@@ -249,7 +248,7 @@ func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
 }
 
 func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {
-	url := "client-stage.dccn.ankr.network"
+	url := "client.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -298,7 +297,7 @@ func (p *portalProxy) createJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client-stage.dccn.ankr.network"
+	url := "client.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -363,7 +362,7 @@ func (p *portalProxy) cancelJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client-stage.dccn.ankr.network"
+	url := "client.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -411,7 +410,7 @@ func (p *portalProxy) deleteJob(c echo.Context) error {
 	log.Info(body)
 	log.Info("xiaowu")
 
-	url := "client-stage.dccn.ankr.network"
+	url := "client.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -457,7 +456,7 @@ func (p *portalProxy) updateJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client-stage.dccn.ankr.network"
+	url := "client.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {

@@ -69,7 +69,7 @@ const XSRFTokenCookie = "XSRF-TOKEN"
 const XSRFTokenSessionName = "xsrf_token"
 
 const (
-	address = "client-dev.dccn.ankr.network:50051"
+	address = "client.dccn.ankr.network:50051"
 	//address = "127.0.0.1:50051"
 )
 
@@ -813,7 +813,7 @@ func (p *portalProxy) getUAAToken(body url.Values, skipSSLValidation bool, clien
 
 	var response UAAResponse
 
-	conn, err := grpc.Dial("client-dev.dccn.ankr.network:50051", grpc.WithInsecure())
+	conn, err := grpc.Dial("client.dccn.ankr.network:50051", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
