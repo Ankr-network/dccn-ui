@@ -2,15 +2,16 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:4efd0ce51334b25d4c88352c07f43eb8051c46f3ffbe4001d483ca4a11edf6a2"
+  digest = "1:6eed10b6189869c0475e43c45730342981cf51bc2de8e5b4576477c031710bd4"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     ".",
     "protocol/cli",
   ]
   pruneopts = "UT"
-  revision = "9e5f86f5a2e8a7e789b41d87c39c787f592753b5"
+  revision = "a27c203c3840cf0da9fb68b0d3cc76c8ae9133fd"
 
+  
 [[projects]]
   digest = "1:7cb4fdca4c251b3ef8027c90ea35f70c7b661a593b9eeae34753c65499098bb1"
   name = "github.com/cpuguy83/go-md2man"
