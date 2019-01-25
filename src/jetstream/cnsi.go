@@ -17,9 +17,19 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 
+	
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/cnsis"
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/interfaces"
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/tokens"
+
+	grpc "github.com/micro/go-grpc"
+	"github.com/micro/go-micro/metadata"
+
+	//for new version of the dccn-hub
+	ankr_default "github.com/Ankr-network/dccn-common/protos"
+	common_proto "github.com/Ankr-network/dccn-common/protos/common"
+	taskmgr "github.com/Ankr-network/dccn-common/protos/taskmgr/v1/micro"
+	testCommon "github.com/Ankr-network/dccn-hub/app_dccn_taskmgr/examples/common"
 
 	"context"
 
@@ -248,7 +258,7 @@ func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
 }
 
 func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {
-	url := "client.dccn.ankr.network"
+	/*url := "client.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -266,7 +276,37 @@ func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {
 	Taskinfos := r.Tasksinfo
 	log.Info(Taskinfos)
 	log.Info("Sucessfully obtained list of tasks")
-	return Taskinfos
+	return Taskinfos*/
+
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	log.Println("client service start...")
+	srv := grpc.NewService()
+
+	srv.Init()
+
+	cl := taskmgr.NewTaskMgrService(ankr_default.TaskMgrRegistryServerName, srv.Client())
+
+	tokenContext := metadata.NewContext(context.Background(), map[string]string{
+		"Token": token,
+	})
+
+	for i := range tasks {
+		if rsp, _ := cl.CreateTask(tokenContext, &taskmgr.CreateTaskRequest{UserId: tasks[i].UserId, Task: &tasks[i]}); testCommon.IsSuccess("CreateTask", rsp.Error) {
+			log.Println("CreateTask Ok")
+		}
+	}
+
+	userTasks := []*common_proto.Task{}
+	if rsp, _ := cl.TaskList(tokenContext, &taskmgr.ID{UserId: 1}); testCommon.IsSuccess("TaskList", rsp.Error) {
+		userTasks = append(userTasks, rsp.Tasks...)
+		log.Println("TaskList Ok")
+	}
+
+	if len(userTasks) == 0 {
+		log.Fatalf("no tasks belongs to %d\n", 1)
+	}
+
+
 }
 
 func (p *portalProxy) getJobs(c echo.Context) error {

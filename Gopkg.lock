@@ -2,15 +2,16 @@
 
 [[projects]]
   branch = "develop"
-  digest = "1:6eed10b6189869c0475e43c45730342981cf51bc2de8e5b4576477c031710bd4"
+  digest = "1:b79dc05fba0c804333d5e6761bbcf9a37c9e3c75afbf738cac5ad1567fb843c7"
   name = "github.com/Ankr-network/dccn-common"
   packages = [
     ".",
     "protocol/cli",
+    "protos/common",
+    "protos/taskmgr/v1/grpc",
   ]
   pruneopts = "UT"
-  revision = "a27c203c3840cf0da9fb68b0d3cc76c8ae9133fd"
-
+  revision = "ca04f68bc1d5e64d99aa2dff28fb289790182bb0"
   
 [[projects]]
   digest = "1:7cb4fdca4c251b3ef8027c90ea35f70c7b661a593b9eeae34753c65499098bb1"
