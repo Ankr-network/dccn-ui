@@ -11,7 +11,7 @@ import (
 
 	"github.com/labstack/echo"
 	log "github.com/sirupsen/logrus"
-	"github.com/micro/go-micro/metadata"
+	metadata "google.golang.org/grpc/metadata"
 	"io/ioutil"
 
 	"crypto/sha1"
@@ -264,14 +264,22 @@ func (p *portalProxy) buildJobs(c echo.Context) []*common_proto.Task {
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-
-	defer conn.Close()
+	defer func(conn *grpc.ClientConn) {
+		if err := conn.Close(); err != nil {
+			log.Println(err.Error())
+		}
+	}(conn)
 	dc2 := taskmgr.NewTaskMgrClient(conn)
-	ctx:=  metadata.NewContext(context.Background(), map[string]string{
-		"Token": token,})
+	md := metadata.New(map[string]string{
+		"token": "test token here",
+	})
+	ctx := metadata.NewOutgoingContext(context.Background(), md)
+
+	tokenContext, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
 	var userTasks []*common_proto.Task
 	//var userTasks []*common_proto.Task
-	r, err := dc2.TaskList(ctx, &taskmgr.ID{UserId: 1})
+	r, err := dc2.TaskList(tokenContext, &taskmgr.ID{UserId: "1"})
 	if err != nil {
 		log.Fatalf("Client: could not send: %v", err)
 	}
@@ -311,7 +319,7 @@ func (p *portalProxy) createJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client-dev.dccn.ankr.network"
+	url := "dc-dev.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -320,16 +328,19 @@ func (p *portalProxy) createJob(c echo.Context) error {
 
 	defer conn.Close()
 	dc := taskmgr.NewTaskMgrClient(conn)
-	ctx:=  metadata.NewContext(context.Background(), map[string]string{
-		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTQ2OGM3M2NjM2Q1ZmRhMjkzNDgwOTFlYjYzYzg4ZmYiLCJ1c2VyX25hbWUiOiJhZG1pbkBhbmtyLmNvbSIsImV4cCI6MTU0ODg4MDgxNywic2NvcGUiOlsic3RyYXRvcy5hZG1pbiJdfQ.uj0ffCi8A6L4E2WnonCyJn4cvyj85XiwET80GxVDtJM",})
-	//defer cancel()
+	md := metadata.New(map[string]string{
+		"token": token,
+	})
+
+	ctx := metadata.NewOutgoingContext(context.Background(), md)
+
 	Datacenterids := body["datacenter"].(string)
 	Datacenteridint64, err := strconv.ParseInt(Datacenterids, 10, 64)
 	if err != nil {
 		log.Info("Coversion Error")
 	}
 	task := common_proto.Task{
-		UserId:       1,
+		UserId:       "1",
 		Name:         "task01",
 		Type:         "web",
 		Image:        body["taskname"].(string),
@@ -346,7 +357,7 @@ func (p *portalProxy) createJob(c echo.Context) error {
 		task.Replica = int32(replicaCount)
 	}
 	tcrq := taskmgr.CreateTaskRequest{
-		UserId: 1,
+		UserId: "1",
 		Task: &task,
 	}
 	tcrp, err := dc.CreateTask(ctx, &tcrq)
@@ -405,7 +416,7 @@ func (p *portalProxy) cancelJob(c echo.Context) error {
 	}
 		log.Info("Afterid")
 	task := taskmgr.Request{
-			UserId: 1,
+			UserId: "1",
 			TaskId: "11",
 		}
 	
