@@ -23,7 +23,7 @@ import (
 
 	"context"
 
-	pb "github.com/Ankr-network/dccn-common/protocol/cli"
+	pb "github.com/Ankr-network/dccn-common/protos"
 	"google.golang.org/grpc"
 
 	"time"

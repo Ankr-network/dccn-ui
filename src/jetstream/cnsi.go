@@ -11,7 +11,7 @@ import (
 
 	"github.com/labstack/echo"
 	log "github.com/sirupsen/logrus"
-
+	"github.com/micro/go-micro/metadata"
 	"io/ioutil"
 
 	"crypto/sha1"
@@ -22,14 +22,13 @@ import (
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/interfaces"
 	"github.com/cloudfoundry-incubator/stratos/src/jetstream/repository/tokens"
 
-	grpc "github.com/micro/go-grpc"
-	"github.com/micro/go-micro/metadata"
+	//grpc1 "github.com/micro/go-grpc"
+	//"github.com/micro/go-micro/metadata"
 
 	//for new version of the dccn-hub
-	ankr_default "github.com/Ankr-network/dccn-common/protos"
+	//ankr_default "github.com/Ankr-network/dccn-common/protos"
 	common_proto "github.com/Ankr-network/dccn-common/protos/common"
-	taskmgr "github.com/Ankr-network/dccn-common/protos/taskmgr/v1/micro"
-	testCommon "github.com/Ankr-network/dccn-hub/app_dccn_taskmgr/examples/common"
+	taskmgr "github.com/Ankr-network/dccn-common/protos/taskmgr/v1/grpc"
 
 	"context"
 
@@ -41,6 +40,7 @@ import (
 )
 
 const dbReferenceError = "Unable to establish a database reference: '%v'"
+var token = "token"
 
 func isSSLRelatedError(err error) (bool, string) {
 	if urlErr, ok := err.(*url.Error); ok {
@@ -231,7 +231,7 @@ func (p *portalProxy) getDatacenters(c echo.Context) error {
 }
 
 func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
-	url := "client.dccn.ankr.network"
+	url := "client-dev.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -257,8 +257,8 @@ func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
 	return m
 }
 
-func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {
-	/*url := "client.dccn.ankr.network"
+func (p *portalProxy) buildJobs(c echo.Context) []*common_proto.Task {
+	url := "client-dev.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -266,46 +266,20 @@ func (p *portalProxy) buildJobs(c echo.Context) []*pb.TaskInfo {
 	}
 
 	defer conn.Close()
-	dc2 := pb.NewDccncliClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
-	r, err := dc2.TaskList(ctx, &pb.TaskListRequest{Usertoken: "ed1605e17374bde6c68864d072c9f5c9"})
+	dc2 := taskmgr.NewTaskMgrClient(conn)
+	ctx:=  metadata.NewContext(context.Background(), map[string]string{
+		"Token": token,})
+	var userTasks []*common_proto.Task
+	//var userTasks []*common_proto.Task
+	r, err := dc2.TaskList(ctx, &taskmgr.ID{UserId: 1})
 	if err != nil {
 		log.Fatalf("Client: could not send: %v", err)
 	}
-	Taskinfos := r.Tasksinfo
-	log.Info(Taskinfos)
+	
+	userTasks = append(userTasks, r.Tasks...)
+	log.Info(userTasks)
 	log.Info("Sucessfully obtained list of tasks")
-	return Taskinfos*/
-
-	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Println("client service start...")
-	srv := grpc.NewService()
-
-	srv.Init()
-
-	cl := taskmgr.NewTaskMgrService(ankr_default.TaskMgrRegistryServerName, srv.Client())
-
-	tokenContext := metadata.NewContext(context.Background(), map[string]string{
-		"Token": token,
-	})
-
-	for i := range tasks {
-		if rsp, _ := cl.CreateTask(tokenContext, &taskmgr.CreateTaskRequest{UserId: tasks[i].UserId, Task: &tasks[i]}); testCommon.IsSuccess("CreateTask", rsp.Error) {
-			log.Println("CreateTask Ok")
-		}
-	}
-
-	userTasks := []*common_proto.Task{}
-	if rsp, _ := cl.TaskList(tokenContext, &taskmgr.ID{UserId: 1}); testCommon.IsSuccess("TaskList", rsp.Error) {
-		userTasks = append(userTasks, rsp.Tasks...)
-		log.Println("TaskList Ok")
-	}
-
-	if len(userTasks) == 0 {
-		log.Fatalf("no tasks belongs to %d\n", 1)
-	}
-
+	return userTasks
 
 }
 
@@ -337,7 +311,7 @@ func (p *portalProxy) createJob(c echo.Context) error {
 
 	log.Info(body)
 
-	url := "client.dccn.ankr.network"
+	url := "client-dev.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {
@@ -345,37 +319,44 @@ func (p *portalProxy) createJob(c echo.Context) error {
 	}
 
 	defer conn.Close()
-	dc := pb.NewDccncliClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
+	dc := taskmgr.NewTaskMgrClient(conn)
+	ctx:=  metadata.NewContext(context.Background(), map[string]string{
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTQ2OGM3M2NjM2Q1ZmRhMjkzNDgwOTFlYjYzYzg4ZmYiLCJ1c2VyX25hbWUiOiJhZG1pbkBhbmtyLmNvbSIsImV4cCI6MTU0ODg4MDgxNywic2NvcGUiOlsic3RyYXRvcy5hZG1pbiJdfQ.uj0ffCi8A6L4E2WnonCyJn4cvyj85XiwET80GxVDtJM",})
+	//defer cancel()
 	Datacenterids := body["datacenter"].(string)
 	Datacenteridint64, err := strconv.ParseInt(Datacenterids, 10, 64)
 	if err != nil {
 		log.Info("Coversion Error")
 	}
-	tcrq := &pb.AddTaskRequest{
-		Name:       body["taskname"].(string),
-		Type:       "web",
-		Datacenterid: Datacenteridint64,
-		Usertoken:  "ed1605e17374bde6c68864d072c9f5c9",
+	task := common_proto.Task{
+		UserId:       1,
+		Name:         "task01",
+		Type:         "web",
+		Image:        body["taskname"].(string),
+		DataCenter:   "dc01",
+		DataCenterId: Datacenteridint64,
 	}
+
 	log.Info("xiaowu")
 	if body["replica"].(string) != "" {
 		replicaCount, err := strconv.Atoi(body["replica"].(string))
 		if err != nil {
 			return fmt.Errorf("replica count %s is not an int", body["replica"].(string))
 		}
-		tcrq.Replica = int64(replicaCount)
+		task.Replica = int32(replicaCount)
 	}
-
-	tcrp, err := dc.AddTask(ctx, tcrq)
+	tcrq := taskmgr.CreateTaskRequest{
+		UserId: 1,
+		Task: &task,
+	}
+	tcrp, err := dc.CreateTask(ctx, &tcrq)
 	if err != nil {
 		return err
 	}
-	if tcrp.Status == "Success" {
-		log.Info("Task id %d created successfully. \n", tcrp.Taskid)
+	if tcrp.Error == nil {
+		log.Info("Task id %d created successfully. \n", tcrp.TaskId)
 	} else {
-		log.Info("Fail to create task. \n", tcrp.Reason)
+		log.Info("Fail to create task. \n", tcrp.Error)
 	}
 
 	// jsonString, err := json.Marshal(jobList)
@@ -409,7 +390,7 @@ func (p *portalProxy) cancelJob(c echo.Context) error {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	dc := pb.NewDccncliClient(conn)
+	dc := taskmgr.NewTaskMgrClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
@@ -423,7 +404,12 @@ func (p *portalProxy) cancelJob(c echo.Context) error {
 		log.Fatalf("ID is not an integer")
 	}
 		log.Info("Afterid")
-	if ctr, err := dc.CancelTask(ctx, &pb.CancelTaskRequest{Taskid: id, Usertoken: "ed1605e17374bde6c68864d072c9f5c9"}); err != nil {
+	task := taskmgr.Request{
+			UserId: 1,
+			TaskId: "11",
+		}
+	
+	if ctr, err := dc.CancelTask(ctx, &task); err != nil {
 		return fmt.Errorf("unable to delete task %d: %v", id, err)
 	} else {
 		fmt.Printf("Delete task id %d ...%s! \n", id, ctr.Status)

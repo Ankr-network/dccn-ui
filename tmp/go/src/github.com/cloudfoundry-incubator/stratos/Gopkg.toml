@@ -20,6 +20,11 @@
   name = "github.com/kat-co/vala"
   revision = "43c3f19f86f47a7a83ce5656a1dd8fee3da5d12b"
 
+[[constraint]]
+  name = "github.com/Ankr-network/dccn-common"
+  branch = "develop"
+
+
 # code.cloudfoundry.org/cli requires moby master, which isn't compatible with current code.cloudfoundry.org/cli
 [[override]]
   name = "github.com/moby/moby"

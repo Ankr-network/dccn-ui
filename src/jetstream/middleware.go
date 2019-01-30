@@ -71,7 +71,7 @@ func (p *portalProxy) sessionMiddleware(h echo.HandlerFunc) echo.HandlerFunc {
 			c.Set("user_id", userID)
 			return h(c)
 		}
-
+		log.Info("Session Middleware: this is a message for H.K1tahara to test")
 		// Don't log an error if we are verifying the session, as a failure is not an error
 		isVerify := strings.HasSuffix(c.Request().URI(), "/auth/session/verify")
 		if isVerify {

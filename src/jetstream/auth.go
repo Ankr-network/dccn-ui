@@ -18,7 +18,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	ctext "context"
-
+	usermgr "github.com/Ankr-network/dccn-common/protos/usermgr/v1/grpc"
 	pb "github.com/Ankr-network/dccn-common/protocol/cli"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
@@ -69,7 +69,7 @@ const XSRFTokenCookie = "XSRF-TOKEN"
 const XSRFTokenSessionName = "xsrf_token"
 
 const (
-	address = "client.dccn.ankr.network:50051"
+	address = "client-dev.dccn.ankr.network:50051"
 	//address = "127.0.0.1:50051"
 )
 
@@ -250,18 +250,28 @@ func (p *portalProxy) signupToUAA(c echo.Context) error {
 		log.Fatalf("did not connect: %v", err)
 	}
 	defer conn.Close()
-	c1 := pb.NewDccncliClient(conn)
+	c1 := usermgr.NewUserMgrClient(conn)
 
 	ctx, cancel := ctext.WithTimeout(ctext.Background(), 30*time.Second)
 	defer cancel()
-	r, err := c1.Register(ctx, &pb.RegisterRequest{Name: username, Password : password, Erc20Address:"asfasfasdgasg"})
+	newuser := &usermgr.User{
+		Id : "1",
+		Name : "Namexiaowu",
+		Nickname : "nickname",
+		Email : username,
+		Password : password,
+     	Balance : 0,
+    	Token : "asfasfasdgasg",
+	}
+
+	xiaowu, err := c1.Register(ctx, newuser)
 	if err != nil {
 		return err
 	}
-
-	fmt.Printf("received Status : %s reason %s \n", r.Status, r.Reason)
-	if (r.Status == "Faiure") {
-		return fmt.Errorf("%s", r.Reason)}
+log.Info(xiaowu)
+	//fmt.Printf("received Status : %s reason %s \n", r.Status, r.Reason)
+	//if (r.Status == "Faiure") {
+	//	return fmt.Errorf("%s", r.Error)}
 	return nil
 
 }
