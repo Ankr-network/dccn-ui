@@ -258,7 +258,7 @@ func (p *portalProxy) buildDatacenters(c echo.Context) ankr_const.Metrics {
 }
 
 func (p *portalProxy) buildJobs(c echo.Context) []*common_proto.Task {
-	url := "client-dev.dccn.ankr.network"
+	url := "dc-dev.dccn.ankr.network"
 	port := "50051"
 	conn, err := grpc.Dial(url+":"+port, grpc.WithInsecure())
 	if err != nil {

@@ -243,35 +243,38 @@ func (p *portalProxy) loginToUAA(c echo.Context) error {
 
 func (p *portalProxy) signupToUAA(c echo.Context) error {
 	log.Debug("signupToUAA")
-	username := c.FormValue("username")
-	password := c.FormValue("password")
+	//username := c.FormValue("username")
+	//password := c.FormValue("password")
 	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+		log.Fatal(err.Error())
 	}
-	defer conn.Close()
-	c1 := usermgr.NewUserMgrClient(conn)
+	defer func(conn *grpc.ClientConn) {
+		if err := conn.Close(); err != nil {
+			log.Println(err.Error())
+		}
+	}(conn)
 
-	ctx, cancel := ctext.WithTimeout(ctext.Background(), 30*time.Second)
-	defer cancel()
 	newuser := &usermgr.User{
-		Id : "1",
-		Name : "Namexiaowu",
-		Nickname : "nickname",
-		Email : username,
-		Password : password,
-     	Balance : 0,
-    	Token : "asfasfasdgasg",
+		Name:     "user_test",
+		Nickname: "test",
+		Email:    `123@Gmail.com`,
+		Password: "1234567890",
+		Balance:  99,
+	}
+	cli := usermgr.NewUserMgrClient(conn)
+
+	if _, err := cli.Register(ctext.Background(), newuser); err != nil {
+		log.Fatal(err.Error())
+	} else {
+		log.Println("Register Ok")
 	}
 
-	xiaowu, err := c1.Register(ctx, newuser)
-	if err != nil {
-		return err
-	}
-log.Info(xiaowu)
+
+log.Info("Successful")
 	//fmt.Printf("received Status : %s reason %s \n", r.Status, r.Reason)
 	//if (r.Status == "Faiure") {
-	//	return fmt.Errorf("%s", r.Error)}
+	//	return fmt.Errorf("%s", r.Error)}*/
 	return nil
 
 }
