@@ -9,7 +9,8 @@
 [![slack.cloudfoundry.org](https://slack.cloudfoundry.org/badge.svg)](https://cloudfoundry.slack.com/messages/C80EP4Y57/)
 
 
-![Stratos Application view](docs/images/screenshots/app-summary.png)
+![dashboard deep](https://user-images.githubusercontent.com/34444349/52699865-9a47b280-2f2b-11e9-9900-ef353cc0b5c9.jpg)
+
 
 ## Quick Start
 
